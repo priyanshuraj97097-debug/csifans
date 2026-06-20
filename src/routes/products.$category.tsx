@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Download, Check, ArrowLeft } from "lucide-react";
-import { findCategory, categories } from "@/lib/products";
+import { findCategory, categories, type Model } from "@/lib/products";
 
 export const Route = createFileRoute("/products/$category")({
   loader: ({ params }) => {
@@ -55,7 +55,7 @@ function CategoryPage() {
 
         <h2 className="mt-16 font-[Poppins] text-2xl font-bold text-[#0a2f44]">Available Models</h2>
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cat.models.map((m) => (
+          {cat.models.map((m: Model) => (
             <div key={m.modelNo} className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden flex flex-col">
               <div className="aspect-square overflow-hidden bg-gradient-to-br from-slate-50 to-[#0d6b78]/5">
                 <img src={m.image} alt={m.name} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -70,7 +70,7 @@ function CategoryPage() {
                   {m.warranty && <span>Warranty: <b className="text-[#0a2f44]">{m.warranty}</b></span>}
                 </div>
                 <ul className="mt-3 space-y-1">
-                  {m.highlights.map((h) => (
+                  {m.highlights.map((h: string) => (
                     <li key={h} className="flex items-start gap-2 font-[Inter] text-xs text-slate-700">
                       <Check className="h-3.5 w-3.5 text-[#0d6b78] mt-0.5 shrink-0" /> {h}
                     </li>
