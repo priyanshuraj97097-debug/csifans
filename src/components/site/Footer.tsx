@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import logo from "@/assets/csi-logo.png.asset.json";
 
 export function Footer() {
@@ -44,6 +44,7 @@ export function Footer() {
               ["/products/ceiling-fans", "Ceiling Fans"],
               ["/products/high-speed-fans", "High-Speed Fans"],
               ["/products/exhaust-fans", "Exhaust Fans"],
+              ["/products/wall-cabin-fans", "Wall & Cabin Fans"],
               ["/products/decorative-fans", "Decorative Fans"],
               ["/products/premium-series", "Premium Series"],
             ].map(([to, label]) => (
@@ -67,18 +68,6 @@ export function Footer() {
               <MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Nalanda, Bihar, India
             </li>
           </ul>
-          <div className="flex gap-3 mt-5">
-            {[Facebook, Instagram, Youtube].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="h-9 w-9 grid place-items-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                aria-label="Social link"
-              >
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
-          </div>
         </div>
       </div>
       <div className="border-t border-white/10">
