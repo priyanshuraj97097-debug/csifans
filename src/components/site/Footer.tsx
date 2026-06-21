@@ -26,8 +26,7 @@ export function Footer() {
             {[
               ["/about", "About Us"],
               ["/products", "Products"],
-              ["/knowledge-center", "Knowledge Center"],
-              ["/blog", "Blog"],
+              ["/new-launches", "New Launches"],
               ["/dealers", "Dealers & Distributors"],
               ["/downloads", "Downloads"],
             ].map(([to, label]) => (

@@ -10,11 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProductsRouteImport } from './routes/products'
-import { Route as KnowledgeCenterRouteImport } from './routes/knowledge-center'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as DealersRouteImport } from './routes/dealers'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
@@ -22,11 +20,6 @@ import { Route as ProductsCategoryRouteImport } from './routes/products.$categor
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KnowledgeCenterRoute = KnowledgeCenterRouteImport.update({
-  id: '/knowledge-center',
-  path: '/knowledge-center',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DownloadsRoute = DownloadsRouteImport.update({
@@ -42,11 +35,6 @@ const DealersRoute = DealersRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -68,22 +56,18 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
-  '/knowledge-center': typeof KnowledgeCenterRoute
   '/products': typeof ProductsRouteWithChildren
   '/products/$category': typeof ProductsCategoryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
-  '/knowledge-center': typeof KnowledgeCenterRoute
   '/products': typeof ProductsRouteWithChildren
   '/products/$category': typeof ProductsCategoryRoute
 }
@@ -91,11 +75,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
-  '/knowledge-center': typeof KnowledgeCenterRoute
   '/products': typeof ProductsRouteWithChildren
   '/products/$category': typeof ProductsCategoryRoute
 }
@@ -104,33 +86,27 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/blog'
     | '/contact'
     | '/dealers'
     | '/downloads'
-    | '/knowledge-center'
     | '/products'
     | '/products/$category'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/blog'
     | '/contact'
     | '/dealers'
     | '/downloads'
-    | '/knowledge-center'
     | '/products'
     | '/products/$category'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/blog'
     | '/contact'
     | '/dealers'
     | '/downloads'
-    | '/knowledge-center'
     | '/products'
     | '/products/$category'
   fileRoutesById: FileRoutesById
@@ -138,11 +114,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
   DealersRoute: typeof DealersRoute
   DownloadsRoute: typeof DownloadsRoute
-  KnowledgeCenterRoute: typeof KnowledgeCenterRoute
   ProductsRoute: typeof ProductsRouteWithChildren
 }
 
@@ -153,13 +127,6 @@ declare module '@tanstack/react-router' {
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/knowledge-center': {
-      id: '/knowledge-center'
-      path: '/knowledge-center'
-      fullPath: '/knowledge-center'
-      preLoaderRoute: typeof KnowledgeCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/downloads': {
@@ -181,13 +148,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -229,23 +189,11 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
   DealersRoute: DealersRoute,
   DownloadsRoute: DownloadsRoute,
-  KnowledgeCenterRoute: KnowledgeCenterRoute,
   ProductsRoute: ProductsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
