@@ -91,7 +91,7 @@ function ModelPage() {
             </button>
             {images.length > 1 && (
               <div className="mt-3 grid grid-cols-5 gap-2">
-                {images.map((src, i) => (
+                {images.map((src: string, i: number) => (
                   <button
                     key={i}
                     onClick={() => setActive(i)}
@@ -109,7 +109,7 @@ function ModelPage() {
           <div>
             {model.tags && model.tags.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
-                {model.tags.map((t) => (
+                {model.tags.map((t: ProductTag) => (
                   <span key={t} className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] text-white px-2.5 py-1 font-[Inter] text-[10px] font-semibold uppercase tracking-wider">
                     <Tag className="h-2.5 w-2.5" /> {t}
                   </span>
@@ -147,7 +147,7 @@ function ModelPage() {
               <div className="mt-7">
                 <h3 className="font-[Poppins] font-bold text-[#0a2f44]">Key Features</h3>
                 <ul className="mt-3 grid sm:grid-cols-2 gap-2">
-                  {model.features.map((f) => (
+                  {model.features.map((f: string) => (
                     <li key={f} className="flex items-start gap-2 font-[Inter] text-sm text-slate-700">
                       <Check className="h-4 w-4 text-[#0d6b78] mt-0.5 shrink-0" /> {f}
                     </li>
@@ -160,7 +160,7 @@ function ModelPage() {
               <div className="mt-6">
                 <h3 className="font-[Poppins] font-bold text-[#0a2f44] text-sm">Available Colours</h3>
                 <div className="mt-2 flex flex-wrap gap-1.5">
-                  {model.colors.map((c) => (
+                  {model.colors.map((c: string) => (
                     <span key={c} className="rounded-full bg-white ring-1 ring-[#0d6b78]/20 px-3 py-1 font-[Inter] text-xs font-medium text-[#0a2f44]">{c}</span>
                   ))}
                 </div>
@@ -191,7 +191,7 @@ function ModelPage() {
           <section className="mt-14">
             <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Similar Products</h2>
             <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {similar.map((s) => (
+              {similar.map((s: Model) => (
                 <Link
                   key={s.modelNo}
                   to="/products/$category/$model"
