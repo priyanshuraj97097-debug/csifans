@@ -27,6 +27,7 @@ export function Footer() {
               ["/about", "About Us"],
               ["/products", "Products"],
               ["/new-launches", "New Launches"],
+              ["/gallery", "Gallery"],
               ["/dealers", "Dealers & Distributors"],
               ["/downloads", "Downloads"],
             ].map(([to, label]) => (

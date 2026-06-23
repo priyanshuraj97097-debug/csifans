@@ -11,12 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as NewLaunchesRouteImport } from './routes/new-launches'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as DealersRouteImport } from './routes/dealers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
+import { Route as ProductsCategoryModelRouteImport } from './routes/products.$category.$model'
 
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
@@ -26,6 +28,11 @@ const ProductsRoute = ProductsRouteImport.update({
 const NewLaunchesRoute = NewLaunchesRouteImport.update({
   id: '/new-launches',
   path: '/new-launches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DownloadsRoute = DownloadsRouteImport.update({
@@ -58,6 +65,11 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
   path: '/$category',
   getParentRoute: () => ProductsRoute,
 } as any)
+const ProductsCategoryModelRoute = ProductsCategoryModelRouteImport.update({
+  id: '/$model',
+  path: '/$model',
+  getParentRoute: () => ProductsCategoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -65,9 +77,11 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
+  '/gallery': typeof GalleryRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
-  '/products/$category': typeof ProductsCategoryRoute
+  '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,9 +89,11 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
+  '/gallery': typeof GalleryRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
-  '/products/$category': typeof ProductsCategoryRoute
+  '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,9 +102,11 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
+  '/gallery': typeof GalleryRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
-  '/products/$category': typeof ProductsCategoryRoute
+  '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -98,9 +116,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dealers'
     | '/downloads'
+    | '/gallery'
     | '/new-launches'
     | '/products'
     | '/products/$category'
+    | '/products/$category/$model'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,9 +128,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dealers'
     | '/downloads'
+    | '/gallery'
     | '/new-launches'
     | '/products'
     | '/products/$category'
+    | '/products/$category/$model'
   id:
     | '__root__'
     | '/'
@@ -118,9 +140,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/dealers'
     | '/downloads'
+    | '/gallery'
     | '/new-launches'
     | '/products'
     | '/products/$category'
+    | '/products/$category/$model'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -129,6 +153,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DealersRoute: typeof DealersRoute
   DownloadsRoute: typeof DownloadsRoute
+  GalleryRoute: typeof GalleryRoute
   NewLaunchesRoute: typeof NewLaunchesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
 }
@@ -147,6 +172,13 @@ declare module '@tanstack/react-router' {
       path: '/new-launches'
       fullPath: '/new-launches'
       preLoaderRoute: typeof NewLaunchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/downloads': {
@@ -191,15 +223,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsCategoryRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/products/$category/$model': {
+      id: '/products/$category/$model'
+      path: '/$model'
+      fullPath: '/products/$category/$model'
+      preLoaderRoute: typeof ProductsCategoryModelRouteImport
+      parentRoute: typeof ProductsCategoryRoute
+    }
   }
 }
 
+interface ProductsCategoryRouteChildren {
+  ProductsCategoryModelRoute: typeof ProductsCategoryModelRoute
+}
+
+const ProductsCategoryRouteChildren: ProductsCategoryRouteChildren = {
+  ProductsCategoryModelRoute: ProductsCategoryModelRoute,
+}
+
+const ProductsCategoryRouteWithChildren =
+  ProductsCategoryRoute._addFileChildren(ProductsCategoryRouteChildren)
+
 interface ProductsRouteChildren {
-  ProductsCategoryRoute: typeof ProductsCategoryRoute
+  ProductsCategoryRoute: typeof ProductsCategoryRouteWithChildren
 }
 
 const ProductsRouteChildren: ProductsRouteChildren = {
-  ProductsCategoryRoute: ProductsCategoryRoute,
+  ProductsCategoryRoute: ProductsCategoryRouteWithChildren,
 }
 
 const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
@@ -212,19 +262,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DealersRoute: DealersRoute,
   DownloadsRoute: DownloadsRoute,
+  GalleryRoute: GalleryRoute,
   NewLaunchesRoute: NewLaunchesRoute,
   ProductsRoute: ProductsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

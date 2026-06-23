@@ -1,13 +1,16 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent } from "react";
-import { Menu, X, Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/csi-logo.png.asset.json";
+import { categories } from "@/lib/products";
+import { SearchCombobox } from "./SearchCombobox";
 
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/products", label: "Products" },
   { to: "/new-launches", label: "New Launches" },
+  { to: "/gallery", label: "Gallery" },
   { to: "/dealers", label: "Dealers" },
   { to: "/downloads", label: "Downloads" },
   { to: "/contact", label: "Contact" },
@@ -16,7 +19,8 @@ const nav = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [openCat, setOpenCat] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,12 +30,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const submitSearch = (e: FormEvent) => {
-    e.preventDefault();
-    const q = query.trim();
-    setOpen(false);
-    navigate({ to: "/products", search: q ? { q } : {} });
-  };
+  const closeMobile = () => { setOpen(false); setProductsOpen(false); setOpenCat(null); };
 
   return (
     <header
@@ -52,7 +51,7 @@ export function Header() {
             <span className="font-[Poppins] text-lg font-extrabold tracking-tight text-[#0d4361]">
               CSI Fans
             </span>
-            <span className="font-[Inter] hidden sm:inline font-[Inter] text-[10px] font-medium text-[#0d6b78] -mt-0.5">
+            <span className="font-[Inter] hidden sm:inline text-[10px] font-medium text-[#0d6b78] -mt-0.5">
               ISO 9001:2015 Certified
             </span>
           </div>
@@ -72,19 +71,9 @@ export function Header() {
           ))}
         </nav>
 
-        <form onSubmit={submitSearch} className="hidden md:flex flex-1 max-w-xs items-center">
-          <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#0d6b78]" />
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search fans, models..."
-              aria-label="Search products"
-              className="w-full pl-9 pr-3 py-2 rounded-full bg-white/80 ring-1 ring-[#0d6b78]/20 focus:ring-2 focus:ring-[#0d6b78]/40 outline-none font-[Inter] text-sm text-[#0a2f44] placeholder:text-slate-400 transition-all"
-            />
-          </div>
-        </form>
+        <div className="hidden md:flex flex-1 max-w-xs items-center">
+          <SearchCombobox />
+        </div>
 
         <Link
           to="/contact"
@@ -102,36 +91,86 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile search bar (always visible on small screens) */}
+      {/* Mobile search bar */}
       <div className="md:hidden px-4 pb-3 sm:px-6">
-        <form onSubmit={submitSearch} className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#0d6b78]" />
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search fans, models..."
-            aria-label="Search products"
-            className="w-full pl-9 pr-3 py-2 rounded-full bg-white/80 ring-1 ring-[#0d6b78]/20 focus:ring-2 focus:ring-[#0d6b78]/40 outline-none font-[Inter] text-sm text-[#0a2f44] placeholder:text-slate-400"
-          />
-        </form>
+        <SearchCombobox />
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-slate-200/70 bg-white/95 backdrop-blur-xl animate-fade-in">
+        <div className="lg:hidden border-t border-slate-200/70 bg-white/95 backdrop-blur-xl animate-fade-in max-h-[80vh] overflow-y-auto">
           <nav className="flex flex-col p-3 gap-1">
-            {nav.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                onClick={() => setOpen(false)}
-                activeOptions={{ exact: n.to === "/" }}
-                className="px-4 py-3 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:bg-[#0d6b78]/10"
-                activeProps={{ className: "text-[#0d4361] bg-[#0d6b78]/15" }}
-              >
-                {n.label}
-              </Link>
-            ))}
+            {nav.map((n) => {
+              if (n.to === "/products") {
+                return (
+                  <div key={n.to} className="rounded-lg">
+                    <button
+                      onClick={() => setProductsOpen((v) => !v)}
+                      className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:bg-[#0d6b78]/10"
+                      aria-expanded={productsOpen}
+                    >
+                      <span>Products</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} />
+                    </button>
+                    {productsOpen && (
+                      <div className="pl-2">
+                        <Link
+                          to="/products"
+                          onClick={closeMobile}
+                          className="block px-4 py-2 rounded-lg font-[Inter] text-xs font-semibold text-[#0d4361] hover:bg-[#0d6b78]/10"
+                        >
+                          All Products
+                        </Link>
+                        {categories.map((c) => (
+                          <div key={c.slug}>
+                            <button
+                              onClick={() => setOpenCat(openCat === c.slug ? null : c.slug)}
+                              className="w-full flex items-center justify-between px-4 py-2 rounded-lg font-[Inter] text-xs text-slate-700 hover:bg-[#0d6b78]/10"
+                              aria-expanded={openCat === c.slug}
+                            >
+                              <span>{c.name}</span>
+                              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openCat === c.slug ? "rotate-180" : ""}`} />
+                            </button>
+                            {openCat === c.slug && (
+                              <div className="pl-3 py-1 border-l-2 border-[#0d6b78]/20 ml-4">
+                                <button
+                                  onClick={() => { closeMobile(); navigate({ to: "/products/$category", params: { category: c.slug } }); }}
+                                  className="block w-full text-left px-3 py-1.5 font-[Inter] text-[11px] font-semibold text-[#0d6b78] hover:underline"
+                                >
+                                  View category →
+                                </button>
+                                {c.models.map((md) => (
+                                  <Link
+                                    key={md.modelNo}
+                                    to="/products/$category/$model"
+                                    params={{ category: c.slug, model: md.slug }}
+                                    onClick={closeMobile}
+                                    className="block px-3 py-1.5 rounded font-[Inter] text-[12px] text-slate-700 hover:bg-[#0d6b78]/10"
+                                  >
+                                    {md.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  onClick={closeMobile}
+                  activeOptions={{ exact: n.to === "/" }}
+                  className="px-4 py-3 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:bg-[#0d6b78]/10"
+                  activeProps={{ className: "text-[#0d4361] bg-[#0d6b78]/15" }}
+                >
+                  {n.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       )}

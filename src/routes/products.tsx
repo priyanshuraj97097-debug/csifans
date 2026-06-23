@@ -52,8 +52,8 @@ function Products() {
                 {results.map((m) => (
                   <Link
                     key={m.modelNo}
-                    to="/products/$category"
-                    params={{ category: m.categorySlug }}
+                    to="/products/$category/$model"
+                    params={{ category: m.categorySlug, model: m.slug }}
                     className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden"
                   >
                     <div className="aspect-square overflow-hidden bg-gradient-to-br from-slate-50 to-[#0d6b78]/5">
