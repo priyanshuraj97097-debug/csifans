@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Check, Phone, MessageCircle, ChevronRight, Tag } from "lucide-react";
-import { findModel, categories } from "@/lib/products";
+import { findModel, categories, type Model, type Category, type ProductTag } from "@/lib/products";
 import { Lightbox } from "@/components/site/Lightbox";
 
 export const Route = createFileRoute("/products/$category/$model")({
