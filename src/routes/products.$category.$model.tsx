@@ -43,12 +43,12 @@ export const Route = createFileRoute("/products/$category/$model")({
 const WHATSAPP_NUMBER = "919876543210";
 
 function ModelPage() {
-  const { category, model } = Route.useLoaderData();
-  const images = (model.images && model.images.length ? model.images : [model.image]);
+  const { category, model } = Route.useLoaderData() as { category: Category; model: Model };
+  const images: string[] = model.images && model.images.length ? model.images : [model.image];
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
-  const similar = category.models.filter((m) => m.modelNo !== model.modelNo).slice(0, 4);
+  const similar = category.models.filter((mm: Model) => mm.modelNo !== model.modelNo).slice(0, 4);
   const whatsappMsg = encodeURIComponent(`Hi CSI Fans, I'd like more information about ${model.name} (${model.modelNo}).`);
 
   const specs: Array<[string, string | undefined]> = [
