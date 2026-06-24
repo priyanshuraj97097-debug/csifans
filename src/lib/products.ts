@@ -1,4 +1,5 @@
 import superToophanSilver from "@/assets/super-toophan-silver.png.asset.json";
+import superToophanChocolate from "@/assets/super-toophan-chocolate.png.asset.json";
 
 export type Category = {
   slug: string;
@@ -91,6 +92,41 @@ export const categories: Category[] = [
         description:
           "The Super Toophan Silver is engineered for the best performance in low voltage conditions. A 3-blade 1200mm ceiling fan with decorative integrated light fitting, 100% copper winding motor, double ball bearing and a class-leading 3-year warranty.",
         tags: ["New Arrival", "Best Seller"],
+      }),
+      m({
+        modelNo: "CSI-ST-CHOCOLATE-1200",
+        name: "Super Toophan Chocolate 1200mm",
+        price: 3299,
+        sweep: "1200 mm (48 inch)",
+        rpm: "380–400 RPM",
+        airDelivery: "220–240 CMM",
+        warranty: "3 Years",
+        power: "70–75 W",
+        voltage: "220–240 V AC (operates 140–240 V)",
+        frequency: "50 Hz",
+        blades: "3 Aerodynamic",
+        bladeMaterial: "Aluminium (Chocolate)",
+        motor: "Copper-wound induction · Double Ball Bearing",
+        colors: ["Chocolate"],
+        image: superToophanChocolate.url,
+        images: [superToophanChocolate.url],
+        highlights: [
+          "Rich chocolate premium finish",
+          "Wide voltage operation (140–240 V)",
+          "Service value ~3.1–3.3 CMM/W",
+        ],
+        features: [
+          "Best performance even in low voltage (140–240 V)",
+          "Copper-wound induction motor",
+          "Double ball bearing for long life",
+          "1200 mm (48\") aerodynamic 3-blade sweep",
+          "Service value ~3.1–3.3 CMM/W",
+          "Standard downrod 225–260 mm",
+          "ISO 9001:2015 certified manufacturing",
+        ],
+        description:
+          "The Super Toophan Chocolate is a premium 1200mm 3-blade ceiling fan in a rich chocolate finish. Built with a copper-wound induction motor and double ball bearings, it delivers 220–240 CMM of air at just 70–75 W and runs reliably across a wide 140–240 V range — backed by a 3-year warranty.",
+        tags: ["New Arrival"],
       }),
     ],
   },
