@@ -1,4 +1,5 @@
 import superToophanSilver from "@/assets/super-toophan-silver.png.asset.json";
+import superToophanChocolate from "@/assets/super-toophan-chocolate.png.asset.json";
 
 export type Category = {
   slug: string;
