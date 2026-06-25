@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const featured = categories.flatMap((c) => c.models.slice(0, 1)).slice(0, 4);
+  const featured = allModels.slice(0, 8);
   return (
     <>
       {/* HERO */}
