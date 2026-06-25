@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Zap, Wind, Award, Volume2, Wrench, Star, Quote } from "lucide-react";
-import { categories } from "@/lib/products";
-import hero from "@/assets/hero-fan.jpg";
+import { allModels } from "@/lib/products";
+import superToophanSilver from "@/assets/super-toophan-silver.png.asset.json";
+const hero = superToophanSilver.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const featured = categories.flatMap((c) => c.models.slice(0, 1)).slice(0, 4);
+  const featured = allModels.slice(0, 8);
   return (
     <>
       {/* HERO */}
@@ -81,13 +82,11 @@ function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionHeader eyebrow="Best Sellers" title="Featured Products" subtitle="Hand-picked premium fans loved by 10,000+ customers." />
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featured.map((m, i) => {
-              const cat = categories.find((c) => c.models.includes(m))!;
-              return (
+            {featured.map((m, i) => (
                 <Link
                   key={m.modelNo}
-                  to="/products/$category"
-                  params={{ category: cat.slug }}
+                  to="/products/$category/$model"
+                  params={{ category: m.categorySlug, model: m.slug }}
                   className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-lg shadow-[#0d4361]/5 hover:shadow-2xl hover:shadow-[#0d4361]/15 hover:-translate-y-1 transition-all overflow-hidden"
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
@@ -95,7 +94,7 @@ function Home() {
                     <img src={m.image} alt={m.name} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>
                   <div className="p-5">
-                    <p className="font-[Inter] text-xs text-[#0d6b78] font-semibold">{cat.name}</p>
+                    <p className="font-[Inter] text-xs text-[#0d6b78] font-semibold">{m.categoryName}</p>
                     <h3 className="mt-1 font-[Poppins] font-semibold text-[#0a2f44] line-clamp-2">{m.name}</h3>
                     <div className="mt-3 flex items-center justify-between">
                       <span className="font-[Poppins] text-xl font-bold text-[#0d4361]">₹{m.price.toLocaleString("en-IN")}</span>
@@ -103,8 +102,7 @@ function Home() {
                     </div>
                   </div>
                 </Link>
-              );
-            })}
+              ))}
           </div>
         </div>
       </section>
