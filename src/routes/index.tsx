@@ -81,8 +81,8 @@ function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionHeader eyebrow="Browse by Type" title="Product Categories" subtitle="Find the perfect CSI fan for every space." />
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-5">
-            {categories.map((c) => {
+          <div className="mt-12 grid grid-cols-2 gap-5 max-w-3xl mx-auto">
+            {categories.filter((c) => ["ceiling-fans","pedestal-fans","table-fans","wall-fans"].includes(c.slug)).map((c) => {
               const Icon = categoryIcon(c.slug);
               return (
                 <Link
