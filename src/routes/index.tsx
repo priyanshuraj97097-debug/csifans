@@ -89,7 +89,9 @@ function Home() {
                   key={c.slug}
                   to="/products/$category"
                   params={{ category: c.slug }}
-                  className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-6 sm:p-7 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col items-center text-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-6 sm:p-7 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col items-center text-center cursor-pointer"
                 >
                   <div className="h-20 w-20 grid place-items-center rounded-2xl bg-gradient-to-br from-[#0d6b78]/10 to-[#0d4361]/10 ring-1 ring-[#0d6b78]/15 group-hover:from-[#0d4361] group-hover:to-[#0d6b78] transition-all">
                     <Icon className="h-10 w-10 text-[#0d4361] group-hover:text-white transition-colors" strokeWidth={1.5} />
