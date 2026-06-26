@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Zap, Wind, Award, Volume2, Wrench, Star, Quote } from "lucide-react";
 import { allModels } from "@/lib/products";
-import superToophanSilver from "@/assets/super-toophan-silver.png.asset.json";
-const hero = superToophanSilver.url;
+import fanCategories from "@/assets/fan-categories.png.asset.json";
+const hero = fanCategories.url;
 
 export const Route = createFileRoute("/")({
   head: () => ({
