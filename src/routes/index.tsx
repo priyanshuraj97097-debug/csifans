@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Zap, Wind, Award, Volume2, Wrench, Star, Quote } from "lucide-react";
-import { allModels } from "@/lib/products";
+import { ArrowRight, ShieldCheck, Zap, Wind, Award, Volume2, Wrench, Star, Quote, Fan, AirVent, Sparkles } from "lucide-react";
+import { allModels, categories } from "@/lib/products";
 import fanCategories from "@/assets/fan-categories.png.asset.json";
 const hero = fanCategories.url;
 
