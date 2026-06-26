@@ -224,3 +224,15 @@ export function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; t
     </div>
   );
 }
+
+function categoryIcon(slug: string) {
+  switch (slug) {
+    case "ceiling-fans": return Fan;
+    case "pedestal-fans": return Wind;
+    case "table-fans": return Fan;
+    case "wall-fans": return AirVent;
+    case "exhaust-fans": return AirVent;
+    case "special-fans": return Sparkles;
+    default: return Fan;
+  }
+}
