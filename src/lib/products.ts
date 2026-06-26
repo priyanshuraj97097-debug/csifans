@@ -51,11 +51,11 @@ const m = (
 
 export const categories: Category[] = [
   {
-    slug: "premium-series",
-    name: "Premium Series",
-    tagline: "Flagship engineering",
+    slug: "ceiling-fans",
+    name: "Ceiling Fans",
+    tagline: "Powerful airflow overhead",
     description:
-      "The flagship Super TOOPHAN Premium Series — engineered for the best performance even in low voltage conditions.",
+      "Premium 1200mm ceiling fans engineered for the best performance even in low voltage — featuring the flagship Super TOOPHAN series.",
     image: superToophanSilver.url,
     models: [
       m({
