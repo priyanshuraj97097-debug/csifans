@@ -45,9 +45,9 @@ function CategoryPage() {
   const [maxPower, setMaxPower] = useState<number>(0);
   const [showFilters, setShowFilters] = useState(false);
 
-  const priceCap = Math.max(...cat.models.map((m: Model) => m.price));
-  const sweepCap = Math.max(...cat.models.map((m: Model) => parseSweep(m.sweep)));
-  const powerCap = Math.max(...cat.models.map((m: Model) => parsePower(m.power)));
+  const priceCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => m.price)) : 0;
+  const sweepCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => parseSweep(m.sweep))) : 0;
+  const powerCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => parsePower(m.power))) : 0;
 
   const models = useMemo(() => {
     let list = [...cat.models];

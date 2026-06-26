@@ -51,11 +51,11 @@ const m = (
 
 export const categories: Category[] = [
   {
-    slug: "premium-series",
-    name: "Premium Series",
-    tagline: "Flagship engineering",
+    slug: "ceiling-fans",
+    name: "Ceiling Fans",
+    tagline: "Powerful airflow overhead",
     description:
-      "The flagship Super TOOPHAN Premium Series — engineered for the best performance even in low voltage conditions.",
+      "Premium 1200mm ceiling fans engineered for the best performance even in low voltage — featuring the flagship Super TOOPHAN series.",
     image: superToophanSilver.url,
     models: [
       m({
@@ -129,6 +129,51 @@ export const categories: Category[] = [
         tags: ["New Arrival"],
       }),
     ],
+  },
+  {
+    slug: "pedestal-fans",
+    name: "Pedestal Fans",
+    tagline: "Powerful, portable cooling",
+    description:
+      "High-performance pedestal fans with sturdy stands, wide oscillation and copper motors. New models launching soon.",
+    image: superToophanSilver.url,
+    models: [],
+  },
+  {
+    slug: "table-fans",
+    name: "Table Fans",
+    tagline: "Compact desktop comfort",
+    description:
+      "Compact, energy-efficient table fans built for desks, bedside tables and small spaces. New models launching soon.",
+    image: superToophanSilver.url,
+    models: [],
+  },
+  {
+    slug: "wall-fans",
+    name: "Wall Fans",
+    tagline: "Space-saving wall mount",
+    description:
+      "Heavy-duty wall-mounted fans with wide oscillation — ideal for shops, kitchens and workspaces. New models launching soon.",
+    image: superToophanSilver.url,
+    models: [],
+  },
+  {
+    slug: "exhaust-fans",
+    name: "Exhaust Fans",
+    tagline: "Fresh-air ventilation",
+    description:
+      "Durable exhaust fans for kitchens, bathrooms and industrial spaces. New models launching soon.",
+    image: superToophanSilver.url,
+    models: [],
+  },
+  {
+    slug: "special-fans",
+    name: "Special Fans",
+    tagline: "Decorative & custom designs",
+    description:
+      "Decorative, BLDC and specialty CSI fans for premium interiors. New models launching soon.",
+    image: superToophanSilver.url,
+    models: [],
   },
 ];
 

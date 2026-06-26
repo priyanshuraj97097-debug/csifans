@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Zap, Wind, Award, Volume2, Wrench, Star, Quote } from "lucide-react";
-import { allModels } from "@/lib/products";
+import { ArrowRight, ShieldCheck, Zap, Wind, Award, Volume2, Wrench, Star, Quote, Fan, AirVent, Sparkles } from "lucide-react";
+import { allModels, categories } from "@/lib/products";
 import fanCategories from "@/assets/fan-categories.png.asset.json";
 const hero = fanCategories.url;
 
@@ -75,6 +75,35 @@ function Home() {
           </div>
         </div>
         <style>{`@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}`}</style>
+      </section>
+
+      {/* PRODUCT CATEGORIES */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeader eyebrow="Browse by Type" title="Product Categories" subtitle="Find the perfect CSI fan for every space." />
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-5">
+            {categories.map((c) => {
+              const Icon = categoryIcon(c.slug);
+              return (
+                <Link
+                  key={c.slug}
+                  to="/products/$category"
+                  params={{ category: c.slug }}
+                  className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-6 sm:p-7 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all flex flex-col items-center text-center"
+                >
+                  <div className="h-20 w-20 grid place-items-center rounded-2xl bg-gradient-to-br from-[#0d6b78]/10 to-[#0d4361]/10 ring-1 ring-[#0d6b78]/15 group-hover:from-[#0d4361] group-hover:to-[#0d6b78] transition-all">
+                    <Icon className="h-10 w-10 text-[#0d4361] group-hover:text-white transition-colors" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="mt-5 font-[Poppins] text-lg font-extrabold tracking-wide text-[#0d4361] uppercase">{c.name.replace(/\s*Fans$/i, "")}</h3>
+                  <p className="font-[Inter] text-xs font-semibold tracking-[0.2em] uppercase text-slate-500">Fans</p>
+                  <span className="mt-4 inline-flex items-center gap-1 font-[Inter] text-xs font-semibold text-[#0d6b78] group-hover:gap-2 transition-all">
+                    View Range <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* FEATURED PRODUCTS */}
@@ -194,4 +223,16 @@ export function SectionHeader({ eyebrow, title, subtitle }: { eyebrow: string; t
       <p className="mt-3 font-[Inter] text-slate-600">{subtitle}</p>
     </div>
   );
+}
+
+function categoryIcon(slug: string) {
+  switch (slug) {
+    case "ceiling-fans": return Fan;
+    case "pedestal-fans": return Wind;
+    case "table-fans": return Fan;
+    case "wall-fans": return AirVent;
+    case "exhaust-fans": return AirVent;
+    case "special-fans": return Sparkles;
+    default: return Fan;
+  }
 }
