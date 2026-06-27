@@ -17,6 +17,7 @@ import { Route as DealersRouteImport } from './routes/dealers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
 import { Route as ProductsCategoryModelRouteImport } from './routes/products.$category.$model'
 
@@ -60,6 +61,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProductsRoute,
+} as any)
 const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
   id: '/$category',
   path: '/$category',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
   '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/': typeof ProductsIndexRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRoutesByTo {
@@ -91,8 +98,8 @@ export interface FileRoutesByTo {
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
   '/new-launches': typeof NewLaunchesRoute
-  '/products': typeof ProductsRouteWithChildren
   '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products': typeof ProductsIndexRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRoutesById {
@@ -106,6 +113,7 @@ export interface FileRoutesById {
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
   '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/products/': typeof ProductsIndexRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +128,7 @@ export interface FileRouteTypes {
     | '/new-launches'
     | '/products'
     | '/products/$category'
+    | '/products/'
     | '/products/$category/$model'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -130,8 +139,8 @@ export interface FileRouteTypes {
     | '/downloads'
     | '/gallery'
     | '/new-launches'
-    | '/products'
     | '/products/$category'
+    | '/products'
     | '/products/$category/$model'
   id:
     | '__root__'
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/new-launches'
     | '/products'
     | '/products/$category'
+    | '/products/'
     | '/products/$category/$model'
   fileRoutesById: FileRoutesById
 }
@@ -216,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/': {
+      id: '/products/'
+      path: '/'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof ProductsRoute
+    }
     '/products/$category': {
       id: '/products/$category'
       path: '/$category'
@@ -246,10 +263,12 @@ const ProductsCategoryRouteWithChildren =
 
 interface ProductsRouteChildren {
   ProductsCategoryRoute: typeof ProductsCategoryRouteWithChildren
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 const ProductsRouteChildren: ProductsRouteChildren = {
   ProductsCategoryRoute: ProductsCategoryRouteWithChildren,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 
 const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
@@ -269,3 +288,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

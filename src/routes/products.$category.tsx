@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag } from "lucide-react";
 import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
@@ -25,13 +25,24 @@ export const Route = createFileRoute("/products/$category")({
       <Link to="/products" search={{}} className="mt-6 inline-block text-[#0d6b78] underline">Back to products</Link>
     </div>
   ),
-  errorComponent: ({ error, reset }) => (
-    <div className="py-24 text-center px-4">
-      <h1 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Something went wrong</h1>
-      <p className="mt-2 text-slate-600 text-sm">{error.message}</p>
-      <button onClick={reset} className="mt-6 rounded-full bg-[#0d4361] text-white px-5 py-2 text-sm">Try again</button>
-    </div>
-  ),
+  errorComponent: ({ error, reset }) => {
+    const router = useRouter();
+    return (
+      <div className="py-24 text-center px-4">
+        <h1 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Something went wrong</h1>
+        <p className="mt-2 text-slate-600 text-sm">{error.message}</p>
+        <button
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="mt-6 rounded-full bg-[#0d4361] text-white px-5 py-2 text-sm"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  },
   component: CategoryPage,
 });
 
@@ -55,20 +66,41 @@ function CategoryPage() {
     if (maxSweep > 0) list = list.filter((m) => parseSweep(m.sweep) <= maxSweep);
     if (maxPower > 0) list = list.filter((m) => parsePower(m.power) <= maxPower);
     switch (sort) {
-      case "price-asc": list.sort((a, b) => a.price - b.price); break;
-      case "price-desc": list.sort((a, b) => b.price - a.price); break;
-      case "popular": list.sort((a, b) => Number(b.tags?.includes("Best Seller")) - Number(a.tags?.includes("Best Seller"))); break;
-      case "latest": list.sort((a, b) => Number(b.tags?.includes("New Arrival")) - Number(a.tags?.includes("New Arrival"))); break;
+      case "price-asc":
+        list.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        list.sort((a, b) => b.price - a.price);
+        break;
+      case "popular":
+        list.sort((a, b) => Number(b.tags?.includes("Best Seller")) - Number(a.tags?.includes("Best Seller")));
+        break;
+      case "latest":
+        list.sort((a, b) => Number(b.tags?.includes("New Arrival")) - Number(a.tags?.includes("New Arrival")));
+        break;
     }
     return list;
   }, [cat.models, sort, maxPrice, maxSweep, maxPower]);
 
-  const resetFilters = () => { setMaxPrice(0); setMaxSweep(0); setMaxPower(0); setSort("latest"); };
+  const resetFilters = () => {
+    setMaxPrice(0);
+    setMaxSweep(0);
+    setMaxPower(0);
+    setSort("latest");
+  };
 
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <Link to="/products" search={{}} className="inline-flex items-center gap-1 text-sm font-[Inter] text-[#0d6b78] hover:underline">
+        <nav className="flex items-center gap-1 text-xs font-[Inter] text-slate-500">
+          <Link to="/" className="hover:text-[#0d4361]">Home</Link>
+          <ArrowRight className="h-3 w-3" />
+          <Link to="/products" search={{}} className="hover:text-[#0d4361]">Products</Link>
+          <ArrowRight className="h-3 w-3" />
+          <span className="text-[#0d4361] font-semibold">{cat.name}</span>
+        </nav>
+
+        <Link to="/products" search={{}} className="mt-6 inline-flex items-center gap-1 text-sm font-[Inter] text-[#0d6b78] hover:underline">
           <ArrowLeft className="h-4 w-4" /> All categories
         </Link>
 
@@ -89,9 +121,10 @@ function CategoryPage() {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="mt-14 flex items-center justify-between flex-wrap gap-3">
-          <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Available Models <span className="font-[Inter] text-sm font-medium text-slate-500">({models.length})</span></h2>
+          <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">
+            Available Models <span className="font-[Inter] text-sm font-medium text-slate-500">({models.length})</span>
+          </h2>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowFilters((v) => !v)}
@@ -116,9 +149,9 @@ function CategoryPage() {
 
         {showFilters && (
           <div className="mt-4 rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-5 grid sm:grid-cols-3 gap-5 animate-fade-in">
-            <FilterSlider label="Max Price" value={maxPrice || priceCap} max={priceCap} step={100} suffix="₹" onChange={setMaxPrice} disabled={maxPrice === 0} />
-            <FilterSlider label="Max Sweep" value={maxSweep || sweepCap} max={sweepCap} step={50} suffix=" mm" onChange={setMaxSweep} disabled={maxSweep === 0} />
-            <FilterSlider label="Max Power" value={maxPower || powerCap} max={powerCap} step={5} suffix=" W" onChange={setMaxPower} disabled={maxPower === 0} />
+            <FilterSlider label="Max Price" value={maxPrice || priceCap} max={priceCap} step={100} suffix="₹" onChange={setMaxPrice} disabled={maxPrice === 0 || priceCap === 0} />
+            <FilterSlider label="Max Sweep" value={maxSweep || sweepCap} max={sweepCap} step={50} suffix=" mm" onChange={setMaxSweep} disabled={maxSweep === 0 || sweepCap === 0} />
+            <FilterSlider label="Max Power" value={maxPower || powerCap} max={powerCap} step={5} suffix=" W" onChange={setMaxPower} disabled={maxPower === 0 || powerCap === 0} />
             <button onClick={resetFilters} className="sm:col-span-3 justify-self-start text-xs font-[Inter] font-semibold text-[#0d6b78] hover:underline">Reset filters</button>
           </div>
         )}
@@ -164,8 +197,10 @@ function CategoryPage() {
                   ))}
                 </ul>
 
-                <div className="mt-auto pt-4 flex items-center justify-between">
-                  <span className="font-[Poppins] text-2xl font-extrabold text-[#0d4361]">₹{mm.price.toLocaleString("en-IN")}</span>
+                <div className="mt-auto pt-4 flex items-center justify-between gap-3">
+                  <span className="font-[Poppins] text-2xl font-extrabold text-[#0d4361]">
+                    {mm.price > 0 ? `₹${mm.price.toLocaleString("en-IN")}` : "Enquire Now"}
+                  </span>
                   <span className="inline-flex items-center gap-1 font-[Inter] text-xs font-semibold text-[#0d4361] group-hover:gap-2 transition-all">
                     View <ArrowRight className="h-3.5 w-3.5" />
                   </span>
@@ -177,7 +212,7 @@ function CategoryPage() {
 
         {models.length === 0 && (
           <div className="mt-10 rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-8 text-center">
-            <p className="font-[Inter] text-slate-600">No products match these filters.</p>
+            <p className="font-[Inter] text-slate-600">No products match these filters yet.</p>
             <button onClick={resetFilters} className="mt-3 text-sm font-[Inter] text-[#0d6b78] underline">Reset filters</button>
           </div>
         )}
@@ -202,16 +237,19 @@ function FilterSlider({ label, value, max, step, suffix, onChange, disabled }: {
     <label className="block">
       <div className="flex items-center justify-between font-[Inter] text-xs font-semibold text-[#0d4361]">
         <span>{label}</span>
-        <span className="text-[#0d6b78]">{disabled ? "Any" : `${suffix === "₹" ? "₹" : ""}${value.toLocaleString("en-IN")}${suffix !== "₹" ? suffix : ""}`}</span>
+        <span className="text-[#0d6b78]">
+          {disabled ? "Any" : `${suffix === "₹" ? "₹" : ""}${value.toLocaleString("en-IN")}${suffix !== "₹" ? suffix : ""}`}
+        </span>
       </div>
       <input
         type="range"
         min={0}
-        max={max}
+        max={Math.max(max, 0)}
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="mt-2 w-full accent-[#0d6b78]"
+        disabled={disabled || max === 0}
       />
     </label>
   );

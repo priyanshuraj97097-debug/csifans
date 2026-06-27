@@ -1,5 +1,10 @@
-import superToophanSilver from "@/assets/super-toophan-silver.png.asset.json";
-import superToophanChocolate from "@/assets/super-toophan-chocolate.png.asset.json";
+import tableFan400 from "@/assets/csi-super-toophan-table-fan-400.png.asset.json";
+import pedestalFan400 from "@/assets/csi-super-toophan-pedestal-fan-400.png.asset.json";
+import tableFan300 from "@/assets/csi-super-toophan-table-fan-300.png.asset.json";
+import ceilingChocolate from "@/assets/csi-super-toophan-ceiling-classic.png.asset.json";
+import ceilingSilver from "@/assets/csi-super-toophan-silver-uploaded.png.asset.json";
+import bldcBrown from "@/assets/csi-super-toophan-bldc-brown.png.asset.json";
+import bldcWhite from "@/assets/csi-super-toophan-bldc-white.png.asset.json";
 
 export type Category = {
   slug: string;
@@ -12,11 +17,17 @@ export type Category = {
 
 export type ProductTag = "New Arrival" | "Best Seller" | "Energy Efficient" | "Premium";
 
+export type Specification = {
+  label: string;
+  value?: string;
+};
+
 export type Model = {
   modelNo: string;
   name: string;
   slug: string;
   price: number;
+  fanType?: string;
   sweep?: string;
   rpm?: string;
   airDelivery?: string;
@@ -29,6 +40,7 @@ export type Model = {
   motor?: string;
   colors?: string[];
   features?: string[];
+  specifications?: Specification[];
   image: string;
   images?: string[];
   highlights: string[];
@@ -43,25 +55,80 @@ const m = (
   model: Omit<Model, "slug" | "voltage" | "frequency"> &
     Partial<Pick<Model, "voltage" | "frequency">>
 ): Model => ({
-  voltage: "230 V",
+  voltage: "220–240 V AC",
   frequency: "50 Hz",
   ...model,
   slug: slugify(model.modelNo),
 });
 
+const spec = (label: string, value?: string): Specification => ({ label, value });
+
 export const categories: Category[] = [
   {
     slug: "ceiling-fans",
     name: "Ceiling Fans",
-    tagline: "Powerful airflow overhead",
+    tagline: "Reliable everyday performance",
     description:
-      "Premium 1200mm ceiling fans engineered for the best performance even in low voltage — featuring the flagship Super TOOPHAN series.",
-    image: superToophanSilver.url,
+      "CSI ceiling fans for homes and offices with copper-wound motors, strong air delivery, and dependable low-voltage operation.",
+    image: ceilingSilver.url,
     models: [
+      m({
+        modelNo: "CSI-ST-CHOCOLATE-1200",
+        name: "Super Toophan Chocolate 1200mm",
+        price: 3299,
+        fanType: "Ceiling Fan",
+        sweep: "1200 mm (48 inch)",
+        rpm: "380–400 RPM",
+        airDelivery: "220–240 CMM",
+        warranty: "3 Years",
+        power: "70–75 W",
+        voltage: "220–240 V AC",
+        frequency: "50 Hz",
+        blades: "3",
+        bladeMaterial: "Metal blades · Chocolate finish",
+        motor: "Copper-wound induction motor",
+        colors: ["Chocolate"],
+        image: ceilingChocolate.url,
+        images: [ceilingChocolate.url],
+        highlights: [
+          "Best performance in low voltage",
+          "Double ball bearing",
+          "3-year warranty",
+        ],
+        features: [
+          "Copper-wound induction motor",
+          "Approx. 140–240 V operating range",
+          "Double ball bearing for long life",
+          "Standard downrod mounting",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-CHOCOLATE-1200"),
+          spec("Model", "Super Toophan"),
+          spec("Fan Type", "Ceiling Fan"),
+          spec("Color", "Chocolate"),
+          spec("Sweep", "1200 mm (48 inch)"),
+          spec("Blades", "3"),
+          spec("Bearing Type", "Double Ball Bearing"),
+          spec("Motor", "Copper-wound induction motor"),
+          spec("Rated Voltage", "220–240 V AC, 50 Hz"),
+          spec("Operating Voltage", "Approximately 140–240 V"),
+          spec("Speed", "380–400 RPM"),
+          spec("Air Delivery", "220–240 CMM"),
+          spec("Power Consumption", "70–75 W"),
+          spec("Downrod Length", "225–260 mm (standard)"),
+          spec("Warranty", "3 Years"),
+          spec("Features", "Low-voltage performance, copper motor, double ball bearing"),
+        ],
+        description:
+          "A 1200 mm Super Toophan ceiling fan in chocolate finish built for dependable airflow, smooth running, and reliable performance in low-voltage conditions.",
+        tags: ["Best Seller"],
+      }),
       m({
         modelNo: "CSI-ST-SILVER-1200",
         name: "Super Toophan Silver 1200mm",
         price: 3299,
+        fanType: "Ceiling Fan",
         sweep: "1200 mm (48 inch)",
         rpm: "360–400 RPM",
         airDelivery: "220–235 CMM",
@@ -69,63 +136,43 @@ export const categories: Category[] = [
         power: "70–80 W",
         voltage: "220–240 V AC",
         frequency: "50 Hz",
-        blades: "3 Aerodynamic",
-        bladeMaterial: "Aluminium (Silver/White-Silver)",
-        motor: "100% Copper Winding · Double Ball Bearing",
+        blades: "3",
+        bladeMaterial: "Metal blades · Silver / White-Silver finish",
+        motor: "100% Copper Winding",
         colors: ["Silver", "White-Silver"],
-        image: superToophanSilver.url,
-        images: [superToophanSilver.url],
+        image: ceilingSilver.url,
+        images: [ceilingSilver.url],
         highlights: [
           "Best performance in low voltage",
-          "Decorative integrated light",
-          "100% copper · double ball bearing",
+          "100% copper winding",
+          "Double ball bearing",
         ],
         features: [
-          "Best performance in low voltage",
-          "Decorative integrated light fitting",
-          "100% copper winding motor",
-          "Double ball bearing for long life",
-          "1200 mm (48\") aerodynamic 3-blade sweep",
-          "ISO 9001:2015 certified manufacturing",
+          "3-blade ceiling fan",
           "Downrod ceiling mount",
+          "Strong airflow for daily use",
+          "3-year warranty",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-SILVER-1200"),
+          spec("Model", "Super Toophan Silver"),
+          spec("Fan Type", "Ceiling Fan"),
+          spec("Sweep Size", "1200 mm (48 inch)"),
+          spec("Number of Blades", "3"),
+          spec("Rated Voltage", "220–240 V AC, 50 Hz"),
+          spec("Motor Winding", "100% Copper"),
+          spec("Bearing Type", "Double Ball Bearing"),
+          spec("Speed", "360–400 RPM"),
+          spec("Air Delivery", "220–235 CMM"),
+          spec("Power Consumption", "70–80 W"),
+          spec("Warranty", "3 Years"),
+          spec("Color", "Silver / White-Silver"),
+          spec("Mounting", "Downrod Ceiling Mount"),
+          spec("Features", "Low-voltage performance, copper winding, double ball bearing"),
         ],
         description:
-          "The Super Toophan Silver is engineered for the best performance in low voltage conditions. A 3-blade 1200mm ceiling fan with decorative integrated light fitting, 100% copper winding motor, double ball bearing and a class-leading 3-year warranty.",
-        tags: ["New Arrival", "Best Seller"],
-      }),
-      m({
-        modelNo: "CSI-ST-CHOCOLATE-1200",
-        name: "Super Toophan Chocolate 1200mm",
-        price: 3299,
-        sweep: "1200 mm (48 inch)",
-        rpm: "380–400 RPM",
-        airDelivery: "220–240 CMM",
-        warranty: "3 Years",
-        power: "70–75 W",
-        voltage: "220–240 V AC (operates 140–240 V)",
-        frequency: "50 Hz",
-        blades: "3 Aerodynamic",
-        bladeMaterial: "Aluminium (Chocolate)",
-        motor: "Copper-wound induction · Double Ball Bearing",
-        colors: ["Chocolate"],
-        image: superToophanChocolate.url,
-        images: [superToophanChocolate.url],
-        highlights: [
-          "Rich chocolate premium finish",
-          "Wide voltage operation (140–240 V)",
-          "Service value ~3.1–3.3 CMM/W",
-        ],
-        features: [
-          "Best performance even in low voltage (140–240 V)",
-          "Copper-wound induction motor",
-          "Double ball bearing for long life",
-          "1200 mm (48\") aerodynamic 3-blade sweep",
-          "Service value ~3.1–3.3 CMM/W",
-          "Standard downrod 225–260 mm",
-          "ISO 9001:2015 certified manufacturing",
-        ],
-        description:
-          "The Super Toophan Chocolate is a premium 1200mm 3-blade ceiling fan in a rich chocolate finish. Built with a copper-wound induction motor and double ball bearings, it delivers 220–240 CMM of air at just 70–75 W and runs reliably across a wide 140–240 V range — backed by a 3-year warranty.",
+          "The Super Toophan Silver 1200 mm ceiling fan pairs an elegant silver finish with dependable airflow and low-voltage performance for bedrooms, halls, and living spaces.",
         tags: ["New Arrival"],
       }),
     ],
@@ -133,47 +180,319 @@ export const categories: Category[] = [
   {
     slug: "pedestal-fans",
     name: "Pedestal Fans",
-    tagline: "Powerful, portable cooling",
+    tagline: "Portable airflow with height adjustment",
     description:
-      "High-performance pedestal fans with sturdy stands, wide oscillation and copper motors. New models launching soon.",
-    image: superToophanSilver.url,
-    models: [],
+      "Pedestal fans with strong copper motors, metal safety grills, oscillation control, and sturdy round bases for home, office, shop, and classroom use.",
+    image: pedestalFan400.url,
+    models: [
+      m({
+        modelNo: "CSI-ST-PED-400",
+        name: "Super Toophan Pedestal Fan 400mm",
+        price: 0,
+        fanType: "Pedestal / Stand Fan",
+        sweep: "400 mm (16 inch)",
+        rpm: "1300–1400 RPM",
+        airDelivery: "75–90 CMM",
+        power: "55–60 W",
+        voltage: "220–240 V AC",
+        frequency: "50 Hz",
+        blades: "3",
+        bladeMaterial: "High-grade PP Plastic",
+        motor: "Copper-wound AC induction motor",
+        image: pedestalFan400.url,
+        images: [pedestalFan400.url],
+        highlights: [
+          "Height adjustment",
+          "Tilt adjustment",
+          "Heavy-duty round base",
+        ],
+        features: [
+          "Copper-wound AC induction motor",
+          "Powder-coated metal safety grill",
+          "Suitable for home, office, shop, and classroom",
+          "3 speed settings",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-PED-400"),
+          spec("Model", "Super Toophan Pedestal Fan"),
+          spec("Fan Type", "Pedestal / Stand Fan"),
+          spec("Sweep Size", "400 mm (16 inch)"),
+          spec("Blade Count", "3"),
+          spec("Blade Material", "High-grade PP Plastic"),
+          spec("Motor Type", "Copper-wound AC Induction Motor"),
+          spec("Rated Voltage", "220–240 V AC"),
+          spec("Frequency", "50 Hz"),
+          spec("Power Consumption", "55–60 W"),
+          spec("Maximum Speed", "1300–1400 RPM"),
+          spec("Air Delivery", "75–90 CMM"),
+          spec("Speed Settings", "3"),
+          spec("Tilt Adjustment", "Yes"),
+          spec("Height Adjustment", "Yes"),
+          spec("Guard", "Powder-coated Metal Safety Grill"),
+          spec("Base Type", "Heavy-duty Round Base"),
+          spec("Suitable For", "Home, Office, Shop, Classroom"),
+        ],
+        description:
+          "A full-size Super Toophan pedestal fan with adjustable height, tilt control, and strong airflow for larger rooms and workspaces.",
+        tags: ["New Arrival"],
+      }),
+    ],
   },
   {
     slug: "table-fans",
     name: "Table Fans",
-    tagline: "Compact desktop comfort",
+    tagline: "Compact cooling for desks and counters",
     description:
-      "Compact, energy-efficient table fans built for desks, bedside tables and small spaces. New models launching soon.",
-    image: superToophanSilver.url,
-    models: [],
+      "Table and mini pedestal fans for desks, bedside tables, shops, and workstations with lightweight placement and quick focused airflow.",
+    image: tableFan400.url,
+    models: [
+      m({
+        modelNo: "CSI-ST-TABLE-400",
+        name: "Super Toophan Table Fan 400mm",
+        price: 0,
+        fanType: "Table Fan",
+        sweep: "400 mm (16 inch)",
+        rpm: "1300–1400 RPM",
+        airDelivery: "70–75 CMM",
+        power: "50–60 W",
+        voltage: "220–240 V AC",
+        frequency: "50 Hz",
+        blades: "3",
+        bladeMaterial: "PP (Polypropylene) Plastic",
+        motor: "Copper-wound AC induction motor",
+        image: tableFan400.url,
+        images: [tableFan400.url],
+        highlights: [
+          "Large 400 mm sweep",
+          "Powder-coated steel safety grill",
+          "Table-top convenience",
+        ],
+        features: [
+          "Ideal for home, office, and shop",
+          "Copper-wound AC induction motor",
+          "3 speed settings",
+          "Stable table-top base",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-TABLE-400"),
+          spec("Model", "Super Toophan Table Fan"),
+          spec("Fan Type", "Table Fan"),
+          spec("Sweep Size", "400 mm (16 inch)"),
+          spec("Blade Material", "PP (Polypropylene) Plastic"),
+          spec("Number of Blades", "3"),
+          spec("Motor Type", "Copper-wound AC induction motor"),
+          spec("Rated Voltage", "220–240 V AC"),
+          spec("Frequency", "50 Hz"),
+          spec("Power Consumption", "50–60 W"),
+          spec("Speed", "1300–1400 RPM"),
+          spec("Air Delivery", "70–75 CMM"),
+          spec("Speed Settings", "3"),
+          spec("Guard", "Powder-coated steel safety grill"),
+          spec("Mounting", "Table-top"),
+          spec("Suitable Use", "Home, Office, Shop"),
+        ],
+        description:
+          "A 16-inch Super Toophan table fan designed for desks and counter spaces with practical airflow and dependable everyday performance.",
+        tags: ["New Arrival"],
+      }),
+      m({
+        modelNo: "CSI-ST-TABLE-300",
+        name: "Super Toophan Mini Table Fan 300mm",
+        price: 0,
+        fanType: "Table Fan",
+        sweep: "300 mm (12 inch)",
+        rpm: "2200–2400 RPM",
+        airDelivery: "45–60 CMM",
+        power: "40–50 W",
+        voltage: "220–240 V AC",
+        frequency: "50 Hz",
+        blades: "3",
+        bladeMaterial: "High-grade PP Plastic",
+        motor: "Copper-wound AC induction motor",
+        image: tableFan300.url,
+        images: [tableFan300.url],
+        highlights: [
+          "Compact 12-inch size",
+          "High-speed performance",
+          "Desk-friendly footprint",
+        ],
+        features: [
+          "High-strength steel safety grill",
+          "Ideal for bedroom, office desk, study table, and kitchen",
+          "3 speed settings",
+          "Quick focused airflow for compact spaces",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-TABLE-300"),
+          spec("Model", "Super Toophan Table Fan"),
+          spec("Fan Type", "Table Fan"),
+          spec("Sweep Size", "300 mm (12 inch)"),
+          spec("Guard", "High-strength steel safety grill"),
+          spec("Blade Count", "3"),
+          spec("Blade Material", "High-grade PP Plastic"),
+          spec("Motor Type", "Copper-wound AC induction motor"),
+          spec("Rated Voltage", "220–240 V AC"),
+          spec("Frequency", "50 Hz"),
+          spec("Power Consumption", "40–50 W"),
+          spec("Maximum Speed", "2200–2400 RPM"),
+          spec("Air Delivery", "45–60 CMM"),
+          spec("Speed Settings", "3"),
+          spec("Suitable Use", "Bedroom, Office Desk, Study Table, Kitchen"),
+        ],
+        description:
+          "A compact Super Toophan mini table fan with high speed, low footprint, and practical desk-side cooling for personal spaces.",
+        tags: ["New Arrival"],
+      }),
+    ],
   },
   {
     slug: "wall-fans",
     name: "Wall Fans",
-    tagline: "Space-saving wall mount",
+    tagline: "Space-saving wall-mounted airflow",
     description:
-      "Heavy-duty wall-mounted fans with wide oscillation — ideal for shops, kitchens and workspaces. New models launching soon.",
-    image: superToophanSilver.url,
+      "Dedicated wall fan models will appear here as you add more CSI wall-mounted products to the catalog.",
+    image: tableFan400.url,
     models: [],
   },
   {
     slug: "exhaust-fans",
     name: "Exhaust Fans",
-    tagline: "Fresh-air ventilation",
+    tagline: "Fresh air for kitchens and washrooms",
     description:
-      "Durable exhaust fans for kitchens, bathrooms and industrial spaces. New models launching soon.",
-    image: superToophanSilver.url,
+      "Dedicated exhaust fan models will appear here as you add more CSI ventilation products to the catalog.",
+    image: tableFan400.url,
     models: [],
   },
   {
     slug: "special-fans",
     name: "Special Fans",
-    tagline: "Decorative & custom designs",
+    tagline: "Application-specific cooling solutions",
     description:
-      "Decorative, BLDC and specialty CSI fans for premium interiors. New models launching soon.",
-    image: superToophanSilver.url,
+      "Special-purpose fan models will appear here as you add more CSI specialty products to the catalog.",
+    image: ceilingSilver.url,
     models: [],
+  },
+  {
+    slug: "premium-fans",
+    name: "Premium Fans",
+    tagline: "BLDC technology with remote convenience",
+    description:
+      "Premium CSI BLDC fans with remote control, low power draw, high speed, and energy-efficient performance for modern homes.",
+    image: bldcBrown.url,
+    models: [
+      m({
+        modelNo: "CSI-ST-BLDC-BROWN-1200",
+        name: "Super Toophan BLDC Brown 1200mm",
+        price: 0,
+        fanType: "BLDC Ceiling Fan",
+        sweep: "1200 mm (48 inch)",
+        rpm: "650 RPM ±",
+        warranty: "To be updated",
+        power: "35 W ± 5 W",
+        voltage: "220–240 V AC",
+        frequency: "50 Hz",
+        blades: "3",
+        bladeMaterial: "Premium finish blades",
+        motor: "Brushless DC (BLDC) · 100% Copper",
+        colors: ["Chocolate Brown"],
+        image: bldcBrown.url,
+        images: [bldcBrown.url],
+        highlights: [
+          "5-star energy efficient",
+          "Remote control",
+          "Memory function",
+        ],
+        features: [
+          "BLDC motor for low power consumption",
+          "Double ball bearing",
+          "Low noise operation",
+          "Starts at approximately 90–140 V",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-BLDC-BROWN-1200"),
+          spec("Model", "Super Toophan BLDC"),
+          spec("Fan Type", "BLDC Ceiling Fan"),
+          spec("Sweep Size", "1200 mm (48 inch)"),
+          spec("Blade Count", "3"),
+          spec("Motor Type", "Brushless DC (BLDC)"),
+          spec("Rated Voltage", "220–240 V AC"),
+          spec("Frequency", "50 Hz"),
+          spec("Rated Power", "35 W ± 5 W"),
+          spec("Maximum Speed", "650 RPM"),
+          spec("Memory Function", "Yes"),
+          spec("Bearing Type", "Double Ball Bearing"),
+          spec("Motor Winding", "100% Copper"),
+          spec("Noise Level", "Low (<45 dB, typical)"),
+          spec("Starting Voltage", "Approximately 90–140 V"),
+          spec("Star Rating", "5-Star Energy Efficient"),
+          spec("Color", "Chocolate Brown"),
+          spec("Speed Control", "Remote"),
+        ],
+        description:
+          "A premium BLDC Super Toophan fan with low power draw, remote convenience, and fast airflow for modern living rooms and bedrooms.",
+        tags: ["Premium", "Energy Efficient"],
+      }),
+      m({
+        modelNo: "CSI-ST-BLDC-WHITE-1200",
+        name: "Super Toophan BLDC White 1200mm",
+        price: 0,
+        fanType: "Ceiling Fan",
+        sweep: "1200 mm (48 inch)",
+        rpm: "650 RPM ±",
+        airDelivery: "240–260 CMM",
+        warranty: "To be updated",
+        power: "35 W ± 5 W",
+        voltage: "220–240 V AC",
+        frequency: "50 Hz",
+        blades: "3",
+        bladeMaterial: "Aluminium",
+        motor: "Brushless DC (BLDC) · 100% Copper",
+        colors: ["White"],
+        image: bldcWhite.url,
+        images: [bldcWhite.url],
+        highlights: [
+          "RF remote control",
+          "High air delivery",
+          "5-star energy efficient",
+        ],
+        features: [
+          "BLDC motor with low noise",
+          "Double ball bearing",
+          "Starts at 90–140 V",
+          "Suitable for modern bedrooms and living spaces",
+        ],
+        specifications: [
+          spec("Brand", "CSI"),
+          spec("Model No.", "CSI-ST-BLDC-WHITE-1200"),
+          spec("Model", "Super Toophan BLDC"),
+          spec("Fan Type", "Ceiling Fan"),
+          spec("Sweep Size", "1200 mm (48 inch)"),
+          spec("Blade Count", "3"),
+          spec("Blade Material", "Aluminium"),
+          spec("Motor Type", "Brushless DC (BLDC)"),
+          spec("Rated Voltage", "220–240 V AC"),
+          spec("Frequency", "50 Hz"),
+          spec("Rated Power", "35 W ± 5 W"),
+          spec("Maximum Speed", "650 RPM ±"),
+          spec("Air Delivery", "240–260 CMM"),
+          spec("Star Rating", "5-Star Energy Efficient"),
+          spec("Speed Control", "RF Remote Control"),
+          spec("Bearing Type", "Double Ball Bearing"),
+          spec("Motor Winding", "100% Copper"),
+          spec("Starting Voltage", "90–140 V"),
+          spec("Power Factor", ">0.95"),
+          spec("Color", "White"),
+          spec("Noise Level", "Low (<45 dB, typical)"),
+        ],
+        description:
+          "A premium white BLDC Super Toophan fan with remote control, strong air delivery, and high-speed energy-efficient operation.",
+        tags: ["Premium", "Energy Efficient", "New Arrival"],
+      }),
+    ],
   },
 ];
 
@@ -203,6 +522,7 @@ export const searchModels = (query: string) => {
       mm.name,
       mm.modelNo,
       mm.categoryName,
+      mm.fanType ?? "",
       mm.description ?? "",
       mm.sweep ?? "",
       mm.power ?? "",
@@ -213,6 +533,7 @@ export const searchModels = (query: string) => {
       ...(mm.tags ?? []),
       ...(mm.highlights ?? []),
       ...(mm.features ?? []),
+      ...((mm.specifications ?? []).map((item) => `${item.label} ${item.value ?? ""}`)),
     ]
       .join(" ")
       .toLowerCase()
@@ -225,6 +546,7 @@ export const parseSweep = (s?: string) => {
   const match = s.match(/(\d+)/);
   return match ? parseInt(match[1]!, 10) : 0;
 };
+
 export const parsePower = (s?: string) => {
   if (!s) return 0;
   const match = s.match(/(\d+)/);
