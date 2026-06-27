@@ -43,11 +43,12 @@ export function Footer() {
           <ul className="space-y-2 font-[Inter] text-sm text-white/75">
             {[
               ["/products/ceiling-fans", "Ceiling Fans"],
-              ["/products/high-speed-fans", "High-Speed Fans"],
+              ["/products/pedestal-fans", "Pedestal Fans"],
+              ["/products/table-fans", "Table Fans"],
+              ["/products/wall-fans", "Wall Fans"],
               ["/products/exhaust-fans", "Exhaust Fans"],
-              ["/products/wall-cabin-fans", "Wall & Cabin Fans"],
-              ["/products/decorative-fans", "Decorative Fans"],
-              ["/products/premium-series", "Premium Series"],
+              ["/products/special-fans", "Special Fans"],
+              ["/products/premium-fans", "Premium Fans"],
             ].map(([to, label]) => (
               <li key={to}>
                 <Link to={to} className="hover:text-white transition-colors">{label}</Link>
