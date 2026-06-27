@@ -14,9 +14,17 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Our Products | CSI Fans" },
-      { name: "description", content: "Explore the full CSI Fans range — ceiling, high-speed, exhaust, wall, cabin, decorative and premium Super TOOPHAN series." },
+      {
+        name: "description",
+        content:
+          "Explore CSI table fans, pedestal fans, ceiling fans, premium BLDC fans, and upcoming wall, exhaust, and special fan categories.",
+      },
       { property: "og:title", content: "CSI Fans Product Range" },
-      { property: "og:description", content: "Ceiling, high-speed, exhaust, wall/cabin, decorative and premium series fans." },
+      {
+        property: "og:description",
+        content:
+          "Browse table, pedestal, ceiling, premium, wall, exhaust, and special fan categories from CSI Fans.",
+      },
     ],
     links: [{ rel: "canonical", href: "/products" }],
   }),
@@ -37,7 +45,7 @@ function Products() {
                 <SearchIcon className="h-3.5 w-3.5" /> Search results
               </span>
               <h1 className="mt-4 font-[Poppins] text-3xl sm:text-4xl font-extrabold text-[#0a2f44]">
-                "{q}"
+                &quot;{q}&quot;
               </h1>
               <p className="mt-2 font-[Inter] text-slate-600">
                 {results.length} {results.length === 1 ? "product" : "products"} found
@@ -63,7 +71,9 @@ function Products() {
                       <p className="font-[Inter] text-xs text-[#0d6b78] font-semibold">{m.categoryName}</p>
                       <h3 className="mt-1 font-[Poppins] font-semibold text-[#0a2f44]">{m.name}</h3>
                       <div className="mt-3 flex items-center justify-between">
-                        <span className="font-[Poppins] text-xl font-bold text-[#0d4361]">₹{m.price.toLocaleString("en-IN")}</span>
+                        <span className="font-[Poppins] text-xl font-bold text-[#0d4361]">
+                          {m.price > 0 ? `₹${m.price.toLocaleString("en-IN")}` : "Enquire Now"}
+                        </span>
                         <ArrowRight className="h-4 w-4 text-[#0d6b78] group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -85,7 +95,7 @@ function Products() {
           </>
         ) : (
           <>
-            <SectionHeader eyebrow="Our Range" title="Fans for Every Space" subtitle="From everyday ceiling fans to flagship BLDC models — built to perform." />
+            <SectionHeader eyebrow="Our Range" title="Fans for Every Space" subtitle="Browse table, pedestal, ceiling, premium BLDC, and upcoming specialty categories from CSI Fans." />
             <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.map((c) => (
                 <Link

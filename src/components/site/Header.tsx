@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/csi-logo.png.asset.json";
@@ -20,8 +20,6 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-  const [openCat, setOpenCat] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -30,7 +28,10 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const closeMobile = () => { setOpen(false); setProductsOpen(false); setOpenCat(null); };
+  const closeMobile = () => {
+    setOpen(false);
+    setProductsOpen(false);
+  };
 
   return (
     <header
@@ -58,17 +59,69 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
-          {nav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              activeOptions={{ exact: n.to === "/" }}
-              className="px-3 py-2 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:text-[#0d4361] hover:bg-[#0d6b78]/10 transition-colors"
-              activeProps={{ className: "text-[#0d4361] bg-[#0d6b78]/15" }}
-            >
-              {n.label}
-            </Link>
-          ))}
+          {nav.map((n) => {
+            if (n.to === "/products") {
+              return (
+                <div key={n.to} className="relative group">
+                  <div className="flex items-center rounded-lg transition-colors group-hover:bg-[#0d6b78]/10 group-focus-within:bg-[#0d6b78]/10">
+                    <Link
+                      to="/products"
+                      className="pl-3 pr-1 py-2 font-[Inter] text-sm font-medium text-slate-700 hover:text-[#0d4361] transition-colors"
+                      activeProps={{ className: "pl-3 pr-1 py-2 font-[Inter] text-sm font-medium text-[#0d4361]" }}
+                    >
+                      Products
+                    </Link>
+                    <ChevronDown className="mr-3 h-4 w-4 text-slate-500 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
+                  </div>
+
+                  <div className="pointer-events-none invisible absolute left-0 top-full z-50 pt-3 opacity-0 transition-all duration-200 group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
+                    <div className="w-[22rem] rounded-2xl bg-white/95 p-3 shadow-2xl ring-1 ring-[#0d6b78]/15 backdrop-blur-xl">
+                      <Link
+                        to="/products"
+                        className="block rounded-xl px-3 py-2.5 font-[Inter] text-sm font-semibold text-[#0d4361] hover:bg-[#0d6b78]/8"
+                      >
+                        All Products
+                      </Link>
+                      <div className="mt-2 grid gap-1">
+                        {categories.map((category) => (
+                          <Link
+                            key={category.slug}
+                            to="/products/$category"
+                            params={{ category: category.slug }}
+                            className="flex items-center justify-between rounded-xl px-3 py-2.5 hover:bg-[#0d6b78]/8 transition-colors"
+                          >
+                            <div>
+                              <p className="font-[Inter] text-sm font-semibold text-[#0a2f44]">
+                                {category.name}
+                              </p>
+                              <p className="font-[Inter] text-[11px] text-slate-500">
+                                {category.models.length} {category.models.length === 1 ? "product" : "products"}
+                              </p>
+                            </div>
+                            <span className="font-[Inter] text-xs font-semibold text-[#0d6b78]">
+                              View
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={n.to}
+                to={n.to}
+                activeOptions={{ exact: n.to === "/" }}
+                className="px-3 py-2 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:text-[#0d4361] hover:bg-[#0d6b78]/10 transition-colors"
+                activeProps={{ className: "text-[#0d4361] bg-[#0d6b78]/15" }}
+              >
+                {n.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden md:flex flex-1 max-w-xs items-center">
@@ -91,7 +144,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile search bar */}
       <div className="md:hidden px-4 pb-3 sm:px-6">
         <SearchCombobox />
       </div>
@@ -120,44 +172,26 @@ export function Header() {
                         >
                           All Products
                         </Link>
-                        {categories.map((c) => (
-                          <div key={c.slug}>
-                            <button
-                              onClick={() => setOpenCat(openCat === c.slug ? null : c.slug)}
-                              className="w-full flex items-center justify-between px-4 py-2 rounded-lg font-[Inter] text-xs text-slate-700 hover:bg-[#0d6b78]/10"
-                              aria-expanded={openCat === c.slug}
-                            >
-                              <span>{c.name}</span>
-                              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openCat === c.slug ? "rotate-180" : ""}`} />
-                            </button>
-                            {openCat === c.slug && (
-                              <div className="pl-3 py-1 border-l-2 border-[#0d6b78]/20 ml-4">
-                                <button
-                                  onClick={() => { closeMobile(); navigate({ to: "/products/$category", params: { category: c.slug } }); }}
-                                  className="block w-full text-left px-3 py-1.5 font-[Inter] text-[11px] font-semibold text-[#0d6b78] hover:underline"
-                                >
-                                  View category →
-                                </button>
-                                {c.models.map((md) => (
-                                  <Link
-                                    key={md.modelNo}
-                                    to="/products/$category/$model"
-                                    params={{ category: c.slug, model: md.slug }}
-                                    onClick={closeMobile}
-                                    className="block px-3 py-1.5 rounded font-[Inter] text-[12px] text-slate-700 hover:bg-[#0d6b78]/10"
-                                  >
-                                    {md.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                          </div>
+                        {categories.map((category) => (
+                          <Link
+                            key={category.slug}
+                            to="/products/$category"
+                            params={{ category: category.slug }}
+                            onClick={closeMobile}
+                            className="flex items-center justify-between px-4 py-2 rounded-lg font-[Inter] text-xs text-slate-700 hover:bg-[#0d6b78]/10"
+                          >
+                            <span>{category.name}</span>
+                            <span className="text-[10px] font-semibold text-[#0d6b78]">
+                              {category.models.length}
+                            </span>
+                          </Link>
                         ))}
                       </div>
                     )}
                   </div>
                 );
               }
+
               return (
                 <Link
                   key={n.to}
