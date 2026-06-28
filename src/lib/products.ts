@@ -1,10 +1,10 @@
-import tableFan400 from "@/assets/csi-super-toophan-table-fan-400.png.asset.json";
-import pedestalFan400 from "@/assets/csi-super-toophan-pedestal-fan-400.png.asset.json";
-import tableFan300 from "@/assets/csi-super-toophan-table-fan-300.png.asset.json";
-import ceilingChocolate from "@/assets/csi-super-toophan-ceiling-classic.png.asset.json";
-import ceilingSilver from "@/assets/csi-super-toophan-silver-uploaded.png.asset.json";
-import bldcBrown from "@/assets/csi-super-toophan-bldc-brown.png.asset.json";
-import bldcWhite from "@/assets/csi-super-toophan-bldc-white.png.asset.json";
+import tableFan400 from "@/assets/csi-super-toophan-table-fan-400.png";
+import pedestalFan400 from "@/assets/csi-super-toophan-pedestal-fan-400.png";
+import tableFan300 from "@/assets/csi-super-toophan-table-fan-300.png";
+import ceilingChocolate from "@/assets/csi-super-toophan-ceiling-classic.png";
+import ceilingSilver from "@/assets/csi-super-toophan-silver-uploaded.png";
+import bldcBrown from "@/assets/csi-super-toophan-bldc-brown.png";
+import bldcWhite from "@/assets/csi-super-toophan-bldc-white.png";
 
 export type Category = {
   slug: string;
