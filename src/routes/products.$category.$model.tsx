@@ -1,33 +1,28 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, Check, Phone, MessageCircle, ChevronRight, Tag } from "lucide-react";
-import { findModel, categories, type Model, type Category, type ProductTag, type Specification } from "@/lib/products";
-import { Lightbox } from "@/components/site/Lightbox";
+import { useMemo, useState } from "react";
+import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag } from "lucide-react";
+import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
 
-export const Route = createFileRoute("/products/$category/$model")({
+export const Route = createFileRoute("/products/$category")({
   loader: ({ params }) => {
-    const found = findModel(params.category, params.model);
-    if (!found) throw notFound();
-    return found;
+    const cat = findCategory(params.category);
+    if (!cat) throw notFound();
+    return cat;
   },
-  head: ({ loaderData }) => {
-    const m = loaderData?.model;
-    const c = loaderData?.category;
-    return {
-      meta: [
-        { title: `${m?.name ?? "Product"} | CSI Fans` },
-        { name: "description", content: m?.description ?? "CSI fan product details." },
-        { property: "og:title", content: `${m?.name ?? ""} — CSI Fans` },
-        { property: "og:description", content: m?.description ?? "" },
-        { property: "og:image", content: m?.image ?? "" },
-      ],
-      links: [{ rel: "canonical", href: `/products/${c?.slug}/${m?.slug}` }],
-    };
-  },
+  head: ({ loaderData }) => ({
+    meta: [
+      { title: `${loaderData?.name ?? "Products"} | CSI Fans` },
+      { name: "description", content: loaderData?.description ?? "CSI Fans product range." },
+      { property: "og:title", content: `${loaderData?.name ?? "Products"} — CSI Fans` },
+      { property: "og:description", content: loaderData?.tagline ?? "Premium fans." },
+      { property: "og:image", content: loaderData?.image ?? "" },
+    ],
+    links: [{ rel: "canonical", href: `/products/${loaderData?.slug ?? ""}` }],
+  }),
   notFoundComponent: () => (
     <div className="py-24 text-center px-4">
-      <h1 className="font-[Poppins] text-3xl font-bold text-[#0a2f44]">Product not found</h1>
-      <Link to="/products" search={{}} className="mt-6 inline-block text-[#0d6b78] underline">Browse all products</Link>
+      <h1 className="font-[Poppins] text-3xl font-bold text-[#0a2f44]">Category not found</h1>
+      <Link to="/products" search={{}} className="mt-6 inline-block text-[#0d6b78] underline">Back to products</Link>
     </div>
   ),
   errorComponent: ({ error, reset }) => {
@@ -48,199 +43,215 @@ export const Route = createFileRoute("/products/$category/$model")({
       </div>
     );
   },
-  component: ModelPage,
+  component: CategoryPage,
 });
 
-const WHATSAPP_NUMBER = "919876543210";
+type SortKey = "latest" | "popular" | "price-asc" | "price-desc";
 
-function ModelPage() {
-  const { category, model } = Route.useLoaderData() as { category: Category; model: Model };
-  const images: string[] = model.images && model.images.length ? model.images : [model.image];
-  const [active, setActive] = useState(0);
-  const [lightbox, setLightbox] = useState(false);
+function CategoryPage() {
+  const cat = Route.useLoaderData();
+  const [sort, setSort] = useState<SortKey>("latest");
+  const [maxPrice, setMaxPrice] = useState<number>(0);
+  const [maxSweep, setMaxSweep] = useState<number>(0);
+  const [maxPower, setMaxPower] = useState<number>(0);
+  const [showFilters, setShowFilters] = useState(false);
 
-  const similar = category.models.filter((mm: Model) => mm.modelNo !== model.modelNo).slice(0, 4);
-  const whatsappMsg = encodeURIComponent(`Hi CSI Fans, I'd like more information about ${model.name} (${model.modelNo}).`);
+  const priceCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => m.price)) : 0;
+  const sweepCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => parseSweep(m.sweep))) : 0;
+  const powerCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => parsePower(m.power))) : 0;
 
-  const fallbackSpecs: Specification[] = [
-    { label: "Model No.", value: model.modelNo },
-    { label: "Sweep", value: model.sweep },
-    { label: "Voltage", value: model.voltage },
-    { label: "Wattage", value: model.power },
-    { label: "RPM", value: model.rpm },
-    { label: "Air Delivery", value: model.airDelivery },
-    { label: "Warranty", value: model.warranty },
-    { label: "Features", value: model.features?.join(", ") },
-  ];
+  const models = useMemo(() => {
+    let list = [...cat.models];
+    if (maxPrice > 0) list = list.filter((m) => m.price <= maxPrice);
+    if (maxSweep > 0) list = list.filter((m) => parseSweep(m.sweep) <= maxSweep);
+    if (maxPower > 0) list = list.filter((m) => parsePower(m.power) <= maxPower);
+    switch (sort) {
+      case "price-asc":
+        list.sort((a, b) => a.price - b.price);
+        break;
+      case "price-desc":
+        list.sort((a, b) => b.price - a.price);
+        break;
+      case "popular":
+        list.sort((a, b) => Number(b.tags?.includes("Best Seller")) - Number(a.tags?.includes("Best Seller")));
+        break;
+      case "latest":
+        list.sort((a, b) => Number(b.tags?.includes("New Arrival")) - Number(a.tags?.includes("New Arrival")));
+        break;
+    }
+    return list;
+  }, [cat.models, sort, maxPrice, maxSweep, maxPower]);
 
-  const specs = (model.specifications && model.specifications.length ? model.specifications : fallbackSpecs).map((item) => ({
-    label: item.label,
-    value: item.value && item.value.trim() ? item.value : "To be updated",
-  }));
+  const resetFilters = () => {
+    setMaxPrice(0);
+    setMaxSweep(0);
+    setMaxPower(0);
+    setSort("latest");
+  };
 
   return (
-    <div className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8">
+    <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <nav className="flex items-center gap-1 text-xs font-[Inter] text-slate-500">
+          <Link to="/" className="hover:text-[#0d4361]">Home</Link>
+          <ArrowRight className="h-3 w-3" />
           <Link to="/products" search={{}} className="hover:text-[#0d4361]">Products</Link>
-          <ChevronRight className="h-3 w-3" />
-          <Link to="/products/$category" params={{ category: category.slug }} className="hover:text-[#0d4361]">{category.name}</Link>
-          <ChevronRight className="h-3 w-3" />
-          <span className="text-[#0d4361] font-semibold truncate">{model.name}</span>
+          <ArrowRight className="h-3 w-3" />
+          <span className="text-[#0d4361] font-semibold">{cat.name}</span>
         </nav>
 
-        <Link to="/products/$category" params={{ category: category.slug }} className="mt-4 inline-flex items-center gap-1 text-sm font-[Inter] text-[#0d6b78] hover:underline">
-          <ArrowLeft className="h-4 w-4" /> Back to {category.name}
+        <Link to="/products" search={{}} className="mt-6 inline-flex items-center gap-1 text-sm font-[Inter] text-[#0d6b78] hover:underline">
+          <ArrowLeft className="h-4 w-4" /> All categories
         </Link>
 
-        <div className="mt-6 grid lg:grid-cols-2 gap-10">
+        <div className="mt-6 grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <button
-              type="button"
-              onClick={() => setLightbox(true)}
-              className="block w-full aspect-square rounded-3xl overflow-hidden ring-1 ring-white/60 shadow-2xl shadow-[#0d4361]/20 bg-gradient-to-br from-slate-50 to-[#0d6b78]/5 cursor-zoom-in"
-              aria-label="Open fullscreen gallery"
+            <span className="inline-block font-[Inter] text-xs font-bold tracking-[0.2em] uppercase text-[#0d6b78]">{cat.tagline}</span>
+            <h1 className="mt-3 font-[Poppins] text-4xl sm:text-5xl font-extrabold text-[#0a2f44]">{cat.name}</h1>
+            <p className="mt-5 font-[Inter] text-slate-600 leading-relaxed">{cat.description}</p>
+            <Link
+              to="/downloads"
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-6 py-3 font-[Poppins] font-semibold text-white shadow-lg shadow-[#0d6b78]/30 hover:scale-105 transition-transform"
             >
-              <img src={images[active]} alt={`${model.name} view ${active + 1}`} className="h-full w-full object-cover transition-transform hover:scale-105" />
-            </button>
-            {images.length > 1 && (
-              <div className="mt-3 grid grid-cols-5 gap-2">
-                {images.map((src: string, i: number) => (
-                  <button
-                    key={i}
-                    onClick={() => setActive(i)}
-                    aria-label={`Show image ${i + 1}`}
-                    className={`aspect-square rounded-xl overflow-hidden ring-2 transition-all ${i === active ? "ring-[#0d6b78]" : "ring-transparent hover:ring-[#0d6b78]/40"}`}
-                  >
-                    <img src={src} alt="" className="h-full w-full object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
+              <Download className="h-4 w-4" /> Download Catalogue
+            </Link>
           </div>
-
-          <div>
-            {model.tags && model.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {model.tags.map((t: ProductTag) => (
-                  <span key={t} className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] text-white px-2.5 py-1 font-[Inter] text-[10px] font-semibold uppercase tracking-wider">
-                    <Tag className="h-2.5 w-2.5" /> {t}
-                  </span>
-                ))}
-              </div>
-            )}
-            <p className="mt-3 font-[Inter] text-xs font-semibold tracking-wider uppercase text-[#0d6b78]">Model {model.modelNo}</p>
-            <h1 className="mt-1 font-[Poppins] text-3xl sm:text-4xl font-extrabold text-[#0a2f44]">{model.name}</h1>
-            <p className="mt-2 font-[Inter] text-sm text-[#0d6b78] font-semibold">{category.name}</p>
-            {model.description && <p className="mt-4 font-[Inter] text-slate-700 leading-relaxed">{model.description}</p>}
-
-            <div className="mt-5 flex items-end gap-3">
-              <span className="font-[Poppins] text-4xl font-extrabold text-[#0d4361]">
-                {model.price > 0 ? `₹${model.price.toLocaleString("en-IN")}` : "Enquire Now"}
-              </span>
-              <span className="font-[Inter] text-xs text-slate-500 pb-2">
-                {model.price > 0 ? "MRP incl. taxes" : "Contact for pricing"}
-              </span>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMsg}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] px-5 py-3 font-[Poppins] font-semibold text-white shadow-lg shadow-[#25D366]/30 transition-all"
-              >
-                <MessageCircle className="h-4 w-4" /> WhatsApp Enquiry
-              </a>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-5 py-3 font-[Poppins] font-semibold text-white shadow-lg shadow-[#0d6b78]/30"
-              >
-                <Phone className="h-4 w-4" /> Contact Us
-              </Link>
-            </div>
-
-            {model.features && model.features.length > 0 && (
-              <div className="mt-7">
-                <h2 className="font-[Poppins] font-bold text-[#0a2f44]">Key Features</h2>
-                <ul className="mt-3 grid sm:grid-cols-2 gap-2">
-                  {model.features.map((f: string) => (
-                    <li key={f} className="flex items-start gap-2 font-[Inter] text-sm text-slate-700">
-                      <Check className="h-4 w-4 text-[#0d6b78] mt-0.5 shrink-0" /> {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {model.colors && model.colors.length > 0 && (
-              <div className="mt-6">
-                <h2 className="font-[Poppins] font-bold text-[#0a2f44] text-sm">Available Colours</h2>
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {model.colors.map((c: string) => (
-                    <span key={c} className="rounded-full bg-white ring-1 ring-[#0d6b78]/20 px-3 py-1 font-[Inter] text-xs font-medium text-[#0a2f44]">{c}</span>
-                  ))}
-                </div>
-              </div>
-            )}
+          <div className="rounded-3xl overflow-hidden ring-1 ring-white/60 shadow-2xl shadow-[#0d4361]/20 bg-white/40 backdrop-blur-xl aspect-[4/3]">
+            <img src={cat.image} alt={cat.name} className="h-full w-full object-cover" />
           </div>
         </div>
 
-        <section className="mt-14 rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-6 sm:p-8 shadow-xl shadow-[#0d4361]/10">
-          <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Technical Specifications</h2>
-          <div className="mt-5 overflow-hidden rounded-2xl ring-1 ring-[#0d6b78]/15">
-            <table className="w-full text-left font-[Inter] text-sm">
-              <tbody>
-                {specs.map((item, i) => (
-                  <tr key={item.label} className={i % 2 === 0 ? "bg-white" : "bg-[#0d6b78]/5"}>
-                    <th className="py-3 px-4 font-semibold text-[#0d4361] w-1/2 sm:w-1/3">{item.label}</th>
-                    <td className="py-3 px-4 text-slate-800">{item.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="mt-14 flex items-center justify-between flex-wrap gap-3">
+          <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">
+            Available Models <span className="font-[Inter] text-sm font-medium text-slate-500">({models.length})</span>
+          </h2>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowFilters((v) => !v)}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white/80 ring-1 ring-[#0d6b78]/20 px-4 py-2 font-[Inter] text-sm font-semibold text-[#0d4361] hover:bg-[#0d6b78]/10"
+              aria-expanded={showFilters}
+            >
+              <SlidersHorizontal className="h-4 w-4" /> Filters
+            </button>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              className="rounded-full bg-white/80 ring-1 ring-[#0d6b78]/20 px-4 py-2 font-[Inter] text-sm font-semibold text-[#0d4361] outline-none"
+              aria-label="Sort"
+            >
+              <option value="latest">Latest</option>
+              <option value="popular">Popular</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
           </div>
-        </section>
+        </div>
 
-        {similar.length > 0 && (
-          <section className="mt-14">
-            <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Similar Products</h2>
-            <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {similar.map((s: Model) => (
-                <Link
-                  key={s.modelNo}
-                  to="/products/$category/$model"
-                  params={{ category: category.slug, model: s.slug }}
-                  className="group rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all overflow-hidden"
-                >
-                  <div className="aspect-square overflow-hidden bg-gradient-to-br from-slate-50 to-[#0d6b78]/5">
-                    <img src={s.image} alt={s.name} loading="lazy" className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-[Poppins] font-semibold text-[#0a2f44] text-sm truncate">{s.name}</h3>
-                    <p className="mt-1 font-[Poppins] font-bold text-[#0d4361]">
-                      {s.price > 0 ? `₹${s.price.toLocaleString("en-IN")}` : "Enquire Now"}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
+        {showFilters && (
+          <div className="mt-4 rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-5 grid sm:grid-cols-3 gap-5 animate-fade-in">
+            <FilterSlider label="Max Price" value={maxPrice || priceCap} max={priceCap} step={100} suffix="₹" onChange={setMaxPrice} disabled={priceCap === 0} />
+            <FilterSlider label="Max Sweep" value={maxSweep || sweepCap} max={sweepCap} step={50} suffix=" mm" onChange={setMaxSweep} disabled={sweepCap === 0} />
+            <FilterSlider label="Max Power" value={maxPower || powerCap} max={powerCap} step={5} suffix=" W" onChange={setMaxPower} disabled={powerCap === 0} />
+            <button onClick={resetFilters} className="sm:col-span-3 justify-self-start text-xs font-[Inter] font-semibold text-[#0d6b78] hover:underline">Reset filters</button>
+          </div>
         )}
 
-        <section className="mt-14">
-          <h2 className="font-[Poppins] text-lg font-bold text-[#0a2f44]">Explore Other Categories</h2>
+        <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {models.map((mm: Model) => (
+            <Link
+              key={mm.modelNo}
+              to="/products/$category/$model"
+              params={{ category: cat.slug, model: mm.slug }}
+              className="group rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all overflow-hidden flex flex-col"
+            >
+              <div className="aspect-square overflow-hidden bg-gradient-to-br from-slate-50 to-[#0d6b78]/5 relative">
+                <img src={mm.image} alt={mm.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                {mm.tags && mm.tags.length > 0 && (
+                  <div className="absolute top-3 left-3 flex flex-col gap-1 items-start">
+                    {mm.tags.slice(0, 2).map((t) => (
+                      <span key={t} className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] text-white px-2 py-0.5 font-[Inter] text-[9px] font-bold uppercase tracking-wider shadow">
+                        <Tag className="h-2.5 w-2.5" /> {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <span className="absolute bottom-3 right-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 font-[Inter] text-[11px] font-semibold text-[#0d4361] shadow">
+                  View details →
+                </span>
+              </div>
+
+              <div className="p-5 flex flex-col flex-1">
+                <p className="font-[Inter] text-xs text-[#0d6b78] font-semibold">Model {mm.modelNo}</p>
+                <h3 className="mt-1 font-[Poppins] font-bold text-[#0a2f44]">{mm.name}</h3>
+                <div className="mt-3 grid grid-cols-2 gap-1.5 font-[Inter] text-xs text-slate-600">
+                  {mm.sweep && <span>Sweep: <b className="text-[#0a2f44]">{mm.sweep}</b></span>}
+                  {mm.rpm && <span>Speed: <b className="text-[#0a2f44]">{mm.rpm}</b></span>}
+                  {mm.power && <span>Power: <b className="text-[#0a2f44]">{mm.power}</b></span>}
+                  {mm.warranty && <span>Warranty: <b className="text-[#0a2f44]">{mm.warranty}</b></span>}
+                </div>
+                <ul className="mt-3 space-y-1">
+                  {mm.highlights.slice(0, 3).map((h: string) => (
+                    <li key={h} className="flex items-start gap-2 font-[Inter] text-xs text-slate-700">
+                      <Check className="h-3.5 w-3.5 text-[#0d6b78] mt-0.5 shrink-0" /> {h}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto pt-4 flex items-center justify-between gap-3">
+                  <span className="font-[Poppins] text-2xl font-extrabold text-[#0d4361]">
+                    {mm.price > 0 ? `₹${mm.price.toLocaleString("en-IN")}` : "Enquire Now"}
+                  </span>
+                  <span className="inline-flex items-center gap-1 font-[Inter] text-xs font-semibold text-[#0d4361] group-hover:gap-2 transition-all">
+                    View <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {models.length === 0 && (
+          <div className="mt-10 rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-8 text-center">
+            <p className="font-[Inter] text-slate-600">No products match these filters yet.</p>
+            <button onClick={resetFilters} className="mt-3 text-sm font-[Inter] text-[#0d6b78] underline">Reset filters</button>
+          </div>
+        )}
+
+        <div className="mt-16">
+          <h3 className="font-[Poppins] text-xl font-bold text-[#0a2f44]">Other Categories</h3>
           <div className="mt-4 flex flex-wrap gap-2">
-            {categories.filter((c) => c.slug !== category.slug).map((c) => (
+            {categories.filter((c) => c.slug !== cat.slug).map((c) => (
               <Link key={c.slug} to="/products/$category" params={{ category: c.slug }} className="rounded-full bg-white/70 ring-1 ring-[#0d6b78]/20 px-4 py-2 font-[Inter] text-sm text-[#0d4361] hover:bg-[#0d6b78]/10 transition-colors">
                 {c.name}
               </Link>
             ))}
           </div>
-        </section>
+        </div>
       </div>
-
-      {lightbox && <Lightbox images={images} initial={active} onClose={() => setLightbox(false)} />}
     </div>
   );
 }
+
+function FilterSlider({ label, value, max, step, suffix, onChange, disabled }: { label: string; value: number; max: number; step: number; suffix: string; onChange: (n: number) => void; disabled?: boolean }) {
+  return (
+    <label className="block">
+      <div className="flex items-center justify-between font-[Inter] text-xs font-semibold text-[#0d4361]">
+        <span>{label}</span>
+        <span className="text-[#0d6b78]">
+          {disabled ? "Any" : `${suffix === "₹" ? "₹" : ""}${value.toLocaleString("en-IN")}${suffix !== "₹" ? suffix : ""}`}
+        </span>
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={Math.max(max, 0)}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="mt-2 w-full accent-[#0d6b78]"
+        disabled={disabled || max === 0}
+      />
+    </label>
+  );
+                       }
+
