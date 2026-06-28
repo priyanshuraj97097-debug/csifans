@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import logo from "@/assets/Screenshot_20260620-140313.png";
+import logo from "@/assets/csi-logo.png";
 import { categories } from "@/lib/products";
 import { SearchCombobox } from "./SearchCombobox";
 
