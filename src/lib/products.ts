@@ -70,7 +70,7 @@ export const categories: Category[] = [
     tagline: "Reliable everyday performance",
     description:
       "CSI ceiling fans for homes and offices with copper-wound motors, strong air delivery, and dependable low-voltage operation.",
-    image: ceilingSilver.url,
+    image: ceilingSilver,
     models: [
       m({
         modelNo: "CSI-ST-CHOCOLATE-1200",
@@ -88,8 +88,8 @@ export const categories: Category[] = [
         bladeMaterial: "Metal blades · Chocolate finish",
         motor: "Copper-wound induction motor",
         colors: ["Chocolate"],
-        image: ceilingChocolate.url,
-        images: [ceilingChocolate.url],
+        image: ceilingChocolate,
+        images: [ceilingChocolate],
         highlights: [
           "Best performance in low voltage",
           "Double ball bearing",
@@ -140,8 +140,8 @@ export const categories: Category[] = [
         bladeMaterial: "Metal blades · Silver / White-Silver finish",
         motor: "100% Copper Winding",
         colors: ["Silver", "White-Silver"],
-        image: ceilingSilver.url,
-        images: [ceilingSilver.url],
+        image: ceilingSilver,
+        images: [ceilingSilver],
         highlights: [
           "Best performance in low voltage",
           "100% copper winding",
@@ -183,7 +183,7 @@ export const categories: Category[] = [
     tagline: "Portable airflow with height adjustment",
     description:
       "Pedestal fans with strong copper motors, metal safety grills, oscillation control, and sturdy round bases for home, office, shop, and classroom use.",
-    image: pedestalFan400.url,
+    image: pedestalFan400,
     models: [
       m({
         modelNo: "CSI-ST-PED-400",
@@ -199,8 +199,8 @@ export const categories: Category[] = [
         blades: "3",
         bladeMaterial: "High-grade PP Plastic",
         motor: "Copper-wound AC induction motor",
-        image: pedestalFan400.url,
-        images: [pedestalFan400.url],
+        image: pedestalFan400,
+        images: [pedestalFan400],
         highlights: [
           "Height adjustment",
           "Tilt adjustment",
@@ -245,7 +245,7 @@ export const categories: Category[] = [
     tagline: "Compact cooling for desks and counters",
     description:
       "Table and mini pedestal fans for desks, bedside tables, shops, and workstations with lightweight placement and quick focused airflow.",
-    image: tableFan400.url,
+    image: tableFan400,
     models: [
       m({
         modelNo: "CSI-ST-TABLE-400",
@@ -261,8 +261,8 @@ export const categories: Category[] = [
         blades: "3",
         bladeMaterial: "PP (Polypropylene) Plastic",
         motor: "Copper-wound AC induction motor",
-        image: tableFan400.url,
-        images: [tableFan400.url],
+        image: tableFan400,
+        images: [tableFan400],
         highlights: [
           "Large 400 mm sweep",
           "Powder-coated steel safety grill",
@@ -311,8 +311,8 @@ export const categories: Category[] = [
         blades: "3",
         bladeMaterial: "High-grade PP Plastic",
         motor: "Copper-wound AC induction motor",
-        image: tableFan300.url,
-        images: [tableFan300.url],
+        image: tableFan300,
+        images: [tableFan300],
         highlights: [
           "Compact 12-inch size",
           "High-speed performance",
@@ -354,7 +354,7 @@ export const categories: Category[] = [
     tagline: "Space-saving wall-mounted airflow",
     description:
       "Dedicated wall fan models will appear here as you add more CSI wall-mounted products to the catalog.",
-    image: tableFan400.url,
+    image: tableFan400,
     models: [],
   },
   {
@@ -363,7 +363,7 @@ export const categories: Category[] = [
     tagline: "Fresh air for kitchens and washrooms",
     description:
       "Dedicated exhaust fan models will appear here as you add more CSI ventilation products to the catalog.",
-    image: tableFan400.url,
+    image: tableFan400,
     models: [],
   },
   {
@@ -372,7 +372,7 @@ export const categories: Category[] = [
     tagline: "Application-specific cooling solutions",
     description:
       "Special-purpose fan models will appear here as you add more CSI specialty products to the catalog.",
-    image: ceilingSilver.url,
+    image: ceilingSilver,
     models: [],
   },
   {
@@ -381,7 +381,7 @@ export const categories: Category[] = [
     tagline: "BLDC technology with remote convenience",
     description:
       "Premium CSI BLDC fans with remote control, low power draw, high speed, and energy-efficient performance for modern homes.",
-    image: bldcBrown.url,
+    image: bldcBrown,
     models: [
       m({
         modelNo: "CSI-ST-BLDC-BROWN-1200",
@@ -398,8 +398,8 @@ export const categories: Category[] = [
         bladeMaterial: "Premium finish blades",
         motor: "Brushless DC (BLDC) · 100% Copper",
         colors: ["Chocolate Brown"],
-        image: bldcBrown.url,
-        images: [bldcBrown.url],
+        image: bldcBrown,
+        images: [bldcBrown],
         highlights: [
           "5-star energy efficient",
           "Remote control",
@@ -452,8 +452,8 @@ export const categories: Category[] = [
         bladeMaterial: "Aluminium",
         motor: "Brushless DC (BLDC) · 100% Copper",
         colors: ["White"],
-        image: bldcWhite.url,
-        images: [bldcWhite.url],
+        image: bldcWhite,
+        images: [bldcWhite],
         highlights: [
           "RF remote control",
           "High air delivery",
