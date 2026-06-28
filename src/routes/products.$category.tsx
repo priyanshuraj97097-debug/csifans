@@ -149,9 +149,9 @@ function CategoryPage() {
 
         {showFilters && (
           <div className="mt-4 rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-5 grid sm:grid-cols-3 gap-5 animate-fade-in">
-            <FilterSlider label="Max Price" value={maxPrice || priceCap} max={priceCap} step={100} suffix="₹" onChange={setMaxPrice} disabled={maxPrice === 0 || priceCap === 0} />
-            <FilterSlider label="Max Sweep" value={maxSweep || sweepCap} max={sweepCap} step={50} suffix=" mm" onChange={setMaxSweep} disabled={maxSweep === 0 || sweepCap === 0} />
-            <FilterSlider label="Max Power" value={maxPower || powerCap} max={powerCap} step={5} suffix=" W" onChange={setMaxPower} disabled={maxPower === 0 || powerCap === 0} />
+            <FilterSlider label="Max Price" value={maxPrice || priceCap} max={priceCap} step={100} suffix="₹" onChange={setMaxPrice} disabled={priceCap === 0} />
+            <FilterSlider label="Max Sweep" value={maxSweep || sweepCap} max={sweepCap} step={50} suffix=" mm" onChange={setMaxSweep} disabled={sweepCap === 0} />
+            <FilterSlider label="Max Power" value={maxPower || powerCap} max={powerCap} step={5} suffix=" W" onChange={setMaxPower} disabled={powerCap === 0} />
             <button onClick={resetFilters} className="sm:col-span-3 justify-self-start text-xs font-[Inter] font-semibold text-[#0d6b78] hover:underline">Reset filters</button>
           </div>
         )}
@@ -254,3 +254,4 @@ function FilterSlider({ label, value, max, step, suffix, onChange, disabled }: {
     </label>
   );
 }
+
