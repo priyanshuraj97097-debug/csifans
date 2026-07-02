@@ -8,7 +8,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo.url} alt="CSI Fans" className="h-12 w-12 rounded-full ring-2 ring-white/30" />
+            <img src={logo} alt="CSI Fans" className="h-12 w-12 rounded-full ring-2 ring-white/30" />
             <div>
               <div className="font-[Poppins] text-xl font-extrabold">CSI Fans</div>
               <div className="font-[Inter] text-xs text-white/70">Innovation in Every Rotation</div>
