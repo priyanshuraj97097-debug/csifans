@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Building2 } from "lucide-react";
-import { SectionHeader } from "./index";
+import { SectionHeader } from "@/components/site/SectionHeader";
 
 export const Route = createFileRoute("/dealers")({
   head: () => ({

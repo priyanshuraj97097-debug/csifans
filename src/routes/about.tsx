@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck, Target, Eye, Factory } from "lucide-react";
-import { SectionHeader } from "./index";
+import { SectionHeader } from "@/components/site/SectionHeader";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, ArrowRight, Zap } from "lucide-react";
 import { categories } from "@/lib/products";
-import { SectionHeader } from "./index";
+import { SectionHeader } from "@/components/site/SectionHeader";
 
 export const Route = createFileRoute("/new-launches")({
   head: () => ({
