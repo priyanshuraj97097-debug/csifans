@@ -353,8 +353,6 @@ export const categories: Category[] = [
           "A compact Super Toophan mini table fan with high speed, low footprint, and practical desk-side cooling for personal spaces.",
         tags: ["New Arrival"],
       }),
-    ],
-  },
       m({
         modelNo: "CSI-ST-TABLE-RED-400",
         name: "Super Toophan Table Fan 400mm (Red)",
