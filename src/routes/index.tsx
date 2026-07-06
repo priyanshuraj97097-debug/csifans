@@ -9,7 +9,7 @@ const productsSearchSchema = z.object({
   q: fallback(z.string(), "").default(""),
 });
 
-export const Route = createFileRoute("/products/")({
+export const Route = createFileRoute("/")({
   validateSearch: zodValidator(productsSearchSchema),
   head: () => ({
     meta: [

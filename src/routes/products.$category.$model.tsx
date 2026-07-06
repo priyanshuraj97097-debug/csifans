@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag } from "lucide-react";
 import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
 
-export const Route = createFileRoute("/products/$category")({
+export const Route = createFileRoute("/products/$category/$model")({
   loader: ({ params }) => {
     const cat = findCategory(params.category);
     if (!cat) throw notFound();
