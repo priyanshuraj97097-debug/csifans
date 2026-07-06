@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as NewLaunchesRouteImport } from './routes/new-launches'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as DealersRouteImport } from './routes/dealers'
@@ -19,7 +20,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ProductsCategoryModelRouteImport } from './routes/products.$category.$model'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
@@ -29,6 +33,11 @@ const ProductsRoute = ProductsRouteImport.update({
 const NewLaunchesRoute = NewLaunchesRouteImport.update({
   id: '/new-launches',
   path: '/new-launches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -71,11 +80,29 @@ const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
   path: '/$category',
   getParentRoute: () => ProductsRoute,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ProductsCategoryModelRoute = ProductsCategoryModelRouteImport.update({
   id: '/$model',
   path: '/$model',
   getParentRoute: () => ProductsCategoryRoute,
 } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -84,10 +111,14 @@ export interface FileRoutesByFullPath {
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
+  '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/products/$category': typeof ProductsCategoryRouteWithChildren
   '/products/': typeof ProductsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRoutesByTo {
@@ -97,9 +128,13 @@ export interface FileRoutesByTo {
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
+  '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/products/$category': typeof ProductsCategoryRouteWithChildren
   '/products': typeof ProductsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRoutesById {
@@ -110,10 +145,14 @@ export interface FileRoutesById {
   '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
+  '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/products/$category': typeof ProductsCategoryRouteWithChildren
   '/products/': typeof ProductsIndexRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
 }
 export interface FileRouteTypes {
@@ -125,10 +164,14 @@ export interface FileRouteTypes {
     | '/dealers'
     | '/downloads'
     | '/gallery'
+    | '/mcp'
     | '/new-launches'
     | '/products'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/products/$category'
     | '/products/'
+    | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -138,9 +181,13 @@ export interface FileRouteTypes {
     | '/dealers'
     | '/downloads'
     | '/gallery'
+    | '/mcp'
     | '/new-launches'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/products/$category'
     | '/products'
+    | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
   id:
     | '__root__'
@@ -150,10 +197,14 @@ export interface FileRouteTypes {
     | '/dealers'
     | '/downloads'
     | '/gallery'
+    | '/mcp'
     | '/new-launches'
     | '/products'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/products/$category'
     | '/products/'
+    | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
   fileRoutesById: FileRoutesById
 }
@@ -164,8 +215,12 @@ export interface RootRouteChildren {
   DealersRoute: typeof DealersRoute
   DownloadsRoute: typeof DownloadsRoute
   GalleryRoute: typeof GalleryRoute
+  McpRoute: typeof McpRoute
   NewLaunchesRoute: typeof NewLaunchesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -182,6 +237,13 @@ declare module '@tanstack/react-router' {
       path: '/new-launches'
       fullPath: '/new-launches'
       preLoaderRoute: typeof NewLaunchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -240,12 +302,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsCategoryRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/$category/$model': {
       id: '/products/$category/$model'
       path: '/$model'
       fullPath: '/products/$category/$model'
       preLoaderRoute: typeof ProductsCategoryModelRouteImport
       parentRoute: typeof ProductsCategoryRoute
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -282,8 +365,13 @@ const rootRouteChildren: RootRouteChildren = {
   DealersRoute: DealersRoute,
   DownloadsRoute: DownloadsRoute,
   GalleryRoute: GalleryRoute,
+  McpRoute: McpRoute,
   NewLaunchesRoute: NewLaunchesRoute,
   ProductsRoute: ProductsRouteWithChildren,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
