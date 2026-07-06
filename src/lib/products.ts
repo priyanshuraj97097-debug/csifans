@@ -518,6 +518,9 @@ export const categories: Category[] = [
       }),
     ],
   },
+  {
+    slug: "exhaust-fans",
+    name: "Exhaust Fans",
     tagline: "Fresh air for kitchens and washrooms",
     description:
       "Dedicated exhaust fan models will appear here as you add more CSI ventilation products to the catalog.",
