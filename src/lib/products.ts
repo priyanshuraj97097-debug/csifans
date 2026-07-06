@@ -5,6 +5,13 @@ import ceilingChocolate from "@/assets/csi-super-toophan-ceiling-classic.png";
 import ceilingSilver from "@/assets/csi-super-toophan-silver-uploaded.png";
 import bldcBrown from "@/assets/csi-super-toophan-bldc-brown.png";
 import bldcWhite from "@/assets/csi-super-toophan-bldc-white.png";
+import tableRed400Asset from "@/assets/csi-toophan-table-red-400.png.asset.json";
+import wallTeal400Asset from "@/assets/csi-toophan-wall-teal-400.png.asset.json";
+import tableTeal400Asset from "@/assets/csi-toophan-table-teal-400.png.asset.json";
+
+const tableRed400 = tableRed400Asset.url;
+const wallTeal400 = wallTeal400Asset.url;
+const tableTeal400 = tableTeal400Asset.url;
 
 export type Category = {
   slug: string;
