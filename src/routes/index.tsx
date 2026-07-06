@@ -3,7 +3,7 @@ import { ArrowRight, Search as SearchIcon } from "lucide-react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { categories, searchModels } from "@/lib/products";
-import { SectionHeader } from "./index";
+import { SectionHeader } from "@/components/site/SectionHeader";
 
 const productsSearchSchema = z.object({
   q: fallback(z.string(), "").default(""),
