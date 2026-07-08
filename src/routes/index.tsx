@@ -70,10 +70,7 @@ function Products() {
                     <div className="p-5">
                       <p className="font-[Inter] text-xs text-[#0d6b78] font-semibold">{m.categoryName}</p>
                       <h3 className="mt-1 font-[Poppins] font-semibold text-[#0a2f44]">{m.name}</h3>
-                      <div className="mt-3 flex items-center justify-between">
-                        <span className="font-[Poppins] text-xl font-bold text-[#0d4361]">
-                          {m.price > 0 ? `₹${m.price.toLocaleString("en-IN")}` : "Enquire Now"}
-                        </span>
+                      <div className="mt-3 flex items-center justify-end">
                         <ArrowRight className="h-4 w-4 text-[#0d6b78] group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>

@@ -70,10 +70,7 @@ function NewLaunches() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="font-[Poppins] text-2xl font-extrabold text-[#0d4361]">
-                    ₹{m.price.toLocaleString("en-IN")}
-                  </span>
+                <div className="mt-4 flex items-center justify-end">
                   <span className="inline-flex items-center gap-1 font-[Poppins] text-sm font-semibold text-[#0d6b78] group-hover:gap-2 transition-all">
                     View <ArrowRight className="h-4 w-4" />
                   </span>
