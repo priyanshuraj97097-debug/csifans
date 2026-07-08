@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag } from "lucide-react";
+import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag, Loader2 } from "lucide-react";
 import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
+import { downloadCategoryCatalogue } from "@/lib/catalogue";
 
 export const Route = createFileRoute("/products/$category")({
   loader: ({ params }) => {
