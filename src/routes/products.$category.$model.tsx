@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag } from "lucide-react";
+import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag, Loader2 } from "lucide-react";
 import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
+import { downloadCategoryCatalogue } from "@/lib/catalogue";
 
 export const Route = createFileRoute("/products/$category/$model")({
   loader: ({ params }) => {
@@ -55,6 +56,7 @@ function CategoryPage() {
   const [maxSweep, setMaxSweep] = useState<number>(0);
   const [maxPower, setMaxPower] = useState<number>(0);
   const [showFilters, setShowFilters] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const priceCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => m.price)) : 0;
   const sweepCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => parseSweep(m.sweep))) : 0;
@@ -109,12 +111,23 @@ function CategoryPage() {
             <span className="inline-block font-[Inter] text-xs font-bold tracking-[0.2em] uppercase text-[#0d6b78]">{cat.tagline}</span>
             <h1 className="mt-3 font-[Poppins] text-4xl sm:text-5xl font-extrabold text-[#0a2f44]">{cat.name}</h1>
             <p className="mt-5 font-[Inter] text-slate-600 leading-relaxed">{cat.description}</p>
-            <Link
-              to="/downloads"
-              className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-6 py-3 font-[Poppins] font-semibold text-white shadow-lg shadow-[#0d6b78]/30 hover:scale-105 transition-transform"
+            <button
+              type="button"
+              onClick={async () => {
+                if (downloading) return;
+                setDownloading(true);
+                try {
+                  await downloadCategoryCatalogue(cat);
+                } finally {
+                  setDownloading(false);
+                }
+              }}
+              disabled={downloading}
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-6 py-3 font-[Poppins] font-semibold text-white shadow-lg shadow-[#0d6b78]/30 hover:scale-105 transition-transform disabled:opacity-70 disabled:cursor-wait"
             >
-              <Download className="h-4 w-4" /> Download Catalogue
-            </Link>
+              {downloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+              {downloading ? "Preparing PDF…" : "Download Catalogue"}
+            </button>
           </div>
           <div className="rounded-3xl overflow-hidden ring-1 ring-white/60 shadow-2xl shadow-[#0d4361]/20 bg-white/40 backdrop-blur-xl aspect-[4/3]">
             <img src={cat.image} alt={cat.name} className="h-full w-full object-cover" />
