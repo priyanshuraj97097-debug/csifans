@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import logo from "@/assets/csi-logo.png";
 
 export function Footer() {
@@ -60,9 +60,6 @@ export function Footer() {
         <div>
           <h4 className="font-[Poppins] font-semibold text-white mb-4">Contact</h4>
           <ul className="space-y-3 font-[Inter] text-sm text-white/85">
-            <li className="flex items-start gap-2">
-              <Phone className="h-4 w-4 mt-0.5 shrink-0" /> +91 98765 43210
-            </li>
             <li className="flex items-start gap-2">
               <Mail className="h-4 w-4 mt-0.5 shrink-0" /> info@csifans.in
             </li>

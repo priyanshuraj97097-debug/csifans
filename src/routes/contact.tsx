@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { SectionHeader } from "@/components/site/SectionHeader";
 
 export const Route = createFileRoute("/contact")({
@@ -21,13 +21,11 @@ function Contact() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <SectionHeader eyebrow="Contact" title="Let's Talk" subtitle="We're here to help — reach out via phone, WhatsApp or email." />
+        <SectionHeader eyebrow="Contact" title="Let's Talk" subtitle="We're here to help — reach out via email." />
 
         <div className="mt-12 grid lg:grid-cols-2 gap-8">
           <div className="space-y-4">
             {[
-              { icon: Phone, t: "Phone", v: "+91 98765 43210", href: "tel:+919876543210" },
-              { icon: MessageCircle, t: "WhatsApp", v: "+91 98765 43210", href: "https://wa.me/919876543210" },
               { icon: Mail, t: "Email", v: "info@csifans.in", href: "mailto:info@csifans.in" },
               { icon: MapPin, t: "Address", v: "CSI Fans, Nalanda, Bihar 803101, India" },
             ].map(({ icon: Icon, t, v, href }) => (
