@@ -85,9 +85,6 @@ export function SearchCombobox({ id, autoFocus = false, onSubmitted }: { id?: st
                         {r.categoryName} · {r.sweep ?? "Specs soon"} · {r.power ?? "Wattage soon"}
                       </p>
                     </div>
-                    <span className="font-[Poppins] text-sm font-bold text-[#0d4361] shrink-0">
-                      {r.price > 0 ? `₹${r.price.toLocaleString("en-IN")}` : "View"}
-                    </span>
                   </Link>
                 </li>
               ))}

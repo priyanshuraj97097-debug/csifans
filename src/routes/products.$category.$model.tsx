@@ -197,10 +197,7 @@ function CategoryPage() {
                   ))}
                 </ul>
 
-                <div className="mt-auto pt-4 flex items-center justify-between gap-3">
-                  <span className="font-[Poppins] text-2xl font-extrabold text-[#0d4361]">
-                    {mm.price > 0 ? `₹${mm.price.toLocaleString("en-IN")}` : "Enquire Now"}
-                  </span>
+                <div className="mt-auto pt-4 flex items-center justify-end gap-3">
                   <span className="inline-flex items-center gap-1 font-[Inter] text-xs font-semibold text-[#0d4361] group-hover:gap-2 transition-all">
                     View <ArrowRight className="h-3.5 w-3.5" />
                   </span>
