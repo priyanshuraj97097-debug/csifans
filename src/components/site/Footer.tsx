@@ -61,9 +61,6 @@ export function Footer() {
           <h4 className="font-[Poppins] font-semibold text-white mb-4">Contact</h4>
           <ul className="space-y-3 font-[Inter] text-sm text-white/85">
             <li className="flex items-start gap-2">
-              <Phone className="h-4 w-4 mt-0.5 shrink-0" /> +91 98765 43210
-            </li>
-            <li className="flex items-start gap-2">
               <Mail className="h-4 w-4 mt-0.5 shrink-0" /> info@csifans.in
             </li>
             <li className="flex items-start gap-2">
