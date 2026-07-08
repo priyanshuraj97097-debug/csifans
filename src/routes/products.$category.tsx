@@ -56,6 +56,7 @@ function CategoryPage() {
   const [maxSweep, setMaxSweep] = useState<number>(0);
   const [maxPower, setMaxPower] = useState<number>(0);
   const [showFilters, setShowFilters] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   const priceCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => m.price)) : 0;
   const sweepCap = cat.models.length ? Math.max(...cat.models.map((m: Model) => parseSweep(m.sweep))) : 0;
