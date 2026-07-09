@@ -212,7 +212,7 @@ function ProductDetailPage() {
           <div className="mt-16">
             <h3 className="font-[Poppins] text-xl font-bold text-[#0a2f44]">Other Models in {cat.name}</h3>
             <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cat.models.filter((m) => m.modelNo !== model.modelNo).map((mm) => (
+              {cat.models.filter((m: Model) => m.modelNo !== model.modelNo).map((mm: Model) => (
                 <Link
                   key={mm.modelNo}
                   to="/products/$category/$model"
