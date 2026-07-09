@@ -129,7 +129,7 @@ function ProductDetailPage() {
               <div className="mt-6 rounded-2xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-5">
                 <h2 className="font-[Poppins] text-sm font-bold text-[#0a2f44] uppercase tracking-wider">Key Highlights</h2>
                 <ul className="mt-3 space-y-2">
-                  {model.highlights.map((h) => (
+                  {model.highlights.map((h: string) => (
                     <li key={h} className="flex items-start gap-2 font-[Inter] text-sm text-slate-700">
                       <Check className="h-4 w-4 text-[#0d6b78] mt-0.5 shrink-0" /> {h}
                     </li>
