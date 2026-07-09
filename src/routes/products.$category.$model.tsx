@@ -197,7 +197,7 @@ function ProductDetailPage() {
           <div className="mt-10 rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-6 sm:p-10">
             <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Features</h2>
             <div className="mt-6 grid sm:grid-cols-2 gap-3">
-              {model.features.map((f, idx) => (
+              {model.features.map((f: string, idx: number) => (
                 <div key={idx} className="flex items-start gap-3 rounded-xl bg-[#0d6b78]/5 px-4 py-3">
                   <Check className="h-5 w-5 text-[#0d6b78] mt-0.5 shrink-0" />
                   <span className="font-[Inter] text-sm text-slate-700">{f}</span>
