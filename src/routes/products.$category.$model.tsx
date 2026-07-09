@@ -179,7 +179,7 @@ function ProductDetailPage() {
           <div className="mt-14 rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-6 sm:p-10">
             <h2 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Full Specifications</h2>
             <div className="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-0">
-              {model.specifications.map((spec, idx) => (
+              {model.specifications.map((spec: Specification, idx: number) => (
                 <div
                   key={idx}
                   className={`flex items-start gap-4 py-3.5 border-b border-slate-100 ${idx % 2 === 0 ? "sm:bg-slate-50/50" : ""}`}
