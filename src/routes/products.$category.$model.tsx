@@ -91,7 +91,7 @@ function ProductDetailPage() {
             </div>
             {productImages.length > 1 && (
               <div className="flex gap-3 overflow-x-auto pb-2">
-                {productImages.map((img, idx) => (
+                {productImages.map((img: string, idx: number) => (
                   <button
                     key={idx}
                     onClick={() => openLightbox(idx)}
