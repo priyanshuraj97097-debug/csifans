@@ -51,6 +51,11 @@ type SortKey = "latest" | "popular" | "price-asc" | "price-desc";
 
 function CategoryPage() {
   const cat = Route.useLoaderData();
+  const router = useRouter();
+  const isModelRoute = router.state.matches.some((m) => m.routeId === "/products/$category/$model");
+  if (isModelRoute) {
+    return <Outlet />;
+  }
   const [sort, setSort] = useState<SortKey>("latest");
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [maxSweep, setMaxSweep] = useState<number>(0);
