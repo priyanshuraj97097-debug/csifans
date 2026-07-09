@@ -108,7 +108,7 @@ function ProductDetailPage() {
           <div>
             {model.tags && model.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {model.tags.map((t) => (
+                {model.tags.map((t: ProductTag) => (
                   <span key={t} className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] text-white px-3 py-1 font-[Inter] text-[10px] font-bold uppercase tracking-wider shadow">
                     <Tag className="h-3 w-3" /> {t}
                   </span>
