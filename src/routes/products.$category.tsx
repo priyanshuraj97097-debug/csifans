@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useRouter, Outlet } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag, Loader2 } from "lucide-react";
 import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
@@ -51,6 +51,11 @@ type SortKey = "latest" | "popular" | "price-asc" | "price-desc";
 
 function CategoryPage() {
   const cat = Route.useLoaderData();
+  const router = useRouter();
+  const isModelRoute = router.state.matches.some((m) => m.routeId === "/products/$category/$model");
+  if (isModelRoute) {
+    return <Outlet />;
+  }
   const [sort, setSort] = useState<SortKey>("latest");
   const [maxPrice, setMaxPrice] = useState<number>(0);
   const [maxSweep, setMaxSweep] = useState<number>(0);
