@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Download, Check, Tag, Loader2 } from "lucide-react";
-import { findModel, categories, type Model, type Category } from "@/lib/products";
+import { findModel, categories, type Model, type Category, type Specification, type ProductTag } from "@/lib/products";
 import { downloadProductCatalogue } from "@/lib/catalogue";
 import { Lightbox } from "@/components/site/Lightbox";
 
