@@ -80,21 +80,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      // ADD THIS LINE BELOW:
+      { name: "google-site-verification", content: "7W7epwJ30RUQZO5RGaZZCiDwhvYVhZZfAOrimbEdvkI" },
       { title: "CSI Fans super TOOPHAN" },
-      { name: "description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company,  delivering high-quality, energy-efficient." },
+      { name: "description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company, delivering high-quality, energy-efficient." },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "CSI Fans super TOOPHAN" },
-      { property: "og:description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company,  delivering high-quality, energy-efficient." },
+      { property: "og:description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company, delivering high-quality, energy-efficient." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "CSI Fans super TOOPHAN" },
-      { name: "twitter:description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company,  delivering high-quality, energy-efficient." },
+      { name: "twitter:description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company, delivering high-quality, energy-efficient." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      // ADD THIS LINE BELOW:
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" },
