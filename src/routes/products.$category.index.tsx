@@ -1,21 +1,22 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag, Loader2 } from "lucide-react";
-import { categories, type Model, parseSweep, parsePower } from "@/lib/products";
+import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
 import { downloadCategoryCatalogue } from "@/lib/catalogue";
 
 export const Route = createFileRoute("/products/$category/")({
+  loader: ({ params }) => {
+    const cat = findCategory(params.category);
+    if (!cat) throw notFound();
+    return cat;
+  },
   component: CategoryPage,
 });
 
 type SortKey = "latest" | "popular" | "price-asc" | "price-desc";
 
 function CategoryPage() {
-  const cat = Route.useRouteContext ? undefined : undefined;
-  // Read category from the parent route's loader data
-  const parent = Route.useMatch({ select: (m) => m });
-  void parent;
-  const catData = useParentCategory();
+  const c = Route.useLoaderData();
 
   const [sort, setSort] = useState<SortKey>("latest");
   const [maxPrice, setMaxPrice] = useState<number>(0);
@@ -24,7 +25,6 @@ function CategoryPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
-  const c = catData;
   const priceCap = c.models.length ? Math.max(...c.models.map((m: Model) => m.price)) : 0;
   const sweepCap = c.models.length ? Math.max(...c.models.map((m: Model) => parseSweep(m.sweep))) : 0;
   const powerCap = c.models.length ? Math.max(...c.models.map((m: Model) => parsePower(m.power))) : 0;
@@ -208,22 +208,6 @@ function CategoryPage() {
     </div>
   );
 }
-
-function useParentCategory() {
-  // Read the parent /products/$category route's loader data
-  const match = Route.useMatch();
-  void match;
-  // Use the router to grab the parent match's loaderData
-  return usePartentLoader();
-}
-
-function usePartentLoader() {
-  const router = useRouterState();
-  const parent = router.matches.find((m) => m.routeId === "/products/$category");
-  return parent!.loaderData as ReturnType<typeof import("@/lib/products").findCategory> extends infer T ? NonNullable<T> : never;
-}
-
-import { useRouterState } from "@tanstack/react-router";
 
 function FilterSlider({ label, value, max, step, suffix, onChange, disabled }: { label: string; value: number; max: number; step: number; suffix: string; onChange: (n: number) => void; disabled?: boolean }) {
   return (
