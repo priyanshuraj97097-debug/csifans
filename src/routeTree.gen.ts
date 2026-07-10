@@ -22,6 +22,7 @@ import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as ProductsCategoryIndexRouteImport } from './routes/products.$category.index'
 import { Route as ProductsCategoryModelRouteImport } from './routes/products.$category.$model'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
@@ -92,6 +93,11 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProductsCategoryIndexRoute = ProductsCategoryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProductsCategoryRoute,
+} as any)
 const ProductsCategoryModelRoute = ProductsCategoryModelRouteImport.update({
   id: '/$model',
   path: '/$model',
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/products/': typeof ProductsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
+  '/products/$category/': typeof ProductsCategoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -132,10 +139,10 @@ export interface FileRoutesByTo {
   '/new-launches': typeof NewLaunchesRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
-  '/products/$category': typeof ProductsCategoryRouteWithChildren
   '/products': typeof ProductsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
+  '/products/$category': typeof ProductsCategoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -154,6 +161,7 @@ export interface FileRoutesById {
   '/products/': typeof ProductsIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
+  '/products/$category/': typeof ProductsCategoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -173,6 +181,7 @@ export interface FileRouteTypes {
     | '/products/'
     | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
+    | '/products/$category/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -185,10 +194,10 @@ export interface FileRouteTypes {
     | '/new-launches'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
-    | '/products/$category'
     | '/products'
     | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
+    | '/products/$category'
   id:
     | '__root__'
     | '/'
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/products/'
     | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
+    | '/products/$category/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -316,6 +326,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$category/': {
+      id: '/products/$category/'
+      path: '/'
+      fullPath: '/products/$category/'
+      preLoaderRoute: typeof ProductsCategoryIndexRouteImport
+      parentRoute: typeof ProductsCategoryRoute
+    }
     '/products/$category/$model': {
       id: '/products/$category/$model'
       path: '/$model'
@@ -335,10 +352,12 @@ declare module '@tanstack/react-router' {
 
 interface ProductsCategoryRouteChildren {
   ProductsCategoryModelRoute: typeof ProductsCategoryModelRoute
+  ProductsCategoryIndexRoute: typeof ProductsCategoryIndexRoute
 }
 
 const ProductsCategoryRouteChildren: ProductsCategoryRouteChildren = {
   ProductsCategoryModelRoute: ProductsCategoryModelRoute,
+  ProductsCategoryIndexRoute: ProductsCategoryIndexRoute,
 }
 
 const ProductsCategoryRouteWithChildren =
