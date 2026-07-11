@@ -12,7 +12,6 @@ const nav = [
   { to: "/new-launches", label: "New Launches" },
   { to: "/gallery", label: "Gallery" },
   { to: "/downloads", label: "Downloads" },
-  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function Header() {
@@ -126,13 +125,6 @@ export function Header() {
         <div className="hidden md:flex flex-1 max-w-xs items-center">
           <SearchCombobox />
         </div>
-
-        <Link
-          to="/contact"
-          className="hidden lg:inline-flex shrink-0 items-center rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-5 py-2.5 font-[Poppins] text-sm font-semibold text-white shadow-lg shadow-[#0d6b78]/30 hover:shadow-xl hover:shadow-[#0d6b78]/40 hover:scale-105 transition-all"
-        >
-          Enquire Now
-        </Link>
 
         <button
           onClick={() => setOpen(!open)}
