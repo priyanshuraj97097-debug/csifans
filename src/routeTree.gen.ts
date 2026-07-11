@@ -14,7 +14,6 @@ import { Route as NewLaunchesRouteImport } from './routes/new-launches'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as DownloadsRouteImport } from './routes/downloads'
-import { Route as DealersRouteImport } from './routes/dealers'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -49,11 +48,6 @@ const GalleryRoute = GalleryRouteImport.update({
 const DownloadsRoute = DownloadsRouteImport.update({
   id: '/downloads',
   path: '/downloads',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DealersRoute = DealersRouteImport.update({
-  id: '/dealers',
-  path: '/dealers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -114,7 +108,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
@@ -132,7 +125,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
@@ -149,7 +141,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/dealers': typeof DealersRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
@@ -169,7 +160,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/dealers'
     | '/downloads'
     | '/gallery'
     | '/mcp'
@@ -187,7 +177,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/dealers'
     | '/downloads'
     | '/gallery'
     | '/mcp'
@@ -203,7 +192,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/dealers'
     | '/downloads'
     | '/gallery'
     | '/mcp'
@@ -222,7 +210,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  DealersRoute: typeof DealersRoute
   DownloadsRoute: typeof DownloadsRoute
   GalleryRoute: typeof GalleryRoute
   McpRoute: typeof McpRoute
@@ -268,13 +255,6 @@ declare module '@tanstack/react-router' {
       path: '/downloads'
       fullPath: '/downloads'
       preLoaderRoute: typeof DownloadsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dealers': {
-      id: '/dealers'
-      path: '/dealers'
-      fullPath: '/dealers'
-      preLoaderRoute: typeof DealersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -381,7 +361,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  DealersRoute: DealersRoute,
   DownloadsRoute: DownloadsRoute,
   GalleryRoute: GalleryRoute,
   McpRoute: McpRoute,
