@@ -76,25 +76,32 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      // ADD THIS LINE BELOW:
-      { name: "google-site-verification", content: "7W7epwJ30RUQZO5RGaZZCiDwhvYVhZZfAOrimbEdvkI" },
-      { title: "CSI Fans super TOOPHAN" },
-      { name: "description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company, delivering high-quality, energy-efficient." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "CSI Fans super TOOPHAN" },
-      { property: "og:description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company, delivering high-quality, energy-efficient." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "CSI Fans super TOOPHAN" },
-      { name: "twitter:description", content: "CSI Fans is a premium Indian fan manufacturing brand and a product of an ISO 9001:2015 Certified Company, delivering high-quality, energy-efficient." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
-    ],
+    head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "7W7epwJ30RUQZO5RGaZZCiDwhvYVhZZfAOrimbEdvkI" },
+      
+      // Professional Branding
+      { title: "CSI Fans | Premium Indian Fan Manufacturing" },
+      { name: "description", content: "CSI Fans offers high-quality, energy-efficient fans. ISO 9001:2015 Certified." },
+      { name: "author", content: "Lovable" },
+      
+      // Social Media (OpenGraph)
+      { property: "og:title", content: "CSI Fans | Premium Indian Fan Manufacturing" },
+      { property: "og:description", content: "CSI Fans offers high-quality, energy-efficient fans. ISO 9001:2015 Certified." },
+      { property: "og:type", content: "website" },
+      
+      // Twitter
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "CSI Fans | Premium Indian Fan Manufacturing" },
+      { name: "twitter:description", content: "CSI Fans offers high-quality, energy-efficient fans. ISO 9001:2015 Certified." },
+      
+      // Images (Keep these links as they are)
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
+    ],
     links: [
       { rel: "stylesheet", href: appCss },
       // ADD THIS LINE BELOW:
