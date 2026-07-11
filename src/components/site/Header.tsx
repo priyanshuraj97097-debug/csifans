@@ -12,6 +12,7 @@ const nav = [
   { to: "/new-launches", label: "New Launches" },
   { to: "/gallery", label: "Gallery" },
   { to: "/downloads", label: "Downloads" },
+  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function Header() {
