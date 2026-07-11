@@ -56,14 +56,6 @@ export function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h4 className="font-[Poppins] font-semibold text-white mb-4">Contact</h4>
-          <ul className="space-y-3 font-[Inter] text-sm text-white/85">
-            <li className="flex items-start gap-2">
-              <MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Nalanda, Bihar, India
-            </li>
-          </ul>
-        </div>
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 font-[Inter] text-xs text-white/60 flex flex-col sm:flex-row items-center justify-between gap-2">
