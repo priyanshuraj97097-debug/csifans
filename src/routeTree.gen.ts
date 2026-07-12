@@ -9,22 +9,37 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as NewLaunchesRouteImport } from './routes/new-launches'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as ServicesManufacturingRouteImport } from './routes/services.manufacturing'
+import { Route as ServicesMaintenanceRouteImport } from './routes/services.maintenance'
+import { Route as ServicesInstallationRouteImport } from './routes/services.installation'
 import { Route as ProductsCategoryRouteImport } from './routes/products.$category'
+import { Route as BlogFanMaintenanceChecklistRouteImport } from './routes/blog.fan-maintenance-checklist'
+import { Route as BlogChooseIndustrialFanSizeRouteImport } from './routes/blog.choose-industrial-fan-size'
+import { Route as BlogBldcVsConventionalFansRouteImport } from './routes/blog.bldc-vs-conventional-fans'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ProductsCategoryIndexRouteImport } from './routes/products.$category.index'
 import { Route as ProductsCategoryModelRouteImport } from './routes/products.$category.$model'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
@@ -55,6 +70,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -65,16 +85,59 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicesRoute,
+} as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProductsRoute,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const ServicesManufacturingRoute = ServicesManufacturingRouteImport.update({
+  id: '/manufacturing',
+  path: '/manufacturing',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesMaintenanceRoute = ServicesMaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesInstallationRoute = ServicesInstallationRouteImport.update({
+  id: '/installation',
+  path: '/installation',
+  getParentRoute: () => ServicesRoute,
 } as any)
 const ProductsCategoryRoute = ProductsCategoryRouteImport.update({
   id: '/$category',
   path: '/$category',
   getParentRoute: () => ProductsRoute,
 } as any)
+const BlogFanMaintenanceChecklistRoute =
+  BlogFanMaintenanceChecklistRouteImport.update({
+    id: '/fan-maintenance-checklist',
+    path: '/fan-maintenance-checklist',
+    getParentRoute: () => BlogRoute,
+  } as any)
+const BlogChooseIndustrialFanSizeRoute =
+  BlogChooseIndustrialFanSizeRouteImport.update({
+    id: '/choose-industrial-fan-size',
+    path: '/choose-industrial-fan-size',
+    getParentRoute: () => BlogRoute,
+  } as any)
+const BlogBldcVsConventionalFansRoute =
+  BlogBldcVsConventionalFansRouteImport.update({
+    id: '/bldc-vs-conventional-fans',
+    path: '/bldc-vs-conventional-fans',
+    getParentRoute: () => BlogRoute,
+  } as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
   Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
@@ -107,16 +170,26 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/services': typeof ServicesRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
+  '/blog/choose-industrial-fan-size': typeof BlogChooseIndustrialFanSizeRoute
+  '/blog/fan-maintenance-checklist': typeof BlogFanMaintenanceChecklistRoute
   '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/services/installation': typeof ServicesInstallationRoute
+  '/services/maintenance': typeof ServicesMaintenanceRoute
+  '/services/manufacturing': typeof ServicesManufacturingRoute
+  '/blog/': typeof BlogIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/services/': typeof ServicesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
   '/products/$category/': typeof ProductsCategoryIndexRoute
@@ -131,7 +204,15 @@ export interface FileRoutesByTo {
   '/new-launches': typeof NewLaunchesRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
+  '/blog/choose-industrial-fan-size': typeof BlogChooseIndustrialFanSizeRoute
+  '/blog/fan-maintenance-checklist': typeof BlogFanMaintenanceChecklistRoute
+  '/services/installation': typeof ServicesInstallationRoute
+  '/services/maintenance': typeof ServicesMaintenanceRoute
+  '/services/manufacturing': typeof ServicesManufacturingRoute
+  '/blog': typeof BlogIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/services': typeof ServicesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
   '/products/$category': typeof ProductsCategoryIndexRoute
@@ -140,16 +221,26 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/downloads': typeof DownloadsRoute
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/services': typeof ServicesRouteWithChildren
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
+  '/blog/choose-industrial-fan-size': typeof BlogChooseIndustrialFanSizeRoute
+  '/blog/fan-maintenance-checklist': typeof BlogFanMaintenanceChecklistRoute
   '/products/$category': typeof ProductsCategoryRouteWithChildren
+  '/services/installation': typeof ServicesInstallationRoute
+  '/services/maintenance': typeof ServicesMaintenanceRoute
+  '/services/manufacturing': typeof ServicesManufacturingRoute
+  '/blog/': typeof BlogIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/services/': typeof ServicesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/products/$category/$model': typeof ProductsCategoryModelRoute
   '/products/$category/': typeof ProductsCategoryIndexRoute
@@ -159,16 +250,26 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/blog'
     | '/contact'
     | '/downloads'
     | '/gallery'
     | '/mcp'
     | '/new-launches'
     | '/products'
+    | '/services'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/blog/bldc-vs-conventional-fans'
+    | '/blog/choose-industrial-fan-size'
+    | '/blog/fan-maintenance-checklist'
     | '/products/$category'
+    | '/services/installation'
+    | '/services/maintenance'
+    | '/services/manufacturing'
+    | '/blog/'
     | '/products/'
+    | '/services/'
     | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
     | '/products/$category/'
@@ -183,7 +284,15 @@ export interface FileRouteTypes {
     | '/new-launches'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/blog/bldc-vs-conventional-fans'
+    | '/blog/choose-industrial-fan-size'
+    | '/blog/fan-maintenance-checklist'
+    | '/services/installation'
+    | '/services/maintenance'
+    | '/services/manufacturing'
+    | '/blog'
     | '/products'
+    | '/services'
     | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
     | '/products/$category'
@@ -191,16 +300,26 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/blog'
     | '/contact'
     | '/downloads'
     | '/gallery'
     | '/mcp'
     | '/new-launches'
     | '/products'
+    | '/services'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/blog/bldc-vs-conventional-fans'
+    | '/blog/choose-industrial-fan-size'
+    | '/blog/fan-maintenance-checklist'
     | '/products/$category'
+    | '/services/installation'
+    | '/services/maintenance'
+    | '/services/manufacturing'
+    | '/blog/'
     | '/products/'
+    | '/services/'
     | '/.mcp/invoke-tool/$tool'
     | '/products/$category/$model'
     | '/products/$category/'
@@ -209,12 +328,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   DownloadsRoute: typeof DownloadsRoute
   GalleryRoute: typeof GalleryRoute
   McpRoute: typeof McpRoute
   NewLaunchesRoute: typeof NewLaunchesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
+  ServicesRoute: typeof ServicesRouteWithChildren
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -222,6 +343,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products': {
       id: '/products'
       path: '/products'
@@ -264,6 +392,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -278,6 +413,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof ServicesRoute
+    }
     '/products/': {
       id: '/products/'
       path: '/'
@@ -285,12 +427,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIndexRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/services/manufacturing': {
+      id: '/services/manufacturing'
+      path: '/manufacturing'
+      fullPath: '/services/manufacturing'
+      preLoaderRoute: typeof ServicesManufacturingRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/maintenance': {
+      id: '/services/maintenance'
+      path: '/maintenance'
+      fullPath: '/services/maintenance'
+      preLoaderRoute: typeof ServicesMaintenanceRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/installation': {
+      id: '/services/installation'
+      path: '/installation'
+      fullPath: '/services/installation'
+      preLoaderRoute: typeof ServicesInstallationRouteImport
+      parentRoute: typeof ServicesRoute
+    }
     '/products/$category': {
       id: '/products/$category'
       path: '/$category'
       fullPath: '/products/$category'
       preLoaderRoute: typeof ProductsCategoryRouteImport
       parentRoute: typeof ProductsRoute
+    }
+    '/blog/fan-maintenance-checklist': {
+      id: '/blog/fan-maintenance-checklist'
+      path: '/fan-maintenance-checklist'
+      fullPath: '/blog/fan-maintenance-checklist'
+      preLoaderRoute: typeof BlogFanMaintenanceChecklistRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/choose-industrial-fan-size': {
+      id: '/blog/choose-industrial-fan-size'
+      path: '/choose-industrial-fan-size'
+      fullPath: '/blog/choose-industrial-fan-size'
+      preLoaderRoute: typeof BlogChooseIndustrialFanSizeRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/bldc-vs-conventional-fans': {
+      id: '/blog/bldc-vs-conventional-fans'
+      path: '/bldc-vs-conventional-fans'
+      fullPath: '/blog/bldc-vs-conventional-fans'
+      preLoaderRoute: typeof BlogBldcVsConventionalFansRouteImport
+      parentRoute: typeof BlogRoute
     }
     '/.well-known/oauth-protected-resource': {
       id: '/.well-known/oauth-protected-resource'
@@ -330,6 +521,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogBldcVsConventionalFansRoute: typeof BlogBldcVsConventionalFansRoute
+  BlogChooseIndustrialFanSizeRoute: typeof BlogChooseIndustrialFanSizeRoute
+  BlogFanMaintenanceChecklistRoute: typeof BlogFanMaintenanceChecklistRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogBldcVsConventionalFansRoute: BlogBldcVsConventionalFansRoute,
+  BlogChooseIndustrialFanSizeRoute: BlogChooseIndustrialFanSizeRoute,
+  BlogFanMaintenanceChecklistRoute: BlogFanMaintenanceChecklistRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface ProductsCategoryRouteChildren {
   ProductsCategoryModelRoute: typeof ProductsCategoryModelRoute
   ProductsCategoryIndexRoute: typeof ProductsCategoryIndexRoute
@@ -357,15 +564,35 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
   ProductsRouteChildren,
 )
 
+interface ServicesRouteChildren {
+  ServicesInstallationRoute: typeof ServicesInstallationRoute
+  ServicesMaintenanceRoute: typeof ServicesMaintenanceRoute
+  ServicesManufacturingRoute: typeof ServicesManufacturingRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesInstallationRoute: ServicesInstallationRoute,
+  ServicesMaintenanceRoute: ServicesMaintenanceRoute,
+  ServicesManufacturingRoute: ServicesManufacturingRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   DownloadsRoute: DownloadsRoute,
   GalleryRoute: GalleryRoute,
   McpRoute: McpRoute,
   NewLaunchesRoute: NewLaunchesRoute,
   ProductsRoute: ProductsRouteWithChildren,
+  ServicesRoute: ServicesRouteWithChildren,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
