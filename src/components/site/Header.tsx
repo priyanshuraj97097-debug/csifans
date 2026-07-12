@@ -48,7 +48,7 @@ export function Header() {
             className="h-11 w-11 rounded-full object-cover ring-2 ring-[#0d6b78]/20 group-hover:ring-[#0d6b78]/50 transition-all"
           />
           <div className="flex flex-col leading-tight">
-            <span className="font-[Poppins] text-lg font-extrabold tracking-tight text-[#0d4361]">
+            <span className="font-[Poppins] text-lg font-extrabold tracking-tight text-[#0d4361] leading-tight">
               CSI Super Toophan
             </span>
             <span className="font-[Inter] hidden sm:inline text-[10px] font-medium text-[#0d6b78] -mt-0.5">
