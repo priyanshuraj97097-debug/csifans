@@ -9,8 +9,8 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <img src={logo} alt="CSI Fans" className="h-12 w-12 rounded-full ring-2 ring-white/30" />
             <div>
-              <div className="font-[Poppins] text-xl font-extrabold">CSI Fans</div>
-              <div className="font-[Inter] text-xs text-white/70">Innovation in Every Rotation</div>
+            <div className="font-[Poppins] text-xl font-extrabold">CSI Super Toophan</div>
+            <div className="font-[Inter] text-xs text-white/70">Innovation in Every Rotation</div>
             </div>
           </div>
           <p className="mt-4 font-[Inter] text-sm text-white/75 leading-relaxed">
