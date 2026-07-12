@@ -49,7 +49,7 @@ export function Header() {
           />
           <div className="flex flex-col leading-tight">
             <span className="font-[Poppins] text-lg font-extrabold tracking-tight text-[#0d4361]">
-              CSI Fans
+              CSI Super Toophan
             </span>
             <span className="font-[Inter] hidden sm:inline text-[10px] font-medium text-[#0d6b78] -mt-0.5">
               ISO 9001:2015 Certified
