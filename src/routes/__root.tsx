@@ -83,20 +83,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "google-site-verification", content: "7W7epwJ30RUQZO5RGaZZCiDwhvYVhZZfAOrimbEdvkI" },
       
       // UPDATED BRANDING
-      { title: "CSI Super Toophan | Premium Indian Fan Manufacturing" },
-      { name: "description", content: "CSI Super Toophan offers high-quality, energy-efficient fans. ISO 9001:2015 Certified." },
-      { name: "author", content: "Lovable" },
+      { title: "CSI Super Toophan | Industrial Ceiling Fan Manufacturer in Bihar Sharif" },
+      { name: "description", content: "Looking for durable industrial fans? CSI Super Toophan provides high-quality, energy-efficient ceiling fans for factories and warehouses. Made in Bihar." },
+      { name: "author", content: "CSI Super Toophan" },
       
       // Social Media (OpenGraph)
-      { property: "og:title", content: "CSI Super Toophan | Premium Indian Fan Manufacturing" },
-      { property: "og:description", content: "CSI Super Toophan offers high-quality, energy-efficient fans. ISO 9001:2015 Certified." },
+      { property: "og:title", content: "CSI Super Toophan | Industrial Ceiling Fan Manufacturer in Bihar Sharif" },
+      { property: "og:description", content: "Durable, energy-efficient industrial ceiling fans for factories and warehouses. Made in Bihar by CSI Super Toophan." },
       { property: "og:type", content: "website" },
       
       // Twitter
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "CSI Super Toophan | Premium Indian Fan Manufacturing" },
-      { name: "twitter:description", content: "CSI Super Toophan offers high-quality, energy-efficient fans. ISO 9001:2015 Certified." },
+      { name: "twitter:title", content: "CSI Super Toophan | Industrial Ceiling Fan Manufacturer in Bihar Sharif" },
+      { name: "twitter:description", content: "Durable, energy-efficient industrial ceiling fans for factories and warehouses. Made in Bihar by CSI Super Toophan." },
+
       
       // Images (Keep these links as they are)
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
