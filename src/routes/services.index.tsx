@@ -48,7 +48,7 @@ function ServicesIndex() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <SectionHeader
+        <SectionHeader as="h1"
           eyebrow="What We Do"
           title="Our Services"
           subtitle="From manufacturing to installation and lifelong support — CSI Super Toophan is with you at every step."

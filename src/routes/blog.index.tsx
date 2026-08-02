@@ -47,7 +47,7 @@ function BlogIndex() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader
+        <SectionHeader as="h1"
           eyebrow="Guides"
           title="Blog & Buying Guides"
           subtitle="Straight-talking answers to the questions our customers ask most often."

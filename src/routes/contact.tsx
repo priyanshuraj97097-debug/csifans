@@ -27,7 +27,7 @@ function Contact() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader
+        <SectionHeader as="h1"
           eyebrow="Get in Touch"
           title="Contact CSI Fans"
           subtitle="Connect with us professionally or visit our registered address."

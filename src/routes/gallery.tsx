@@ -38,7 +38,7 @@ function GalleryPage() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionHeader eyebrow="Gallery" title="The CSI Fans Collection" subtitle={`Browse ${items.length}+ premium fan renders. Click any image to view fullscreen.`} />
+        <SectionHeader as="h1" eyebrow="Gallery" title="The CSI Fans Collection" subtitle={`Browse ${items.length}+ premium fan renders. Click any image to view fullscreen.`} />
 
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {items.map((it, i) => (
