@@ -19,7 +19,7 @@ function About() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader eyebrow="Our Story" title="About CSI Fans" subtitle="A product of an ISO 9001:2015 certified company crafting cooling solutions for India." />
+        <SectionHeader as="h1" eyebrow="Our Story" title="About CSI Fans" subtitle="A product of an ISO 9001:2015 certified company crafting cooling solutions for India." />
 
         <div className="mt-12 rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 p-8 lg:p-12 shadow-md">
           <h3 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Company History</h3>

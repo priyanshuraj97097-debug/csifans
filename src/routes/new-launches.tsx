@@ -33,7 +33,7 @@ function NewLaunches() {
             <Sparkles className="h-3.5 w-3.5" /> Just Launched
           </span>
         </div>
-        <SectionHeader
+        <SectionHeader as="h1"
           eyebrow="New Launches"
           title="Freshly Engineered for 2026"
           subtitle="Discover the newest CSI Fans — built with the latest BLDC technology, premium finishes and class-leading air delivery."

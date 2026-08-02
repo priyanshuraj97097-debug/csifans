@@ -25,7 +25,7 @@ function Maintenance() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-        <SectionHeader
+        <SectionHeader as="h1"
           eyebrow="Service"
           title="Maintenance & After-Sales"
           subtitle="Keep your fans running smoothly with scheduled servicing and genuine spares."

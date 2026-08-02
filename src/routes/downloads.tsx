@@ -57,7 +57,7 @@ function Downloads() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-        <SectionHeader eyebrow="Downloads" title="Catalogues & Documents" subtitle="All the resources you need — in one place." />
+        <SectionHeader as="h1" eyebrow="Downloads" title="Catalogues & Documents" subtitle="All the resources you need — in one place." />
         <div className="mt-12 grid sm:grid-cols-2 gap-4">
           {items.map(({ key, icon: Icon, title, subtitle, onClick }) => {
             const isBusy = busy === key;

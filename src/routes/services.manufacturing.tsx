@@ -26,7 +26,7 @@ function Manufacturing() {
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-        <SectionHeader
+        <SectionHeader as="h1"
           eyebrow="Service"
           title="Industrial Fan Manufacturing"
           subtitle="Precision-built fans for factories, warehouses, offices, and homes — engineered in Bihar."
