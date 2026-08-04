@@ -184,6 +184,8 @@ export const categories: Category[] = [
           spec("Warranty", "3 Years"),
           spec("Color", "Silver / White-Silver"),
           spec("Mounting", "Downrod Ceiling Mount"),
+          spec("Suitable Room Size", "100–180 sq. ft."),
+          spec("Speed Control", "Standard regulator compatible"),
           spec("Features", "Low-voltage performance, copper winding, double ball bearing"),
         ],
         description:
