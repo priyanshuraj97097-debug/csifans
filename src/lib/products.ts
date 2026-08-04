@@ -16,10 +16,10 @@ import roomHeaterAsset from "@/assets/csi-super-toophan-room-heater-quartz.png";
 const tableRed400 = tableRed400Asset;
 const wallTeal400 = wallTeal400Asset;
 const tableTeal400 = tableTeal400Asset;
-const deskWhite225 = deskWhite225Asset.url;
-const deskSkyBlue225 = deskSkyBlue225Asset.url;
-const inductionCooktop = inductionCooktopAsset.url;
-const roomHeater = roomHeaterAsset.url;
+const deskWhite225 = deskWhite225Asset;
+const deskSkyBlue225 = deskSkyBlue225Asset;
+const inductionCooktop = inductionCooktopAsset;
+const roomHeater = roomHeaterAsset;
 
 export type Category = {
   slug: string;
