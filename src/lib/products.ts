@@ -8,10 +8,10 @@ import bldcWhite from "@/assets/csi-super-toophan-bldc-ceiling-fan-white.png";
 import tableRed400Asset from "@/assets/csi-super-toophan-table-fan-red-400mm.png";
 import wallTeal400Asset from "@/assets/csi-super-toophan-wall-fan-teal-400mm.png";
 import tableTeal400Asset from "@/assets/csi-super-toophan-table-fan-teal-400mm.png";
-import deskWhite225Asset from "@/assets/csi-super-toophan-desk-fan-white-225mm.png.asset.json";
-import deskSkyBlue225Asset from "@/assets/csi-super-toophan-desk-fan-skyblue-225mm.png.asset.json";
-import inductionCooktopAsset from "@/assets/csi-super-toophan-induction-cooktop-2600w.png.asset.json";
-import roomHeaterAsset from "@/assets/csi-super-toophan-room-heater-quartz.png.asset.json";
+import deskWhite225Asset from "@/assets/csi-super-toophan-desk-fan-white-225mm.png";
+import deskSkyBlue225Asset from "@/assets/csi-super-toophan-desk-fan-skyblue-225mm.png";
+import inductionCooktopAsset from "@/assets/csi-super-toophan-induction-cooktop-2600w.png";
+import roomHeaterAsset from "@/assets/csi-super-toophan-room-heater-quartz.png";
 
 const tableRed400 = tableRed400Asset;
 const wallTeal400 = wallTeal400Asset;
