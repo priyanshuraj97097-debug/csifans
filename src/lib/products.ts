@@ -772,10 +772,11 @@ export const categories: Category[] = [
   {
     slug: "home-appliances",
     name: "Home Appliances",
-    tagline: "Beyond fans — CSI comfort for every room",
+    tagline: "Beyond fans — CSI comfort for every kitchen",
     description:
-      "CSI Super Toophan home appliances including inverter infrared cooktops and quartz room heaters, built to the same ISO 9001:2015 quality standard as our fans.",
+      "CSI Super Toophan home appliances including inverter infrared cooktops, built to the same ISO 9001:2015 quality standard as our fans.",
     image: inductionCooktop,
+
     models: [
       m({
         modelNo: "CSI-ST-COOKTOP-2600",
