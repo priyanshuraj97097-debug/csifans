@@ -830,7 +830,18 @@ export const categories: Category[] = [
           "A 2600 W CSI Super Toophan inverter infrared cooktop with black crystal glass, gold accents, feather-touch and rotary controls, and full flat-bottom utensil compatibility.",
         tags: ["New Arrival", "Premium"],
       }),
+    ],
+  },
+  {
+    slug: "room-heaters",
+    name: "Room Heaters",
+    tagline: "Instant warmth for every winter",
+    description:
+      "CSI Super Toophan room heaters with quartz radiant heating elements, engineered for fast, focused warmth in bedrooms, cabins and study rooms — ISO 9001:2015 certified.",
+    image: roomHeater,
+    models: [
       m({
+
         modelNo: "CSI-ST-HEATER-QUARTZ",
         name: "Super Toophan Quartz Room Heater",
         price: 0,
