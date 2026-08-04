@@ -772,10 +772,11 @@ export const categories: Category[] = [
   {
     slug: "home-appliances",
     name: "Home Appliances",
-    tagline: "Beyond fans — CSI comfort for every room",
+    tagline: "Beyond fans — CSI comfort for every kitchen",
     description:
-      "CSI Super Toophan home appliances including inverter infrared cooktops and quartz room heaters, built to the same ISO 9001:2015 quality standard as our fans.",
+      "CSI Super Toophan home appliances including inverter infrared cooktops, built to the same ISO 9001:2015 quality standard as our fans.",
     image: inductionCooktop,
+
     models: [
       m({
         modelNo: "CSI-ST-COOKTOP-2600",
@@ -829,7 +830,18 @@ export const categories: Category[] = [
           "A 2600 W CSI Super Toophan inverter infrared cooktop with black crystal glass, gold accents, feather-touch and rotary controls, and full flat-bottom utensil compatibility.",
         tags: ["New Arrival", "Premium"],
       }),
+    ],
+  },
+  {
+    slug: "room-heaters",
+    name: "Room Heaters",
+    tagline: "Instant warmth for every winter",
+    description:
+      "CSI Super Toophan room heaters with quartz radiant heating elements, engineered for fast, focused warmth in bedrooms, cabins and study rooms — ISO 9001:2015 certified.",
+    image: roomHeater,
+    models: [
       m({
+
         modelNo: "CSI-ST-HEATER-QUARTZ",
         name: "Super Toophan Quartz Room Heater",
         price: 0,
