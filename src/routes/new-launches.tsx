@@ -16,15 +16,25 @@ export const Route = createFileRoute("/new-launches")({
   component: NewLaunches,
 });
 
+// Only these specific products appear in New Launches
+const LAUNCH_MODEL_NOS = [
+  "CSI-ST-BLDC-BROWN-1200", // BLDC Super Toophan Brown 1200mm
+  "CSI-ST-WALL-400", // Wall Fan Super Toophan
+  "CSI-ST-COOKTOP-2600", // Cooktop
+  "CSI-ST-HEATER-QUARTZ", // Heater
+];
+
 function NewLaunches() {
-  // Curate latest launches: all premium models + first model of every other category
-  const premium = categories.find((c) => c.slug === "premium-fans");
-  const launches = [
-    ...(premium ? premium.models.map((m) => ({ m, cat: premium })) : []),
-    ...categories
-      .filter((c) => c.slug !== "premium-fans" && c.models.length > 0)
-      .map((c) => ({ m: c.models[0]!, cat: c })),
-  ];
+  // Curate launches from the explicit list above
+  const launches = categories.flatMap((cat) =>
+    cat.models
+      .filter((m) => LAUNCH_MODEL_NOS.includes(m.modelNo))
+      .map((m) => ({ m, cat }))
+  );
+  // Preserve the defined order
+  const ordered = LAUNCH_MODEL_NOS.map((no) =>
+    launches.find((l) => l.m.modelNo === no)
+  ).filter((l): l is { m: typeof l.m; cat: typeof l.cat } => Boolean(l));
 
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
@@ -37,11 +47,11 @@ function NewLaunches() {
         <SectionHeader as="h1"
           eyebrow="New Launches"
           title="Freshly Engineered for 2026"
-          subtitle="Discover the newest CSI Fans — built with the latest BLDC technology, premium finishes and class-leading air delivery."
+          subtitle="Discover the newest CSI Super Toophan products — built with the latest BLDC technology, premium finishes and class-leading performance."
         />
 
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {launches.map(({ m, cat }, i) => (
+          {ordered.map(({ m, cat }, i) => (
             <Link
               key={m.modelNo}
               to="/products/$category"
