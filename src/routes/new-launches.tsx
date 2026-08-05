@@ -32,9 +32,10 @@ function NewLaunches() {
       .map((m) => ({ m, cat }))
   );
   // Preserve the defined order
-  const ordered = LAUNCH_MODEL_NOS.map((no) =>
-    launches.find((l) => l.m.modelNo === no)
-  ).filter((l): l is { m: typeof l.m; cat: typeof l.cat } => Boolean(l));
+  const ordered = LAUNCH_MODEL_NOS.flatMap((no) => {
+    const found = launches.find((l) => l.m.modelNo === no);
+    return found ? [found] : [];
+  });
 
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
