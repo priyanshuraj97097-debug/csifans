@@ -17,12 +17,13 @@ export const Route = createFileRoute("/new-launches")({
 });
 
 function NewLaunches() {
-  // Curate latest launches: pick the premium series + first model of every other category
+  // Curate latest launches: all premium models + first model of every other category
+  const premium = categories.find((c) => c.slug === "premium-fans");
   const launches = [
-    ...categories.find((c) => c.slug === "premium-series")!.models.map((m) => ({ m, cat: categories.find((c) => c.slug === "premium-series")! })),
+    ...(premium ? premium.models.map((m) => ({ m, cat: premium })) : []),
     ...categories
-      .filter((c) => c.slug !== "premium-series")
-      .map((c) => ({ m: c.models[0], cat: c })),
+      .filter((c) => c.slug !== "premium-fans" && c.models.length > 0)
+      .map((c) => ({ m: c.models[0]!, cat: c })),
   ];
 
   return (
