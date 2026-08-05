@@ -91,15 +91,6 @@ function NewLaunches() {
             </Link>
           ))}
         </div>
-
-        <div className="mt-14 text-center">
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-6 py-3.5 font-[Poppins] font-semibold text-white shadow-xl shadow-[#0d6b78]/30 hover:shadow-2xl hover:scale-105 transition-all"
-          >
-            View All Products <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
       </div>
     </div>
   );
