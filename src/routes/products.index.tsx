@@ -115,6 +115,26 @@ function Products() {
                 </Link>
               ))}
             </div>
+
+            <div className="mt-14">
+              <h2 className="font-[Poppins] text-xl font-bold text-[#0a2f44] text-center">Quick Links</h2>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                {["room-heaters", "home-appliances"].map((slug) => {
+                  const c = categories.find((cat) => cat.slug === slug);
+                  if (!c) return null;
+                  return (
+                    <Link
+                      key={c.slug}
+                      to="/products/$category"
+                      params={{ category: c.slug }}
+                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#0d4361] to-[#0d6b78] px-6 py-3 font-[Poppins] text-sm font-semibold text-white shadow-lg shadow-[#0d6b78]/25 hover:shadow-xl hover:scale-105 transition-all"
+                    >
+                      {c.name} <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </>
         )}
       </div>
