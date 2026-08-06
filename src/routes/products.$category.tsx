@@ -13,10 +13,33 @@ export const Route = createFileRoute("/products/$category")({
       { name: "description", content: loaderData?.description ?? "CSI Fans product range." },
       { property: "og:title", content: `${loaderData?.name ?? "Products"} — CSI Fans` },
       { property: "og:description", content: loaderData?.tagline ?? "Premium fans." },
-      { property: "og:image", content: loaderData?.image ?? "" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `https://csifans.lovable.app/products/${loaderData?.slug ?? ""}` },
     ],
     links: [{ rel: "canonical", href: `https://csifans.lovable.app/products/${loaderData?.slug ?? ""}` }],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://csifans.lovable.app/" },
+                { "@type": "ListItem", position: 2, name: "Products", item: "https://csifans.lovable.app/products" },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: loaderData.name,
+                  item: `https://csifans.lovable.app/products/${loaderData.slug}`,
+                },
+              ],
+            }),
+          },
+        ]
+      : [],
   }),
+
   notFoundComponent: () => (
     <div className="py-24 text-center px-4">
       <h1 className="font-[Poppins] text-3xl font-bold text-[#0a2f44]">Category not found</h1>
