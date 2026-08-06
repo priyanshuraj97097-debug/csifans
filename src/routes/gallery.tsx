@@ -11,6 +11,7 @@ export const Route = createFileRoute("/gallery")({
       { name: "description", content: "Explore the complete CSI Fans image gallery — ceiling, wall, cabin, exhaust, decorative and premium BLDC fans." },
       { property: "og:title", content: "CSI Fans Gallery" },
       { property: "og:description", content: "Premium fan renders and product photography from CSI Fans." },
+      { property: "og:url", content: "https://csifans.lovable.app/gallery" },
     ],
     links: [{ rel: "canonical", href: "https://csifans.lovable.app/gallery" }],
   }),

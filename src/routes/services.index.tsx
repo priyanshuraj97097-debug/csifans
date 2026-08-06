@@ -17,6 +17,7 @@ export const Route = createFileRoute("/services/")({
         content:
           "Manufacturing, installation, and maintenance services for industrial and commercial fans.",
       },
+      { property: "og:url", content: "https://csifans.lovable.app/services" },
     ],
     links: [{ rel: "canonical", href: "https://csifans.lovable.app/services" }],
   }),

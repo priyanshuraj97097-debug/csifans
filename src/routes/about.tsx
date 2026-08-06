@@ -9,6 +9,7 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "Learn about CSI Fans — an ISO 9001:2015 certified company committed to manufacturing premium fans with cutting-edge technology." },
       { property: "og:title", content: "About CSI Fans" },
       { property: "og:description", content: "Decade of excellence in fan manufacturing — ISO 9001:2015 certified." },
+      { property: "og:url", content: "https://csifans.lovable.app/about" },
     ],
     links: [{ rel: "canonical", href: "https://csifans.lovable.app/about" }],
   }),

@@ -16,6 +16,7 @@ export const Route = createFileRoute("/services/manufacturing")({
         content:
           "Modern production lines, in-house testing, and rigorous quality control for every fan we make.",
       },
+      { property: "og:url", content: "https://csifans.lovable.app/services/manufacturing" },
     ],
     links: [{ rel: "canonical", href: "https://csifans.lovable.app/services/manufacturing" }],
   }),

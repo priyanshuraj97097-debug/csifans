@@ -15,6 +15,7 @@ export const Route = createFileRoute("/blog/fan-maintenance-checklist")({
         property: "og:description",
         content: "Keep fans quiet, efficient, and long-lasting with this simple yearly checklist.",
       },
+      { property: "og:url", content: "https://csifans.lovable.app/blog/fan-maintenance-checklist" },
     ],
     links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog/fan-maintenance-checklist" }],
     scripts: [
