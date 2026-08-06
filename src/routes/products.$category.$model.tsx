@@ -17,10 +17,55 @@ export const Route = createFileRoute("/products/$category/$model")({
       { name: "description", content: loaderData?.model.description ?? "CSI Fans product details." },
       { property: "og:title", content: `${loaderData?.model.name ?? "Product"} — CSI Fans` },
       { property: "og:description", content: loaderData?.model.description ?? "Premium fans." },
-      { property: "og:image", content: loaderData?.model.image ?? "" },
+      { property: "og:type", content: "product" },
+      {
+        property: "og:url",
+        content: `https://csifans.lovable.app/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}`,
+      },
     ],
-    links: [{ rel: "canonical", href: `/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
+    links: [{ rel: "canonical", href: `https://csifans.lovable.app/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: loaderData.model.name,
+              sku: loaderData.model.modelNo,
+              description: loaderData.model.description ?? loaderData.category.description,
+              category: loaderData.category.name,
+              brand: { "@type": "Brand", name: "CSI Super Toophan" },
+              url: `https://csifans.lovable.app/products/${loaderData.category.slug}/${loaderData.model.slug}`,
+            }),
+          },
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://csifans.lovable.app/" },
+                { "@type": "ListItem", position: 2, name: "Products", item: "https://csifans.lovable.app/products" },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: loaderData.category.name,
+                  item: `https://csifans.lovable.app/products/${loaderData.category.slug}`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 4,
+                  name: loaderData.model.name,
+                  item: `https://csifans.lovable.app/products/${loaderData.category.slug}/${loaderData.model.slug}`,
+                },
+              ],
+            }),
+          },
+        ]
+      : [],
   }),
+
   notFoundComponent: () => (
     <div className="py-24 text-center px-4">
       <h1 className="font-[Poppins] text-3xl font-bold text-[#0a2f44]">Product not found</h1>

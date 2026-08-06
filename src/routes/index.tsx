@@ -13,21 +13,41 @@ export const Route = createFileRoute("/")({
   validateSearch: zodValidator(productsSearchSchema),
   head: () => ({
     meta: [
-      { title: "Our Products | CSI Fans" },
+      { title: "CSI Fans | Ceiling, BLDC, Table & Pedestal Fans in India" },
       {
         name: "description",
         content:
-          "Explore CSI table fans, pedestal fans, ceiling fans, premium BLDC fans, and upcoming wall, exhaust, and special fan categories.",
+          "Explore CSI Super Toophan table, pedestal, ceiling, wall, exhaust and premium BLDC fans — ISO 9001:2015 certified, made in Bihar.",
       },
-      { property: "og:title", content: "CSI Fans Product Range" },
+      { property: "og:title", content: "CSI Fans | Ceiling, BLDC, Table & Pedestal Fans" },
       {
         property: "og:description",
         content:
-          "Browse table, pedestal, ceiling, premium, wall, exhaust, and special fan categories from CSI Fans.",
+          "Browse table, pedestal, ceiling, premium BLDC, wall, exhaust and special fans from CSI Super Toophan.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://csifans.lovable.app/" },
+    ],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://csifans.lovable.app/",
+            },
+          ],
+        }),
       },
     ],
-    links: [{ rel: "canonical", href: "/products" }],
   }),
+
   component: Products,
 });
 

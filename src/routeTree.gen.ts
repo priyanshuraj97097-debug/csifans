@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as NewLaunchesRouteImport } from './routes/new-launches'
@@ -35,6 +36,11 @@ import { Route as ProductsCategoryIndexRouteImport } from './routes/products.$ca
 import { Route as ProductsCategoryModelRouteImport } from './routes/products.$category.$model'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -178,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
   '/services': typeof ServicesRouteWithChildren
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
@@ -258,6 +267,7 @@ export interface FileRouteTypes {
     | '/new-launches'
     | '/products'
     | '/services'
+    | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/bldc-vs-conventional-fans'
@@ -282,6 +292,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/mcp'
     | '/new-launches'
+    | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/bldc-vs-conventional-fans'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
     | '/new-launches'
     | '/products'
     | '/services'
+    | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/blog/bldc-vs-conventional-fans'
@@ -336,6 +348,7 @@ export interface RootRouteChildren {
   NewLaunchesRoute: typeof NewLaunchesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   ServicesRoute: typeof ServicesRouteWithChildren
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -343,6 +356,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -593,6 +613,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewLaunchesRoute: NewLaunchesRoute,
   ProductsRoute: ProductsRouteWithChildren,
   ServicesRoute: ServicesRouteWithChildren,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,

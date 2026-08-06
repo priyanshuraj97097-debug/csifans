@@ -10,8 +10,9 @@ export const Route = createFileRoute("/new-launches")({
       { name: "description", content: "Explore the latest fans launched by CSI — premium BLDC, decorative and high-speed models freshly added to our lineup." },
       { property: "og:title", content: "New Launches — CSI Fans" },
       { property: "og:description", content: "The newest CSI Fans models. Premium BLDC, decorative and high-speed fans." },
+      { property: "og:url", content: "https://csifans.lovable.app/new-launches" },
     ],
-    links: [{ rel: "canonical", href: "/new-launches" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/new-launches" }],
   }),
   component: NewLaunches,
 });

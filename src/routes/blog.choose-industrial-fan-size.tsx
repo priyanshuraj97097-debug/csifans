@@ -15,8 +15,9 @@ export const Route = createFileRoute("/blog/choose-industrial-fan-size")({
         property: "og:description",
         content: "Sizing framework for warehouse and factory fans — ceiling height, area, and airflow.",
       },
+      { property: "og:url", content: "https://csifans.lovable.app/blog/choose-industrial-fan-size" },
     ],
-    links: [{ rel: "canonical", href: "/blog/choose-industrial-fan-size" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog/choose-industrial-fan-size" }],
     scripts: [
       {
         type: "application/ld+json",

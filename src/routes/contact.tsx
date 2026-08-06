@@ -17,8 +17,9 @@ export const Route = createFileRoute("/contact")({
         content:
           "Connect with CSI Fans on LinkedIn or reach out through our registered address.",
       },
+      { property: "og:url", content: "https://csifans.lovable.app/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/contact" }],
   }),
   component: Contact,
 });

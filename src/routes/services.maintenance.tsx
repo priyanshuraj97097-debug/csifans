@@ -15,8 +15,9 @@ export const Route = createFileRoute("/services/maintenance")({
         property: "og:description",
         content: "Servicing, spare parts, and preventive maintenance for industrial and home fans.",
       },
+      { property: "og:url", content: "https://csifans.lovable.app/services/maintenance" },
     ],
-    links: [{ rel: "canonical", href: "/services/maintenance" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/services/maintenance" }],
   }),
   component: Maintenance,
 });
