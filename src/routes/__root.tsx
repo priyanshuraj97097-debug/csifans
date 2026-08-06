@@ -98,6 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "CSI Fans | Ceiling, BLDC, Table & Pedestal Fans in India" },
       { name: "twitter:description", content: "Durable, energy-efficient industrial ceiling fans for factories and warehouses. Made in Bihar by CSI Super Toophan." },
 
+      { property: "og:site_name", content: "CSI Super Toophan" },
       
       // Images (Keep these links as they are)
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
@@ -111,7 +112,40 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://csifans.lovable.app/#organization",
+              name: "CSI Super Toophan",
+              alternateName: "CSI Fans",
+              url: "https://csifans.lovable.app/",
+              description:
+                "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and exhaust fans in Bihar, India.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bihar Sharif",
+                addressRegion: "Bihar",
+                addressCountry: "IN",
+              },
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://csifans.lovable.app/#website",
+              url: "https://csifans.lovable.app/",
+              name: "CSI Super Toophan",
+              publisher: { "@id": "https://csifans.lovable.app/#organization" },
+            },
+          ],
+        }),
+      },
+    ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
