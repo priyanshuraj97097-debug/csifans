@@ -50,6 +50,8 @@ export function Footer() {
               ["/products/exhaust-fans", "Exhaust Fans"],
               ["/products/special-fans", "Special Fans"],
               ["/products/premium-fans", "Premium Fans"],
+              ["/products/home-appliances", "Home Appliances"],
+              ["/products/room-heaters", "Room Heaters"],
             ].map(([to, label]) => (
               <li key={to}>
                 <Link to={to} className="hover:text-white transition-colors">{label}</Link>
