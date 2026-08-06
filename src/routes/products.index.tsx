@@ -26,7 +26,7 @@ export const Route = createFileRoute("/products/")({
           "Browse table, pedestal, ceiling, premium, wall, exhaust, and special fan categories from CSI Fans.",
       },
     ],
-    links: [{ rel: "canonical", href: "/products" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/products" }],
   }),
   component: Products,
 });

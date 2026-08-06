@@ -15,7 +15,7 @@ export const Route = createFileRoute("/products/$category")({
       { property: "og:description", content: loaderData?.tagline ?? "Premium fans." },
       { property: "og:image", content: loaderData?.image ?? "" },
     ],
-    links: [{ rel: "canonical", href: `/products/${loaderData?.slug ?? ""}` }],
+    links: [{ rel: "canonical", href: `https://csifans.lovable.app/products/${loaderData?.slug ?? ""}` }],
   }),
   notFoundComponent: () => (
     <div className="py-24 text-center px-4">

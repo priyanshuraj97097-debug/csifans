@@ -10,7 +10,7 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "About CSI Fans" },
       { property: "og:description", content: "Decade of excellence in fan manufacturing — ISO 9001:2015 certified." },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/about" }],
   }),
   component: About,
 });

@@ -16,7 +16,7 @@ export const Route = createFileRoute("/services/installation")({
         content: "Trained technicians, safe mounting, and full commissioning for every fan we install.",
       },
     ],
-    links: [{ rel: "canonical", href: "/services/installation" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/services/installation" }],
   }),
   component: Installation,
 });

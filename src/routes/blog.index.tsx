@@ -17,7 +17,7 @@ export const Route = createFileRoute("/blog/")({
         content: "Guides and answers to the most common questions about industrial and home fans.",
       },
     ],
-    links: [{ rel: "canonical", href: "/blog" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog" }],
   }),
   component: BlogIndex,
 });

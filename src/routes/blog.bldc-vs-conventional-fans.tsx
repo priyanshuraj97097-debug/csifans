@@ -16,7 +16,7 @@ export const Route = createFileRoute("/blog/bldc-vs-conventional-fans")({
         content: "Power, price, noise, lifespan — a plain-English comparison for buyers.",
       },
     ],
-    links: [{ rel: "canonical", href: "/blog/bldc-vs-conventional-fans" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog/bldc-vs-conventional-fans" }],
     scripts: [
       {
         type: "application/ld+json",

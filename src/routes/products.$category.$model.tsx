@@ -19,7 +19,7 @@ export const Route = createFileRoute("/products/$category/$model")({
       { property: "og:description", content: loaderData?.model.description ?? "Premium fans." },
       { property: "og:image", content: loaderData?.model.image ?? "" },
     ],
-    links: [{ rel: "canonical", href: `/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
+    links: [{ rel: "canonical", href: `https://csifans.lovable.app/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
   }),
   notFoundComponent: () => (
     <div className="py-24 text-center px-4">

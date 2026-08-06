@@ -13,7 +13,7 @@ export const Route = createFileRoute("/downloads")({
       { property: "og:title", content: "CSI Fans Downloads" },
       { property: "og:description", content: "Product catalogues and brochures." },
     ],
-    links: [{ rel: "canonical", href: "/downloads" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/downloads" }],
   }),
   component: Downloads,
 });

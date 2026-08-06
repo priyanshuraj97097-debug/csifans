@@ -12,7 +12,7 @@ export const Route = createFileRoute("/gallery")({
       { property: "og:title", content: "CSI Fans Gallery" },
       { property: "og:description", content: "Premium fan renders and product photography from CSI Fans." },
     ],
-    links: [{ rel: "canonical", href: "/gallery" }],
+    links: [{ rel: "canonical", href: "https://csifans.lovable.app/gallery" }],
   }),
   component: GalleryPage,
 });
