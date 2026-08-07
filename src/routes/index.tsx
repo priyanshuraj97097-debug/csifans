@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { categories, searchModels } from "@/lib/products";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { BrandVideo } from "@/components/site/BrandVideo";
 
 const productsSearchSchema = z.object({
   q: fallback(z.string(), "").default(""),
