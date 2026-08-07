@@ -17,13 +17,13 @@ export const Route = createFileRoute("/products/")({
       {
         name: "description",
         content:
-          "Explore CSI table fans, pedestal fans, ceiling fans, premium BLDC fans, and upcoming wall, exhaust, and special fan categories.",
+          "Explore CSI table fans, pedestal fans, ceiling fans, premium BLDC fans, wall, and special fan categories.",
       },
       { property: "og:title", content: "CSI Fans Product Range" },
       {
         property: "og:description",
         content:
-          "Browse table, pedestal, ceiling, premium, wall, exhaust, and special fan categories from CSI Fans.",
+          "Browse table, pedestal, ceiling, premium, wall, and special fan categories from CSI Fans.",
       },
       { property: "og:url", content: "https://csifans.lovable.app/products" },
     ],
