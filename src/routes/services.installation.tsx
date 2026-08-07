@@ -39,7 +39,7 @@ function Installation() {
               <li>Factories, warehouses, and large industrial sheds (HVLS and heavy-duty ceiling fans)</li>
               <li>Offices, showrooms, schools, and community halls</li>
               <li>Residential homes, apartments, and villas</li>
-              <li>Kitchens and washrooms (exhaust fans)</li>
+              <li>Kitchens and washrooms</li>
             </ul>
           </div>
 

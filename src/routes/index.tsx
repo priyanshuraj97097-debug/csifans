@@ -17,13 +17,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Explore CSI Super Toophan table, pedestal, ceiling, wall, exhaust and premium BLDC fans — ISO 9001:2015 certified, made in Bihar.",
+          "Explore CSI Super Toophan table, pedestal, ceiling, wall and premium BLDC fans — ISO 9001:2015 certified, made in Bihar.",
       },
       { property: "og:title", content: "CSI Fans | Ceiling, BLDC, Table & Pedestal Fans" },
       {
         property: "og:description",
         content:
-          "Browse table, pedestal, ceiling, premium BLDC, wall, exhaust and special fans from CSI Super Toophan.",
+          "Browse table, pedestal, ceiling, premium BLDC, wall and special fans from CSI Super Toophan.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://csifans.lovable.app/" },
