@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { categories, searchModels } from "@/lib/products";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { BrandVideo } from "@/components/site/BrandVideo";
 
 const productsSearchSchema = z.object({
   q: fallback(z.string(), "").default(""),
@@ -112,6 +113,7 @@ function Products() {
           </>
         ) : (
           <>
+            <BrandVideo />
             <SectionHeader eyebrow="Our Range" title="Fans for Every Space" subtitle="Browse table, pedestal, ceiling, premium BLDC, and upcoming specialty categories from CSI Fans." />
             <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.map((c) => (
