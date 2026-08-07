@@ -125,7 +125,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               alternateName: "CSI Fans",
               url: "https://csifans.lovable.app/",
               description:
-                "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and exhaust fans in Bihar, India.",
+                "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Bihar Sharif",

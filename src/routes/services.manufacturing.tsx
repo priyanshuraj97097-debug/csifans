@@ -8,7 +8,7 @@ export const Route = createFileRoute("/services/manufacturing")({
       {
         name: "description",
         content:
-          "ISO 9001:2015 certified industrial fan manufacturing in Bihar Sharif — ceiling, pedestal, wall, exhaust and BLDC fans built for durability.",
+          "ISO 9001:2015 certified industrial fan manufacturing in Bihar Sharif — ceiling, pedestal, wall and BLDC fans built for durability.",
       },
       { property: "og:title", content: "Industrial Fan Manufacturing — CSI Super Toophan" },
       {
@@ -38,7 +38,7 @@ function Manufacturing() {
             <h3 className="font-[Poppins] text-xl font-bold text-[#0a2f44]">Our Manufacturing Capabilities</h3>
             <p className="mt-3 font-[Inter] text-slate-700 leading-relaxed">
               CSI Super Toophan operates a modern manufacturing facility with dedicated lines for ceiling, pedestal,
-              table, wall, exhaust, and BLDC fans. Every unit undergoes multi-stage quality checks — from raw material
+              table, wall, and BLDC fans. Every unit undergoes multi-stage quality checks — from raw material
               inspection to motor winding, blade balancing, and final performance testing.
             </p>
           </div>

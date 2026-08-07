@@ -421,7 +421,7 @@ export async function downloadFullCatalogue(cats: Category[]) {
   await drawCoverPage(
     doc,
     "Full Product Catalogue",
-    "Ceiling, pedestal, table, wall, exhaust and premium fans engineered for Indian homes and offices.",
+    "Ceiling, pedestal, table, wall and premium fans engineered for Indian homes and offices.",
     cats[0]?.image
   );
 
