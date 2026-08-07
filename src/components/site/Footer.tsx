@@ -47,7 +47,6 @@ export function Footer() {
               ["/products/pedestal-fans", "Pedestal Fans"],
               ["/products/table-fans", "Table Fans"],
               ["/products/wall-fans", "Wall Fans"],
-              ["/products/exhaust-fans", "Exhaust Fans"],
               ["/products/special-fans", "Special Fans"],
               ["/products/premium-fans", "Premium Fans"],
               ["/products/home-appliances", "Home Appliances"],
