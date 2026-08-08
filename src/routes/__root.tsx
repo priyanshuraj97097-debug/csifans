@@ -178,6 +178,8 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <SupportChat />
+
         
       </div>
     </QueryClientProvider>
