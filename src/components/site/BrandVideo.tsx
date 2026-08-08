@@ -41,8 +41,8 @@ export function BrandVideo() {
           <video
             ref={videoRef}
             className="aspect-video h-full w-full bg-slate-900 object-cover"
-            src={videoAsset.url}
-            poster={posterAsset.url}
+            src={VIDEO_SRC}
+            poster={POSTER_SRC}
             muted
             playsInline
             loop
