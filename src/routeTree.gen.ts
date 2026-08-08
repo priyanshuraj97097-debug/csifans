@@ -30,6 +30,7 @@ import { Route as ProductsCategoryRouteImport } from './routes/products.$categor
 import { Route as BlogFanMaintenanceChecklistRouteImport } from './routes/blog.fan-maintenance-checklist'
 import { Route as BlogChooseIndustrialFanSizeRouteImport } from './routes/blog.choose-industrial-fan-size'
 import { Route as BlogBldcVsConventionalFansRouteImport } from './routes/blog.bldc-vs-conventional-fans'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ProductsCategoryIndexRouteImport } from './routes/products.$category.index'
@@ -144,6 +145,11 @@ const BlogBldcVsConventionalFansRoute =
     path: '/bldc-vs-conventional-fans',
     getParentRoute: () => BlogRoute,
   } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
   Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
@@ -187,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
   '/blog/choose-industrial-fan-size': typeof BlogChooseIndustrialFanSizeRoute
   '/blog/fan-maintenance-checklist': typeof BlogFanMaintenanceChecklistRoute
@@ -212,6 +219,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
   '/blog/choose-industrial-fan-size': typeof BlogChooseIndustrialFanSizeRoute
   '/blog/fan-maintenance-checklist': typeof BlogFanMaintenanceChecklistRoute
@@ -240,6 +248,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/api/chat': typeof ApiChatRoute
   '/blog/bldc-vs-conventional-fans': typeof BlogBldcVsConventionalFansRoute
   '/blog/choose-industrial-fan-size': typeof BlogChooseIndustrialFanSizeRoute
   '/blog/fan-maintenance-checklist': typeof BlogFanMaintenanceChecklistRoute
@@ -270,6 +279,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/api/chat'
     | '/blog/bldc-vs-conventional-fans'
     | '/blog/choose-industrial-fan-size'
     | '/blog/fan-maintenance-checklist'
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/api/chat'
     | '/blog/bldc-vs-conventional-fans'
     | '/blog/choose-industrial-fan-size'
     | '/blog/fan-maintenance-checklist'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
+    | '/api/chat'
     | '/blog/bldc-vs-conventional-fans'
     | '/blog/choose-industrial-fan-size'
     | '/blog/fan-maintenance-checklist'
@@ -351,6 +363,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  ApiChatRoute: typeof ApiChatRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
@@ -503,6 +516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogBldcVsConventionalFansRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/oauth-protected-resource': {
       id: '/.well-known/oauth-protected-resource'
       path: '/.well-known/oauth-protected-resource'
@@ -617,6 +637,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  ApiChatRoute: ApiChatRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
