@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
-import videoAsset from "@/assets/csi-super-toophan-brand-video.mp4.asset.json";
-import posterAsset from "@/assets/csi-super-toophan-brand-video-poster.jpg.asset.json";
+// Served from the repo (public/videos) so the MP4 ships with any deployment target.
+const VIDEO_SRC = "/videos/csi-super-toophan-brand-video.mp4";
+const POSTER_SRC = "/videos/csi-super-toophan-brand-video-poster.jpg";
 
 export function BrandVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
