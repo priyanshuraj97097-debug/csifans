@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { MessageCircle, X, RotateCcw } from "lucide-react";
+import { MessageCircle, X, RotateCcw, Mic, MicOff } from "lucide-react";
+import { useLanguage, LANGUAGE_NAMES } from "@/lib/i18n";
 import logo from "@/assets/csi-logo.png";
 import {
   Conversation,
@@ -19,11 +20,24 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 
 const STORAGE_KEY = "csi-support-chat";
 
-const SUGGESTIONS = [
-  "Which ceiling fans do you offer?",
-  "What is the warranty on Super Toophan fans?",
-  "Where is CSI Super Toophan located?",
-];
+const SUGGESTION_KEYS = ["chat.s1", "chat.s2", "chat.s3"] as const;
+
+type SpeechRecognitionLike = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  start: () => void;
+  stop: () => void;
+  onresult: ((event: any) => void) | null;
+  onerror: (() => void) | null;
+  onend: (() => void) | null;
+};
+
+function getSpeechRecognition(): (new () => SpeechRecognitionLike) | null {
+  if (typeof window === "undefined") return null;
+  const w = window as any;
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
 
 function loadMessages(): UIMessage[] {
   if (typeof window === "undefined") return [];
@@ -43,6 +57,10 @@ export function SupportChat() {
   const [initialMessages] = useState<UIMessage[]>(() => loadMessages());
   const [transport] = useState(() => new DefaultChatTransport({ api: "/api/chat" }));
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { t, lang, speechLocale } = useLanguage();
+  const [listening, setListening] = useState(false);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   const { messages, sendMessage, status, setMessages, error } = useChat({
     id: "csi-support",
@@ -75,10 +93,55 @@ export function SupportChat() {
     const value = text.trim();
     if (!value || status === "submitted" || status === "streaming") return;
     setInput("");
-    void sendMessage({ text: value });
+    void sendMessage({ text: value }, { body: { language: lang, languageName: LANGUAGE_NAMES[lang] } });
   };
 
   const busy = status === "submitted" || status === "streaming";
+
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop();
+    recognitionRef.current = null;
+    setListening(false);
+  }, []);
+
+  useEffect(() => () => recognitionRef.current?.stop(), []);
+
+  const toggleMic = () => {
+    if (listening) {
+      stopListening();
+      return;
+    }
+    const Ctor = getSpeechRecognition();
+    if (!Ctor) {
+      setVoiceError(t("chat.micUnsupported"));
+      return;
+    }
+    setVoiceError(null);
+    const recognition = new Ctor();
+    recognition.lang = speechLocale;
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.onresult = (event: any) => {
+      let transcript = "";
+      for (let i = 0; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript;
+      }
+      setInput(transcript);
+    };
+    recognition.onerror = () => {
+      setVoiceError(t("chat.micUnsupported"));
+      setListening(false);
+      recognitionRef.current = null;
+    };
+    recognition.onend = () => {
+      setListening(false);
+      recognitionRef.current = null;
+      focusInput();
+    };
+    recognitionRef.current = recognition;
+    setListening(true);
+    recognition.start();
+  };
 
   return (
     <>
@@ -86,11 +149,11 @@ export function SupportChat() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          aria-label="Open CSI support chat"
+          aria-label={t("chat.open")}
           className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-gradient-to-br from-[#0d4361] to-[#0d6b78] px-5 py-3.5 text-white shadow-2xl shadow-[#0d4361]/30 hover:scale-105 transition-transform"
         >
           <MessageCircle className="h-5 w-5" />
-          <span className="font-[Poppins] text-sm font-semibold hidden sm:inline">Need help?</span>
+          <span className="font-[Poppins] text-sm font-semibold hidden sm:inline">{t("chat.needHelp")}</span>
         </button>
       )}
 
@@ -103,14 +166,14 @@ export function SupportChat() {
               className="h-9 w-9 rounded-full ring-2 ring-white/30"
             />
             <div className="min-w-0 flex-1">
-              <div className="font-[Poppins] text-sm font-bold">CSI Support</div>
+              <div className="font-[Poppins] text-sm font-bold">{t("chat.title")}</div>
               <div className="font-[Inter] text-[11px] text-white/70">
-                Product & service assistant
+                {t("chat.subtitle")}
               </div>
             </div>
             <button
               type="button"
-              aria-label="Start a new conversation"
+              aria-label={t("chat.new")}
               onClick={() => {
                 setMessages([]);
                 focusInput();
@@ -121,7 +184,7 @@ export function SupportChat() {
             </button>
             <button
               type="button"
-              aria-label="Close support chat"
+              aria-label={t("chat.close")}
               onClick={() => setOpen(false)}
               className="grid h-8 w-8 place-items-center rounded-full hover:bg-white/15 transition-colors"
             >
@@ -134,20 +197,20 @@ export function SupportChat() {
               {messages.length === 0 && (
                 <div className="px-1 py-6">
                   <p className="font-[Poppins] text-base font-semibold text-[#0a2f44]">
-                    Hello! How can we help?
+                    {t("chat.greeting")}
                   </p>
                   <p className="mt-1 font-[Inter] text-sm text-slate-600">
-                    Ask about CSI Super Toophan fans, specifications, categories or support.
+                    {t("chat.greetingSub")}
                   </p>
                   <div className="mt-4 flex flex-col gap-2">
-                    {SUGGESTIONS.map((s) => (
+                    {SUGGESTION_KEYS.map((k) => (
                       <button
-                        key={s}
+                        key={k}
                         type="button"
-                        onClick={() => submit(s)}
+                        onClick={() => submit(t(k))}
                         className="rounded-2xl bg-white px-4 py-2.5 text-left font-[Inter] text-sm text-[#0d4361] ring-1 ring-[#0d6b78]/15 shadow-sm hover:shadow-md transition-shadow"
                       >
-                        {s}
+                        {t(k)}
                       </button>
                     ))}
                   </div>
@@ -173,13 +236,12 @@ export function SupportChat() {
               ))}
 
               {status === "submitted" && (
-                <Shimmer className="px-1 font-[Inter] text-sm">Thinking...</Shimmer>
+                <Shimmer className="px-1 font-[Inter] text-sm">{t("chat.thinking")}</Shimmer>
               )}
 
               {error && (
                 <p className="px-1 font-[Inter] text-sm text-red-600">
-                  Sorry, the assistant is unavailable right now. Please try again, or reach us on
-                  the Contact page.
+                  {t("chat.error")}
                 </p>
               )}
             </ConversationContent>
@@ -197,14 +259,31 @@ export function SupportChat() {
                 ref={textareaRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about our fans, specs or support..."
+                placeholder={t("chat.placeholder")}
               />
-              <PromptInputFooter className="justify-end">
+              <PromptInputFooter className="justify-between">
+                <button
+                  type="button"
+                  onClick={toggleMic}
+                  aria-label={listening ? t("chat.micStop") : t("chat.mic")}
+                  className={`grid h-8 w-8 place-items-center rounded-full transition-colors ${
+                    listening
+                      ? "bg-red-500 text-white animate-pulse"
+                      : "bg-[#0d6b78]/10 text-[#0d4361] hover:bg-[#0d6b78]/20"
+                  }`}
+                >
+                  {listening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                </button>
                 <PromptInputSubmit status={status} disabled={!input.trim() && !busy} />
               </PromptInputFooter>
             </PromptInput>
+            {(listening || voiceError) && (
+              <p className="mt-1.5 text-center font-[Inter] text-[11px] text-slate-500">
+                {listening ? t("chat.listening") : voiceError}
+              </p>
+            )}
             <p className="mt-2 text-center font-[Inter] text-[10px] text-slate-400">
-              Answers are based on published CSI Fans information.
+              {t("chat.disclaimer")}
             </p>
           </div>
         </div>

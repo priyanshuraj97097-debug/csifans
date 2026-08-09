@@ -4,23 +4,26 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "@/assets/csi-logo.png";
 import { categories } from "@/lib/products";
 import { SearchCombobox } from "./SearchCombobox";
+import { LanguageSelector } from "./LanguageSelector";
+import { useLanguage } from "@/lib/i18n";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/products", label: "Products" },
-  { to: "/services", label: "Services" },
-  { to: "/new-launches", label: "New Launches" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/blog", label: "Blog" },
-  { to: "/downloads", label: "Downloads" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", key: "nav.home" },
+  { to: "/about", key: "nav.about" },
+  { to: "/products", key: "nav.products" },
+  { to: "/services", key: "nav.services" },
+  { to: "/new-launches", key: "nav.newLaunches" },
+  { to: "/gallery", key: "nav.gallery" },
+  { to: "/blog", key: "nav.blog" },
+  { to: "/downloads", key: "nav.downloads" },
+  { to: "/contact", key: "nav.contact" },
 ] as const;
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -70,7 +73,7 @@ export function Header() {
                       className="pl-3 pr-1 py-2 font-[Inter] text-sm font-medium text-slate-700 hover:text-[#0d4361] transition-colors"
                       activeProps={{ className: "pl-3 pr-1 py-2 font-[Inter] text-sm font-medium text-[#0d4361]" }}
                     >
-                      Products
+                      {t("nav.products")}
                     </Link>
                     <ChevronDown className="mr-3 h-4 w-4 text-slate-500 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
                   </div>
@@ -81,7 +84,7 @@ export function Header() {
                         to="/products"
                         className="block rounded-xl px-3 py-2.5 font-[Inter] text-sm font-semibold text-[#0d4361] hover:bg-[#0d6b78]/8"
                       >
-                        All Products
+                        {t("nav.allProducts")}
                       </Link>
                       <div className="mt-2 grid gap-1">
                         {categories.map((category) => (
@@ -96,11 +99,11 @@ export function Header() {
                                 {category.name}
                               </p>
                               <p className="font-[Inter] text-[11px] text-slate-500">
-                                {category.models.length} {category.models.length === 1 ? "product" : "products"}
+                                {category.models.length} {category.models.length === 1 ? t("nav.product") : t("nav.products_plural")}
                               </p>
                             </div>
                             <span className="font-[Inter] text-xs font-semibold text-[#0d6b78]">
-                              View
+                              {t("nav.view")}
                             </span>
                           </Link>
                         ))}
@@ -119,7 +122,7 @@ export function Header() {
                 className="px-3 py-2 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:text-[#0d4361] hover:bg-[#0d6b78]/10 transition-colors"
                 activeProps={{ className: "text-[#0d4361] bg-[#0d6b78]/15" }}
               >
-                {n.label}
+                {t(n.key)}
               </Link>
             );
           })}
@@ -129,10 +132,12 @@ export function Header() {
           <SearchCombobox />
         </div>
 
+        <LanguageSelector className="shrink-0" />
+
         <button
           onClick={() => setOpen(!open)}
           className="lg:hidden p-2 rounded-lg text-[#0d4361] hover:bg-[#0d6b78]/10"
-          aria-label="Toggle menu"
+          aria-label={t("nav.toggleMenu")}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -154,7 +159,7 @@ export function Header() {
                       className="w-full flex items-center justify-between px-4 py-3 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:bg-[#0d6b78]/10"
                       aria-expanded={productsOpen}
                     >
-                      <span>Products</span>
+                      <span>{t("nav.products")}</span>
                       <ChevronDown className={`h-4 w-4 transition-transform ${productsOpen ? "rotate-180" : ""}`} />
                     </button>
                     {productsOpen && (
@@ -164,7 +169,7 @@ export function Header() {
                           onClick={closeMobile}
                           className="block px-4 py-2 rounded-lg font-[Inter] text-xs font-semibold text-[#0d4361] hover:bg-[#0d6b78]/10"
                         >
-                          All Products
+                          {t("nav.allProducts")}
                         </Link>
                         {categories.map((category) => (
                           <Link
@@ -195,7 +200,7 @@ export function Header() {
                   className="px-4 py-3 rounded-lg font-[Inter] text-sm font-medium text-slate-700 hover:bg-[#0d6b78]/10"
                   activeProps={{ className: "text-[#0d4361] bg-[#0d6b78]/15" }}
                 >
-                  {n.label}
+                  {t(n.key)}
                 </Link>
               );
             })}

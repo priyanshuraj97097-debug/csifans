@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "../components/site/Header";
 import { Footer } from "../components/site/Footer";
 import { SupportChat } from "../components/site/SupportChat";
+import { LanguageProvider } from "../lib/i18n";
 
 
 function NotFoundComponent() {
@@ -172,6 +173,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
       <div className="flex min-h-screen flex-col bg-[#f7fbfd] font-[Inter]">
         <Header />
         <main className="flex-1">
@@ -182,6 +184,7 @@ function RootComponent() {
 
         
       </div>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
