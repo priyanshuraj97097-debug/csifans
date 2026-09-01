@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Factory, Wrench, LifeBuoy } from "lucide-react";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -17,9 +18,9 @@ export const Route = createFileRoute("/services/")({
         content:
           "Manufacturing, installation, and maintenance services for industrial and commercial fans.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/services" },
+      { property: "og:url", content: `${SITE_URL}/services` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/services" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services` }],
   }),
   component: ServicesIndex,
 });

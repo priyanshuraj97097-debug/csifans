@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -16,9 +17,9 @@ export const Route = createFileRoute("/blog/")({
         property: "og:description",
         content: "Guides and answers to the most common questions about industrial and home fans.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/blog" },
+      { property: "og:url", content: `${SITE_URL}/blog` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
   }),
   component: BlogIndex,
 });

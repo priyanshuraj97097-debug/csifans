@@ -5,9 +5,10 @@ import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { categories, searchModels } from "@/lib/products";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { BrandVideo } from "@/components/site/BrandVideo";
+import { SITE_URL } from "@/lib/site";
 
 const productsSearchSchema = z.object({
-  q: fallback(z.string(), "").default(""),
+  q: fallback(z.string(), "").optional(),
 });
 
 export const Route = createFileRoute("/")({
@@ -27,9 +28,9 @@ export const Route = createFileRoute("/")({
           "Browse table, pedestal, ceiling, premium BLDC, wall and special fans from CSI Super Toophan.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://csifans.lovable.app/" },
+      { property: "og:url", content: `${SITE_URL}/` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     scripts: [
       {
         type: "application/ld+json",
@@ -41,7 +42,7 @@ export const Route = createFileRoute("/")({
               "@type": "ListItem",
               position: 1,
               name: "Home",
-              item: "https://csifans.lovable.app/",
+              item: `${SITE_URL}/`,
             },
           ],
         }),

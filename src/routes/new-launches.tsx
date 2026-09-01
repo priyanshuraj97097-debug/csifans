@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, ArrowRight, Zap } from "lucide-react";
 import { categories } from "@/lib/products";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/new-launches")({
   head: () => ({
@@ -10,9 +11,9 @@ export const Route = createFileRoute("/new-launches")({
       { name: "description", content: "Explore the latest fans launched by CSI — premium BLDC, decorative and high-speed models freshly added to our lineup." },
       { property: "og:title", content: "New Launches — CSI Fans" },
       { property: "og:description", content: "The newest CSI Fans models. Premium BLDC, decorative and high-speed fans." },
-      { property: "og:url", content: "https://csifans.lovable.app/new-launches" },
+      { property: "og:url", content: `${SITE_URL}/new-launches` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/new-launches" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/new-launches` }],
   }),
   component: NewLaunches,
 });

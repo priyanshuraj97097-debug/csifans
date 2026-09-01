@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { allModels } from "@/lib/products";
 import { Lightbox } from "@/components/site/Lightbox";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -11,9 +12,9 @@ export const Route = createFileRoute("/gallery")({
       { name: "description", content: "Explore the complete CSI Fans image gallery — ceiling, wall, cabin, decorative and premium BLDC fans." },
       { property: "og:title", content: "CSI Fans Gallery" },
       { property: "og:description", content: "Premium fan renders and product photography from CSI Fans." },
-      { property: "og:url", content: "https://csifans.lovable.app/gallery" },
+      { property: "og:url", content: `${SITE_URL}/gallery` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/gallery" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/gallery` }],
   }),
   component: GalleryPage,
 });
