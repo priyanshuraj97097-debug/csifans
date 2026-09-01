@@ -7,7 +7,7 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { SITE_URL } from "@/lib/site";
 
 const productsSearchSchema = z.object({
-  q: fallback(z.string(), "").default(""),
+  q: fallback(z.string(), "").optional(),
 });
 
 export const Route = createFileRoute("/products/")({
