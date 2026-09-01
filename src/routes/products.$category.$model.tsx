@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Download, Check, Tag, Loader2 } from "lucide-rea
 import { findModel, categories, type Model, type Category, type Specification, type ProductTag } from "@/lib/products";
 import { downloadProductCatalogue } from "@/lib/catalogue";
 import { Lightbox } from "@/components/site/Lightbox";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/products/$category/$model")({
   loader: ({ params }) => {
@@ -20,10 +21,10 @@ export const Route = createFileRoute("/products/$category/$model")({
       { property: "og:type", content: "product" },
       {
         property: "og:url",
-        content: `https://csifans.lovable.app/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}`,
+        content: `${SITE_URL}/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}`,
       },
     ],
-    links: [{ rel: "canonical", href: `https://csifans.lovable.app/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
     scripts: loaderData
       ? [
           {
@@ -36,7 +37,7 @@ export const Route = createFileRoute("/products/$category/$model")({
               description: loaderData.model.description ?? loaderData.category.description,
               category: loaderData.category.name,
               brand: { "@type": "Brand", name: "CSI Super Toophan" },
-              url: `https://csifans.lovable.app/products/${loaderData.category.slug}/${loaderData.model.slug}`,
+              url: `${SITE_URL}/products/${loaderData.category.slug}/${loaderData.model.slug}`,
             }),
           },
           {
@@ -45,19 +46,19 @@ export const Route = createFileRoute("/products/$category/$model")({
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: "https://csifans.lovable.app/" },
-                { "@type": "ListItem", position: 2, name: "Products", item: "https://csifans.lovable.app/products" },
+                { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+                { "@type": "ListItem", position: 2, name: "Products", item: `${SITE_URL}/products` },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: loaderData.category.name,
-                  item: `https://csifans.lovable.app/products/${loaderData.category.slug}`,
+                  item: `${SITE_URL}/products/${loaderData.category.slug}`,
                 },
                 {
                   "@type": "ListItem",
                   position: 4,
                   name: loaderData.model.name,
-                  item: `https://csifans.lovable.app/products/${loaderData.category.slug}/${loaderData.model.slug}`,
+                  item: `${SITE_URL}/products/${loaderData.category.slug}/${loaderData.model.slug}`,
                 },
               ],
             }),

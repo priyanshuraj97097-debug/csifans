@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { categories, searchModels } from "@/lib/products";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 const productsSearchSchema = z.object({
   q: fallback(z.string(), "").default(""),
@@ -25,9 +26,9 @@ export const Route = createFileRoute("/products/")({
         content:
           "Browse table, pedestal, ceiling, premium, wall, and special fan categories from CSI Fans.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/products" },
+      { property: "og:url", content: `${SITE_URL}/products` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/products" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/products` }],
   }),
   component: Products,
 });

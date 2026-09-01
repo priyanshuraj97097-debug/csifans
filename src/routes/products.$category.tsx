@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter, Outlet } from "@tanstack/react-router";
 import { findCategory } from "@/lib/products";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/products/$category")({
   loader: ({ params }) => {
@@ -14,9 +15,9 @@ export const Route = createFileRoute("/products/$category")({
       { property: "og:title", content: `${loaderData?.name ?? "Products"} — CSI Fans` },
       { property: "og:description", content: loaderData?.tagline ?? "Premium fans." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: `https://csifans.lovable.app/products/${loaderData?.slug ?? ""}` },
+      { property: "og:url", content: `${SITE_URL}/products/${loaderData?.slug ?? ""}` },
     ],
-    links: [{ rel: "canonical", href: `https://csifans.lovable.app/products/${loaderData?.slug ?? ""}` }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/products/${loaderData?.slug ?? ""}` }],
     scripts: loaderData
       ? [
           {
@@ -25,13 +26,13 @@ export const Route = createFileRoute("/products/$category")({
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: "https://csifans.lovable.app/" },
-                { "@type": "ListItem", position: 2, name: "Products", item: "https://csifans.lovable.app/products" },
+                { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+                { "@type": "ListItem", position: 2, name: "Products", item: `${SITE_URL}/products` },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: loaderData.name,
-                  item: `https://csifans.lovable.app/products/${loaderData.slug}`,
+                  item: `${SITE_URL}/products/${loaderData.slug}`,
                 },
               ],
             }),

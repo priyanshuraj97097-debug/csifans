@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/choose-industrial-fan-size")({
   head: () => ({
@@ -15,9 +16,9 @@ export const Route = createFileRoute("/blog/choose-industrial-fan-size")({
         property: "og:description",
         content: "Sizing framework for warehouse and factory fans — ceiling height, area, and airflow.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/blog/choose-industrial-fan-size" },
+      { property: "og:url", content: `${SITE_URL}/blog/choose-industrial-fan-size` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog/choose-industrial-fan-size" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/blog/choose-industrial-fan-size` }],
     scripts: [
       {
         type: "application/ld+json",

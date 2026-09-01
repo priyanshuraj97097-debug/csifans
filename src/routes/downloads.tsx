@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { categories } from "@/lib/products";
 import { downloadCategoryCatalogue, downloadFullCatalogue } from "@/lib/catalogue";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/downloads")({
   head: () => ({
@@ -12,9 +13,9 @@ export const Route = createFileRoute("/downloads")({
       { name: "description", content: "Download CSI Fans catalogues and product brochures." },
       { property: "og:title", content: "CSI Fans Downloads" },
       { property: "og:description", content: "Product catalogues and brochures." },
-      { property: "og:url", content: "https://csifans.lovable.app/downloads" },
+      { property: "og:url", content: `${SITE_URL}/downloads` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/downloads" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/downloads` }],
   }),
   component: Downloads,
 });

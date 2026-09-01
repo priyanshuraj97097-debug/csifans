@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://csifans.lovable.app/sitemap.xml

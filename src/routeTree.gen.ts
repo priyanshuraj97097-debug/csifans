@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as NewLaunchesRouteImport } from './routes/new-launches'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -45,6 +46,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsRoute = ProductsRouteImport.update({
@@ -189,6 +195,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -244,6 +252,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/new-launches': typeof NewLaunchesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -275,6 +284,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/new-launches'
     | '/products'
+    | '/robots.txt'
     | '/services'
     | '/sitemap.xml'
     | '/.mcp/list-tools'
@@ -302,6 +312,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/mcp'
     | '/new-launches'
+    | '/robots.txt'
     | '/sitemap.xml'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/new-launches'
     | '/products'
+    | '/robots.txt'
     | '/services'
     | '/sitemap.xml'
     | '/.mcp/list-tools'
@@ -359,6 +371,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   NewLaunchesRoute: typeof NewLaunchesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
@@ -381,6 +394,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products': {
@@ -632,6 +652,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   NewLaunchesRoute: NewLaunchesRoute,
   ProductsRoute: ProductsRouteWithChildren,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   ServicesRoute: ServicesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,

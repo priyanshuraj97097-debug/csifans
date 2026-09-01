@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Linkedin, MapPin, ExternalLink } from "lucide-react";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -17,9 +18,9 @@ export const Route = createFileRoute("/contact")({
         content:
           "Connect with CSI Fans on LinkedIn or reach out through our registered address.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/contact" },
+      { property: "og:url", content: `${SITE_URL}/contact` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
   }),
   component: Contact,
 });

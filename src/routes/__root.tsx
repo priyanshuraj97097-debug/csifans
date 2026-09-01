@@ -15,6 +15,7 @@ import { Header } from "../components/site/Header";
 import { Footer } from "../components/site/Footer";
 import { SupportChat } from "../components/site/SupportChat";
 import { LanguageProvider } from "../lib/i18n";
+import { SITE_URL } from "@/lib/site";
 
 
 function NotFoundComponent() {
@@ -122,10 +123,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "https://csifans.lovable.app/#organization",
+              "@id": `${SITE_URL}/#organization`,
               name: "CSI Super Toophan",
               alternateName: "CSI Fans",
-              url: "https://csifans.lovable.app/",
+              url: `${SITE_URL}/`,
               description:
                 "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
               address: {
@@ -137,10 +138,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             },
             {
               "@type": "WebSite",
-              "@id": "https://csifans.lovable.app/#website",
-              url: "https://csifans.lovable.app/",
+              "@id": `${SITE_URL}/#website`,
+              url: `${SITE_URL}/`,
               name: "CSI Super Toophan",
-              publisher: { "@id": "https://csifans.lovable.app/#organization" },
+              publisher: { "@id": `${SITE_URL}/#organization` },
             },
           ],
         }),

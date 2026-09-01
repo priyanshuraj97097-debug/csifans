@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/blog/bldc-vs-conventional-fans")({
   head: () => ({
@@ -15,9 +16,9 @@ export const Route = createFileRoute("/blog/bldc-vs-conventional-fans")({
         property: "og:description",
         content: "Power, price, noise, lifespan — a plain-English comparison for buyers.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/blog/bldc-vs-conventional-fans" },
+      { property: "og:url", content: `${SITE_URL}/blog/bldc-vs-conventional-fans` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/blog/bldc-vs-conventional-fans" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/blog/bldc-vs-conventional-fans` }],
     scripts: [
       {
         type: "application/ld+json",

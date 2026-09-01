@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SectionHeader } from "@/components/site/SectionHeader";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/services/installation")({
   head: () => ({
@@ -15,9 +16,9 @@ export const Route = createFileRoute("/services/installation")({
         property: "og:description",
         content: "Trained technicians, safe mounting, and full commissioning for every fan we install.",
       },
-      { property: "og:url", content: "https://csifans.lovable.app/services/installation" },
+      { property: "og:url", content: `${SITE_URL}/services/installation` },
     ],
-    links: [{ rel: "canonical", href: "https://csifans.lovable.app/services/installation" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/services/installation` }],
   }),
   component: Installation,
 });
