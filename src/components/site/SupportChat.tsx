@@ -151,10 +151,13 @@ export function SupportChat() {
           type="button"
           onClick={() => setOpen(true)}
           aria-label={t("chat.open")}
-          className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-gradient-to-br from-[#0d4361] to-[#0d6b78] px-5 py-3.5 text-white shadow-2xl shadow-[#0d4361]/30 hover:scale-105 transition-transform"
+          className="fixed bottom-5 right-5 z-40 hover:scale-105 transition-transform drop-shadow-2xl"
         >
-          <MessageCircle className="h-5 w-5" />
-          <span className="font-[Poppins] text-sm font-semibold hidden sm:inline">{t("chat.needHelp")}</span>
+          <img
+            src={robotIcon}
+            alt={t("chat.open")}
+            className="h-16 w-16 sm:h-20 sm:w-20"
+          />
         </button>
       )}
 
