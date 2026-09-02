@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { MessageCircle, X, RotateCcw, Mic, MicOff } from "lucide-react";
+import { X, RotateCcw, Mic, MicOff } from "lucide-react";
 import { useLanguage, LANGUAGE_NAMES } from "@/lib/i18n";
 import logo from "@/assets/csi-logo.png";
+import robotIcon from "@/assets/robot-chat/csi-robot-icon-animated.svg";
 import {
   Conversation,
   ConversationContent,
