@@ -9,7 +9,8 @@ import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/tanstack/vite";
 
 export default defineConfig({
   // Build a Cloudflare Worker (SSR + /api routes) with static assets in dist/client.
-    preset: "cloudflare-pages",
+nitro:{ 
+  preset: "cloudflare-pages",
     cloudflare: { nodeCompat: true, deployConfig: true },
   },
   tanstackStart: {
