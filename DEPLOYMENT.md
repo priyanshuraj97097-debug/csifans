@@ -1,8 +1,8 @@
 # Deploying CSI Super Toophan to Cloudflare
 
 This app is **server-rendered** (TanStack Start SSR + `/api/chat`), so it deploys as a
-**Cloudflare Worker with static assets** — not as a static Pages upload. In the Cloudflare
-dashboard this lives under **Workers & Pages**.
+**Cloudflare Pages project with Pages Functions** (`dist/_worker.js`), using the nitro
+`cloudflare-pages` preset. The live URL stays `https://csifans.pages.dev`.
 
 ## Cloudflare settings (Workers Builds / Git integration)
 
@@ -11,16 +11,16 @@ dashboard this lives under **Workers & Pages**.
 | Framework preset         | None                                             |
 | Install command          | `bun install`                                    |
 | Build command            | `bun run build`                                  |
-| Deploy command           | `npx wrangler deploy --config dist/server/wrangler.json` |
-| Build output / assets dir| `dist/client`                                    |
-| Worker entry             | `dist/server/index.mjs` (set automatically)      |
+| Deploy command           | (leave empty — Pages deploys the output directory) |
+| Build output directory   | `dist`                                           |
+| Pages Functions entry    | `dist/_worker.js` (generated automatically)      |
 | Compatibility flags      | `nodejs_compat` (already in the generated config)|
 | Root directory           | `/`                                              |
 
 `bun run build` writes:
 
-- `dist/client` — static assets (JS/CSS, images, `/videos/*.mp4`, favicon)
-- `dist/server` — the Worker bundle plus a ready-to-use `wrangler.json`
+- `dist/` — static assets (JS/CSS, images, `/videos/*.mp4`, favicon)
+- `dist/_worker.js` — the Pages Functions bundle that server-renders every route
 
 ## Environment variables
 
@@ -37,7 +37,6 @@ Optional:
 | Name                       | Value                                             |
 | -------------------------- | ------------------------------------------------- |
 | `GEMINI_MODEL`             | Defaults to `gemini-2.5-flash`                     |
-| `CLOUDFLARE_WORKER_NAME`   | Worker name at build time (defaults to `csifans`)  |
 
 Build-time plain variable (public, used for canonical URLs / OG tags / sitemap / robots):
 
@@ -52,11 +51,11 @@ Build-time plain variable (public, used for canonical URLs / OG tags / sitemap /
 
 `.github/workflows/deploy.yml` deploys on push to `main` and needs the repo secrets
 `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, plus the repo variable `VITE_SITE_URL`.
-Set `GEMINI_API_KEY` on the Worker itself (`npx wrangler secret put GEMINI_API_KEY`).
+Set `GEMINI_API_KEY` in the Pages project settings (Settings -> Variables and Secrets).
 
 ## Notes
 
-- SPA refresh 404s do not occur: every route is handled by the Worker's SSR handler.
+- SPA refresh 404s do not occur: every route is handled by the Pages Functions SSR handler.
 - The chatbot calls Google's Gemini API only from the server route `/api/chat`; the key is
   read from `process.env` and is never bundled into client code.
 - Voice input uses the browser Web Speech API and requires HTTPS (Cloudflare provides it).

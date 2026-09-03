@@ -29,11 +29,11 @@ jobs:
           VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
         run: bun run build
 
-      # The app is server-rendered (SSR + /api routes), so it deploys as a
-      # Cloudflare Worker with static assets, not as a static Pages upload.
+      # The app is server-rendered (SSR + /api routes) and deploys to the
+      # existing Cloudflare Pages project (dist/ contains _worker.js + assets).
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --config dist/server/wrangler.json
+          command: pages deploy dist --project-name csifans
