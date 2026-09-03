@@ -8,6 +8,8 @@ const isLovableSandbox =
   process.env.LOVABLE_SANDBOX === "1" ||
   !!process.env.DEV_SERVER__PROJECT_PATH;
 
+const isCloudflarePages = process.env.CF_PAGES === "1";
+
 export default defineConfig({
   // Keep Lovable's normal development environment working.
   ...(isLovableSandbox
