@@ -44,7 +44,7 @@ export default defineConfig({
             // prerender server bundle outside dist/ so no server code is
             // deployed.
             client: { build: { outDir: "dist" } },
-            server: { build: { outDir: ".prerender-server" } },
+            ssr: { build: { outDir: ".prerender-server" } },
           },
         }
       : {}),
