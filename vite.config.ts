@@ -33,6 +33,21 @@ export default defineConfig({
 
   vite: {
     plugins: [mcpPlugin()],
+    ...(useStaticBuild
+      ? {
+          build: {
+            outDir: "dist",
+          },
+          environments: {
+            // Static Cloudflare Pages build: emit the client site directly
+            // into dist/ (instead of dist/client) and keep the temporary
+            // prerender server bundle outside dist/ so no server code is
+            // deployed.
+            client: { build: { outDir: "dist" } },
+            server: { build: { outDir: ".prerender-server" } },
+          },
+        }
+      : {}),
   },
 });
   
