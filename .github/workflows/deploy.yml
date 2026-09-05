@@ -34,7 +34,9 @@ jobs:
       # Function is guaranteed to be included in the deployment instead of
       # relying on wrangler's functions auto-detection during deploy.
       - name: Build Pages Functions
-        run: npx wrangler pages functions build functions --outfile dist/_worker.js
+        run: |
+          npx wrangler pages functions build functions --outdir dist-functions
+          cp dist-functions/index.js dist/_worker.js
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
