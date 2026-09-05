@@ -29,8 +29,15 @@ jobs:
           VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
         run: bun run build
 
-      # The app is server-rendered (SSR + /api routes) and deploys to the
-      # existing Cloudflare Pages project (dist/ contains _worker.js + assets).
+      # The site is fully static; /api/chat is a Cloudflare Pages Function.
+      # Compile functions/ into dist/_worker.js (Pages "advanced mode") so the
+      # Function is guaranteed to be included in the deployment instead of
+      # relying on wrangler's functions auto-detection during deploy.
+      - name: Build Pages Functions
+        run: |
+          npx wrangler pages functions build functions --outdir dist-functions
+          cp dist-functions/index.js dist/_worker.js
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
