@@ -15,7 +15,7 @@ type Env = {
 };
 
 const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai";
-const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
+const DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
 
 function buildSystemPrompt(languageName?: string) {
   return languageName && languageName !== "English"
