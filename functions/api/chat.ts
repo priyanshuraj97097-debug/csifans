@@ -16,6 +16,25 @@ type Env = {
 
 const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai";
 const DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
+/** Tried in order; Gemini returns 503 UNAVAILABLE when a model is overloaded. */
+const FALLBACK_MODELS = ["gemini-3.6-flash", "gemini-3.1-flash-lite", "gemini-2.0-flash"];
+
+async function pickHealthyModel(apiKey: string, preferred: string): Promise<string | null> {
+  const candidates = [preferred, ...FALLBACK_MODELS.filter((m) => m !== preferred)];
+  let lastError = "";
+  for (const model of candidates) {
+    const res = await fetch(`${GEMINI_BASE_URL}/chat/completions`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
+      body: JSON.stringify({ model, messages: [{ role: "user", content: "ping" }], max_tokens: 1 }),
+    });
+    if (res.ok) return model;
+    lastError = `${model}: ${res.status} ${(await res.text()).slice(0, 300)}`;
+    console.error("Gemini model unavailable", lastError);
+  }
+  console.error("No Gemini model available", lastError);
+  return null;
+}
 
 function buildSystemPrompt(languageName?: string) {
   return languageName && languageName !== "English"
@@ -46,9 +65,17 @@ export const onRequestPost = async (context: {
     apiKey,
   });
 
+  const model = await pickHealthyModel(apiKey, context.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL);
+  if (!model) {
+    return new Response(
+      "The support assistant is temporarily busy. Please try again in a moment.",
+      { status: 503 },
+    );
+  }
+
   try {
     const result = streamText({
-      model: google(context.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL),
+      model: google(model),
       system: buildSystemPrompt(languageName),
       messages: await convertToModelMessages(messages as UIMessage[]),
     });
