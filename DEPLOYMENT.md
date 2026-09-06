@@ -36,7 +36,7 @@ Optional:
 
 | Name                       | Value                                             |
 | -------------------------- | ------------------------------------------------- |
-| `GEMINI_MODEL`             | Defaults to `gemini-2.5-flash`                     |
+| `GEMINI_MODEL`             | Defaults to `gemini-3.6-flash`                     |
 
 Build-time plain variable (public, used for canonical URLs / OG tags / sitemap / robots):
 
