@@ -101,7 +101,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "CSI Fans | Ceiling, BLDC, Table & Pedestal Fans in India" },
       { name: "twitter:description", content: "Durable, energy-efficient industrial ceiling fans for factories and warehouses. Made in Bihar by CSI Super Toophan." },
 
-      { property: "og:site_name", content: "CSI Super Toophan" },
+      { property: "og:site_name", content: "CSI Fans" },
+      { name: "application-name", content: "CSI Fans" },
       
       // Images (Keep these links as they are)
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/oIYb5x1RBPNKVAWxbxHZZxofPFu2/social-images/social-1782534060377-5901.webp" },
@@ -109,8 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      // ADD THIS LINE BELOW:
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" },
@@ -124,9 +124,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             {
               "@type": "Organization",
               "@id": `${SITE_URL}/#organization`,
-              name: "CSI Super Toophan",
-              alternateName: "CSI Fans",
+              name: "CSI Fans",
+              alternateName: "CSI Super Toophan",
               url: `${SITE_URL}/`,
+              logo: `${SITE_URL}/favicon.ico`,
               description:
                 "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
               address: {
@@ -140,7 +141,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               "@type": "WebSite",
               "@id": `${SITE_URL}/#website`,
               url: `${SITE_URL}/`,
-              name: "CSI Super Toophan",
+              name: "CSI Fans",
+              alternateName: "CSI Super Toophan",
               publisher: { "@id": `${SITE_URL}/#organization` },
             },
           ],

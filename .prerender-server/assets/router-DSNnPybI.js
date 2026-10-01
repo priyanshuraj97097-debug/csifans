@@ -25,9 +25,9 @@ import { mermaid } from "@streamdown/mermaid";
 import { Streamdown } from "streamdown";
 import { nanoid } from "nanoid";
 import { motion } from "motion/react";
+import { z } from "zod";
 import { createTanStackInvokeToolHandler, createTanStackListToolsHandler, createTanStackMcpHandler, createTanStackOAuthProtectedResourceMetadataHandler } from "@lovable.dev/mcp-js/stacks/tanstack";
 import { defineMcp, defineTool } from "@lovable.dev/mcp-js";
-import { z } from "zod";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 //#region src/styles.css?url
 var styles_default = "/assets/styles-D5ZZQeFW.css";
@@ -1611,7 +1611,11 @@ var Route$24 = createRootRouteWithContext()({
 			},
 			{
 				property: "og:site_name",
-				content: "CSI Super Toophan"
+				content: "CSI Fans"
+			},
+			{
+				name: "application-name",
+				content: "CSI Fans"
 			},
 			{
 				property: "og:image",
@@ -1629,8 +1633,8 @@ var Route$24 = createRootRouteWithContext()({
 			},
 			{
 				rel: "icon",
-				type: "image/png",
-				href: "/favicon.png"
+				type: "image/x-icon",
+				href: "/favicon.ico"
 			},
 			{
 				rel: "preconnect",
@@ -1653,9 +1657,10 @@ var Route$24 = createRootRouteWithContext()({
 				"@graph": [{
 					"@type": "Organization",
 					"@id": `${SITE_URL}/#organization`,
-					name: "CSI Super Toophan",
-					alternateName: "CSI Fans",
+					name: "CSI Fans",
+					alternateName: "CSI Super Toophan",
 					url: `${SITE_URL}/`,
+					logo: `${SITE_URL}/favicon.ico`,
 					description: "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
 					address: {
 						"@type": "PostalAddress",
@@ -1667,7 +1672,8 @@ var Route$24 = createRootRouteWithContext()({
 					"@type": "WebSite",
 					"@id": `${SITE_URL}/#website`,
 					url: `${SITE_URL}/`,
-					name: "CSI Super Toophan",
+					name: "CSI Fans",
+					alternateName: "CSI Super Toophan",
 					publisher: { "@id": `${SITE_URL}/#organization` }
 				}]
 			})
@@ -1703,168 +1709,132 @@ function RootComponent() {
 	});
 }
 //#endregion
-//#region src/routes/sitemap[.]xml.ts
-var BASE_URL = `${SITE_URL}`;
-var Route$23 = createFileRoute("/sitemap.xml")({ server: { handlers: { GET: async () => {
-	const entries = [
-		{
-			path: "/",
-			changefreq: "weekly",
-			priority: "1.0"
-		},
-		{
-			path: "/about",
-			changefreq: "yearly",
-			priority: "0.6"
-		},
-		{
-			path: "/products",
-			changefreq: "weekly",
-			priority: "0.9"
-		},
-		{
-			path: "/new-launches",
-			changefreq: "weekly",
-			priority: "0.8"
-		},
-		{
-			path: "/gallery",
-			changefreq: "monthly",
-			priority: "0.6"
-		},
-		{
-			path: "/downloads",
-			changefreq: "monthly",
-			priority: "0.5"
-		},
-		{
-			path: "/contact",
-			changefreq: "yearly",
-			priority: "0.5"
-		},
-		{
-			path: "/services",
-			changefreq: "monthly",
-			priority: "0.7"
-		},
-		{
-			path: "/services/manufacturing",
-			changefreq: "monthly",
-			priority: "0.6"
-		},
-		{
-			path: "/services/installation",
-			changefreq: "monthly",
-			priority: "0.6"
-		},
-		{
-			path: "/services/maintenance",
-			changefreq: "monthly",
-			priority: "0.6"
-		},
-		{
-			path: "/blog",
-			changefreq: "monthly",
-			priority: "0.7"
-		},
-		{
-			path: "/blog/choose-industrial-fan-size",
-			changefreq: "yearly",
-			priority: "0.6"
-		},
-		{
-			path: "/blog/bldc-vs-conventional-fans",
-			changefreq: "yearly",
-			priority: "0.6"
-		},
-		{
-			path: "/blog/fan-maintenance-checklist",
-			changefreq: "yearly",
-			priority: "0.6"
-		}
-	];
-	for (const c of categories) {
-		entries.push({
-			path: `/products/${c.slug}`,
-			changefreq: "weekly",
-			priority: "0.8"
-		});
-		for (const model of c.models) entries.push({
-			path: `/products/${c.slug}/${model.slug}`,
-			changefreq: "monthly",
-			priority: "0.7"
-		});
-	}
-	const xml = [
-		`<?xml version="1.0" encoding="UTF-8"?>`,
-		`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
-		...entries.map((e) => [
-			`  <url>`,
-			`    <loc>${BASE_URL}${e.path}</loc>`,
-			e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
-			e.priority ? `    <priority>${e.priority}</priority>` : null,
-			`  </url>`
-		].filter(Boolean).join("\n")),
-		`</urlset>`
-	].join("\n");
-	return new Response(xml, { headers: {
-		"Content-Type": "application/xml",
-		"Cache-Control": "public, max-age=3600"
-	} });
-} } } });
-//#endregion
-//#region src/routes/services.tsx
-var $$splitComponentImporter$16 = () => import("./services-C5swur1F.js");
-var Route$22 = createFileRoute("/services")({ component: lazyRouteComponent($$splitComponentImporter$16, "component") });
-//#endregion
-//#region src/routes/robots[.]txt.ts
-var Route$21 = createFileRoute("/robots.txt")({ server: { handlers: { GET: async () => {
-	const body = [
-		"User-agent: *",
-		"Allow: /",
-		"",
-		`Sitemap: ${SITE_URL}/sitemap.xml`,
-		""
-	].join("\n");
-	return new Response(body, { headers: {
-		"Content-Type": "text/plain; charset=utf-8",
-		"Cache-Control": "public, max-age=3600"
-	} });
-} } } });
-//#endregion
-//#region src/routes/products.tsx
-var $$splitComponentImporter$15 = () => import("./products-ppufxH-I.js");
-var Route$20 = createFileRoute("/products")({ component: lazyRouteComponent($$splitComponentImporter$15, "component") });
-//#endregion
-//#region src/routes/new-launches.tsx
-var $$splitComponentImporter$14 = () => import("./new-launches-Bytrp7WH.js");
-var Route$19 = createFileRoute("/new-launches")({
+//#region src/routes/about.tsx
+var $$splitComponentImporter$16 = () => import("./about-BtLyYdYH.js");
+var Route$23 = createFileRoute("/about")({
 	head: () => ({
 		meta: [
-			{ title: "New Launches | CSI Fans" },
+			{ title: "About Us | CSI Fans" },
 			{
 				name: "description",
-				content: "Explore the latest fans launched by CSI — premium BLDC, decorative and high-speed models freshly added to our lineup."
+				content: "Learn about CSI Fans — an ISO 9001:2015 certified company committed to manufacturing premium fans with cutting-edge technology."
 			},
 			{
 				property: "og:title",
-				content: "New Launches — CSI Fans"
+				content: "About CSI Fans"
 			},
 			{
 				property: "og:description",
-				content: "The newest CSI Fans models. Premium BLDC, decorative and high-speed fans."
+				content: "Decade of excellence in fan manufacturing — ISO 9001:2015 certified."
 			},
 			{
 				property: "og:url",
-				content: `${SITE_URL}/new-launches`
+				content: `${SITE_URL}/about`
 			}
 		],
 		links: [{
 			rel: "canonical",
-			href: `${SITE_URL}/new-launches`
+			href: `${SITE_URL}/about`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$16, "component")
+});
+//#endregion
+//#region src/routes/blog.tsx
+var $$splitComponentImporter$15 = () => import("./blog-GHsbigBI.js");
+var Route$22 = createFileRoute("/blog")({ component: lazyRouteComponent($$splitComponentImporter$15, "component") });
+//#endregion
+//#region src/routes/contact.tsx
+var $$splitComponentImporter$14 = () => import("./contact-DH7OFkF4.js");
+var Route$21 = createFileRoute("/contact")({
+	head: () => ({
+		meta: [
+			{ title: "Contact Us | CSI Fans" },
+			{
+				name: "description",
+				content: "Get in touch with CSI Fans. Connect with us on LinkedIn and visit our registered address."
+			},
+			{
+				property: "og:title",
+				content: "Contact CSI Fans"
+			},
+			{
+				property: "og:description",
+				content: "Connect with CSI Fans on LinkedIn or reach out through our registered address."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/contact`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/contact`
 		}]
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$14, "component")
+});
+//#endregion
+//#region src/routes/downloads.tsx
+var $$splitComponentImporter$13 = () => import("./downloads-B6Qwi0no.js");
+var Route$20 = createFileRoute("/downloads")({
+	head: () => ({
+		meta: [
+			{ title: "Downloads | CSI Fans" },
+			{
+				name: "description",
+				content: "Download CSI Fans catalogues and product brochures."
+			},
+			{
+				property: "og:title",
+				content: "CSI Fans Downloads"
+			},
+			{
+				property: "og:description",
+				content: "Product catalogues and brochures."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/downloads`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/downloads`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$13, "component")
+});
+//#endregion
+//#region src/routes/gallery.tsx
+var $$splitComponentImporter$12 = () => import("./gallery-AjHlde0m.js");
+var Route$19 = createFileRoute("/gallery")({
+	head: () => ({
+		meta: [
+			{ title: "Gallery | CSI Fans" },
+			{
+				name: "description",
+				content: "Explore the complete CSI Fans image gallery — ceiling, wall, cabin, decorative and premium BLDC fans."
+			},
+			{
+				property: "og:title",
+				content: "CSI Fans Gallery"
+			},
+			{
+				property: "og:description",
+				content: "Premium fan renders and product photography from CSI Fans."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/gallery`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/gallery`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$12, "component")
 });
 //#endregion
 //#region src/lib/mcp/index.ts
@@ -2032,512 +2002,183 @@ var Route$18 = createFileRoute("/mcp")({ server: { handlers: { ANY: createTanSta
 	trustForwardedHost: true
 }) } } });
 //#endregion
-//#region src/routes/gallery.tsx
-var $$splitComponentImporter$13 = () => import("./gallery-AjHlde0m.js");
-var Route$17 = createFileRoute("/gallery")({
+//#region src/routes/new-launches.tsx
+var $$splitComponentImporter$11 = () => import("./new-launches-Bytrp7WH.js");
+var Route$17 = createFileRoute("/new-launches")({
 	head: () => ({
 		meta: [
-			{ title: "Gallery | CSI Fans" },
+			{ title: "New Launches | CSI Fans" },
 			{
 				name: "description",
-				content: "Explore the complete CSI Fans image gallery — ceiling, wall, cabin, decorative and premium BLDC fans."
+				content: "Explore the latest fans launched by CSI — premium BLDC, decorative and high-speed models freshly added to our lineup."
 			},
 			{
 				property: "og:title",
-				content: "CSI Fans Gallery"
+				content: "New Launches — CSI Fans"
 			},
 			{
 				property: "og:description",
-				content: "Premium fan renders and product photography from CSI Fans."
+				content: "The newest CSI Fans models. Premium BLDC, decorative and high-speed fans."
 			},
 			{
 				property: "og:url",
-				content: `${SITE_URL}/gallery`
+				content: `${SITE_URL}/new-launches`
 			}
 		],
 		links: [{
 			rel: "canonical",
-			href: `${SITE_URL}/gallery`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$13, "component")
-});
-//#endregion
-//#region src/routes/downloads.tsx
-var $$splitComponentImporter$12 = () => import("./downloads-B6Qwi0no.js");
-var Route$16 = createFileRoute("/downloads")({
-	head: () => ({
-		meta: [
-			{ title: "Downloads | CSI Fans" },
-			{
-				name: "description",
-				content: "Download CSI Fans catalogues and product brochures."
-			},
-			{
-				property: "og:title",
-				content: "CSI Fans Downloads"
-			},
-			{
-				property: "og:description",
-				content: "Product catalogues and brochures."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/downloads`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/downloads`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$12, "component")
-});
-//#endregion
-//#region src/routes/contact.tsx
-var $$splitComponentImporter$11 = () => import("./contact-DH7OFkF4.js");
-var Route$15 = createFileRoute("/contact")({
-	head: () => ({
-		meta: [
-			{ title: "Contact Us | CSI Fans" },
-			{
-				name: "description",
-				content: "Get in touch with CSI Fans. Connect with us on LinkedIn and visit our registered address."
-			},
-			{
-				property: "og:title",
-				content: "Contact CSI Fans"
-			},
-			{
-				property: "og:description",
-				content: "Connect with CSI Fans on LinkedIn or reach out through our registered address."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/contact`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/contact`
+			href: `${SITE_URL}/new-launches`
 		}]
 	}),
 	component: lazyRouteComponent($$splitComponentImporter$11, "component")
 });
 //#endregion
-//#region src/routes/blog.tsx
-var $$splitComponentImporter$10 = () => import("./blog-GHsbigBI.js");
-var Route$14 = createFileRoute("/blog")({ component: lazyRouteComponent($$splitComponentImporter$10, "component") });
+//#region src/routes/products.tsx
+var $$splitComponentImporter$10 = () => import("./products-ppufxH-I.js");
+var Route$16 = createFileRoute("/products")({ component: lazyRouteComponent($$splitComponentImporter$10, "component") });
 //#endregion
-//#region src/routes/about.tsx
-var $$splitComponentImporter$9 = () => import("./about-BtLyYdYH.js");
-var Route$13 = createFileRoute("/about")({
-	head: () => ({
-		meta: [
-			{ title: "About Us | CSI Fans" },
-			{
-				name: "description",
-				content: "Learn about CSI Fans — an ISO 9001:2015 certified company committed to manufacturing premium fans with cutting-edge technology."
-			},
-			{
-				property: "og:title",
-				content: "About CSI Fans"
-			},
-			{
-				property: "og:description",
-				content: "Decade of excellence in fan manufacturing — ISO 9001:2015 certified."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/about`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/about`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$9, "component")
-});
+//#region src/routes/robots[.]txt.ts
+var Route$15 = createFileRoute("/robots.txt")({ server: { handlers: { GET: async () => {
+	const body = [
+		"User-agent: *",
+		"Allow: /",
+		"",
+		`Sitemap: ${SITE_URL}/sitemap.xml`,
+		""
+	].join("\n");
+	return new Response(body, { headers: {
+		"Content-Type": "text/plain; charset=utf-8",
+		"Cache-Control": "public, max-age=3600"
+	} });
+} } } });
 //#endregion
-//#region src/routes/services.index.tsx
-var $$splitComponentImporter$8 = () => import("./services.index-ByTam-xV.js");
-var Route$12 = createFileRoute("/services/")({
-	head: () => ({
-		meta: [
-			{ title: "Services | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "Industrial fan manufacturing, professional installation, and after-sales maintenance services from CSI Super Toophan — Bihar."
-			},
-			{
-				property: "og:title",
-				content: "Services — CSI Super Toophan"
-			},
-			{
-				property: "og:description",
-				content: "Manufacturing, installation, and maintenance services for industrial and commercial fans."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/services`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/services`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$8, "component")
-});
+//#region src/routes/services.tsx
+var $$splitComponentImporter$9 = () => import("./services-C5swur1F.js");
+var Route$14 = createFileRoute("/services")({ component: lazyRouteComponent($$splitComponentImporter$9, "component") });
 //#endregion
-//#region src/routes/blog.index.tsx
-var $$splitComponentImporter$7 = () => import("./blog.index-BZg7C07q.js");
-var Route$11 = createFileRoute("/blog/")({
-	head: () => ({
-		meta: [
-			{ title: "Blog & Guides | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "Practical guides on choosing, installing, and maintaining industrial and home fans — from the CSI Super Toophan team."
-			},
-			{
-				property: "og:title",
-				content: "Blog — CSI Super Toophan"
-			},
-			{
-				property: "og:description",
-				content: "Guides and answers to the most common questions about industrial and home fans."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/blog`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/blog`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$7, "component")
-});
+//#region src/routes/sitemap[.]xml.ts
+var BASE_URL = `${SITE_URL}`;
+var Route$13 = createFileRoute("/sitemap.xml")({ server: { handlers: { GET: async () => {
+	const entries = [
+		{
+			path: "/",
+			changefreq: "weekly",
+			priority: "1.0"
+		},
+		{
+			path: "/about",
+			changefreq: "yearly",
+			priority: "0.6"
+		},
+		{
+			path: "/products",
+			changefreq: "weekly",
+			priority: "0.9"
+		},
+		{
+			path: "/new-launches",
+			changefreq: "weekly",
+			priority: "0.8"
+		},
+		{
+			path: "/gallery",
+			changefreq: "monthly",
+			priority: "0.6"
+		},
+		{
+			path: "/downloads",
+			changefreq: "monthly",
+			priority: "0.5"
+		},
+		{
+			path: "/contact",
+			changefreq: "yearly",
+			priority: "0.5"
+		},
+		{
+			path: "/services",
+			changefreq: "monthly",
+			priority: "0.7"
+		},
+		{
+			path: "/services/manufacturing",
+			changefreq: "monthly",
+			priority: "0.6"
+		},
+		{
+			path: "/services/installation",
+			changefreq: "monthly",
+			priority: "0.6"
+		},
+		{
+			path: "/services/maintenance",
+			changefreq: "monthly",
+			priority: "0.6"
+		},
+		{
+			path: "/blog",
+			changefreq: "monthly",
+			priority: "0.7"
+		},
+		{
+			path: "/blog/choose-industrial-fan-size",
+			changefreq: "yearly",
+			priority: "0.6"
+		},
+		{
+			path: "/blog/bldc-vs-conventional-fans",
+			changefreq: "yearly",
+			priority: "0.6"
+		},
+		{
+			path: "/blog/fan-maintenance-checklist",
+			changefreq: "yearly",
+			priority: "0.6"
+		}
+	];
+	for (const c of categories) {
+		entries.push({
+			path: `/products/${c.slug}`,
+			changefreq: "weekly",
+			priority: "0.8"
+		});
+		for (const model of c.models) entries.push({
+			path: `/products/${c.slug}/${model.slug}`,
+			changefreq: "monthly",
+			priority: "0.7"
+		});
+	}
+	const xml = [
+		`<?xml version="1.0" encoding="UTF-8"?>`,
+		`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+		...entries.map((e) => [
+			`  <url>`,
+			`    <loc>${BASE_URL}${e.path}</loc>`,
+			e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
+			e.priority ? `    <priority>${e.priority}</priority>` : null,
+			`  </url>`
+		].filter(Boolean).join("\n")),
+		`</urlset>`
+	].join("\n");
+	return new Response(xml, { headers: {
+		"Content-Type": "application/xml",
+		"Cache-Control": "public, max-age=3600"
+	} });
+} } } });
 //#endregion
-//#region src/routes/services.manufacturing.tsx
-var $$splitComponentImporter$6 = () => import("./services.manufacturing-CSSr0Uzq.js");
-var Route$10 = createFileRoute("/services/manufacturing")({
-	head: () => ({
-		meta: [
-			{ title: "Industrial Fan Manufacturing | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "ISO 9001:2015 certified industrial fan manufacturing in Bihar Sharif — ceiling, pedestal, wall and BLDC fans built for durability."
-			},
-			{
-				property: "og:title",
-				content: "Industrial Fan Manufacturing — CSI Super Toophan"
-			},
-			{
-				property: "og:description",
-				content: "Modern production lines, in-house testing, and rigorous quality control for every fan we make."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/services/manufacturing`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/services/manufacturing`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$6, "component")
-});
+//#region src/routes/[.mcp]/list-tools.ts
+var Route$12 = createFileRoute("/.mcp/list-tools")({ server: { handlers: { ANY: createTanStackListToolsHandler(mcp_default, {
+	resourcePath: "/mcp",
+	metadataPath: "/.well-known/oauth-protected-resource",
+	trustForwardedHost: true
+}) } } });
 //#endregion
-//#region src/routes/services.maintenance.tsx
-var $$splitComponentImporter$5 = () => import("./services.maintenance-CzHdJ5Mh.js");
-var Route$9 = createFileRoute("/services/maintenance")({
-	head: () => ({
-		meta: [
-			{ title: "Fan Maintenance & After-Sales | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "Preventive maintenance, servicing, and genuine spare parts for CSI Super Toophan fans. Extend fan life and keep performance high."
-			},
-			{
-				property: "og:title",
-				content: "Maintenance & After-Sales — CSI Super Toophan"
-			},
-			{
-				property: "og:description",
-				content: "Servicing, spare parts, and preventive maintenance for industrial and home fans."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/services/maintenance`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/services/maintenance`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$5, "component")
-});
-//#endregion
-//#region src/routes/services.installation.tsx
-var $$splitComponentImporter$4 = () => import("./services.installation-D1kbcfh2.js");
-var Route$8 = createFileRoute("/services/installation")({
-	head: () => ({
-		meta: [
-			{ title: "Fan Installation Services | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "Professional fan installation for warehouses, factories, offices, and homes. Safe mounting, wiring, and testing by CSI Super Toophan technicians."
-			},
-			{
-				property: "og:title",
-				content: "Fan Installation — CSI Super Toophan"
-			},
-			{
-				property: "og:description",
-				content: "Trained technicians, safe mounting, and full commissioning for every fan we install."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/services/installation`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/services/installation`
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$4, "component")
-});
-//#endregion
-//#region src/routes/products.$category.tsx
-var $$splitComponentImporter$3 = () => import("./products._category-CWMdQZQP.js");
-var $$splitErrorComponentImporter = () => import("./products._category-DROMYZaz.js");
-var $$splitNotFoundComponentImporter = () => import("./products._category-Du1m0Dtj.js");
-var Route$7 = createFileRoute("/products/$category")({
-	loader: ({ params }) => {
-		const cat = findCategory(params.category);
-		if (!cat) throw notFound();
-		return cat;
-	},
-	head: ({ loaderData }) => ({
-		meta: [
-			{ title: `${loaderData?.name ?? "Products"} | CSI Fans` },
-			{
-				name: "description",
-				content: loaderData?.description ?? "CSI Fans product range."
-			},
-			{
-				property: "og:title",
-				content: `${loaderData?.name ?? "Products"} — CSI Fans`
-			},
-			{
-				property: "og:description",
-				content: loaderData?.tagline ?? "Premium fans."
-			},
-			{
-				property: "og:type",
-				content: "website"
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/products/${loaderData?.slug ?? ""}`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/products/${loaderData?.slug ?? ""}`
-		}],
-		scripts: loaderData ? [{
-			type: "application/ld+json",
-			children: JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "BreadcrumbList",
-				itemListElement: [
-					{
-						"@type": "ListItem",
-						position: 1,
-						name: "Home",
-						item: `${SITE_URL}/`
-					},
-					{
-						"@type": "ListItem",
-						position: 2,
-						name: "Products",
-						item: `${SITE_URL}/products`
-					},
-					{
-						"@type": "ListItem",
-						position: 3,
-						name: loaderData.name,
-						item: `${SITE_URL}/products/${loaderData.slug}`
-					}
-				]
-			})
-		}] : []
-	}),
-	notFoundComponent: lazyRouteComponent($$splitNotFoundComponentImporter, "notFoundComponent"),
-	errorComponent: lazyRouteComponent($$splitErrorComponentImporter, "errorComponent"),
-	component: lazyRouteComponent($$splitComponentImporter$3, "component")
-});
-//#endregion
-//#region src/routes/blog.fan-maintenance-checklist.tsx
-var $$splitComponentImporter$2 = () => import("./blog.fan-maintenance-checklist-CsYHyOQS.js");
-var Route$6 = createFileRoute("/blog/fan-maintenance-checklist")({
-	head: () => ({
-		meta: [
-			{ title: "Yearly Fan Maintenance Checklist | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "A practical yearly maintenance checklist for home and industrial fans — cleaning, tightening, motor care, and safety checks."
-			},
-			{
-				property: "og:title",
-				content: "Yearly Fan Maintenance Checklist"
-			},
-			{
-				property: "og:type",
-				content: "article"
-			},
-			{
-				property: "og:description",
-				content: "Keep fans quiet, efficient, and long-lasting with this simple yearly checklist."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/blog/fan-maintenance-checklist`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/blog/fan-maintenance-checklist`
-		}],
-		scripts: [{
-			type: "application/ld+json",
-			children: JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "Article",
-				headline: "The Yearly Fan Maintenance Checklist",
-				author: {
-					"@type": "Organization",
-					name: "CSI Super Toophan"
-				},
-				publisher: {
-					"@type": "Organization",
-					name: "CSI Super Toophan"
-				}
-			})
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$2, "component")
-});
-//#endregion
-//#region src/routes/blog.choose-industrial-fan-size.tsx
-var $$splitComponentImporter$1 = () => import("./blog.choose-industrial-fan-size-L7n2hwPL.js");
-var Route$5 = createFileRoute("/blog/choose-industrial-fan-size")({
-	head: () => ({
-		meta: [
-			{ title: "How to Choose the Right Industrial Fan Size | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "A practical guide to picking the right industrial fan size for your warehouse — covering ceiling height, square footage, and CFM airflow."
-			},
-			{
-				property: "og:title",
-				content: "How to Choose the Right Industrial Fan Size"
-			},
-			{
-				property: "og:type",
-				content: "article"
-			},
-			{
-				property: "og:description",
-				content: "Sizing framework for warehouse and factory fans — ceiling height, area, and airflow."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/blog/choose-industrial-fan-size`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/blog/choose-industrial-fan-size`
-		}],
-		scripts: [{
-			type: "application/ld+json",
-			children: JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "Article",
-				headline: "How to Choose the Right Size Industrial Fan for Your Warehouse",
-				author: {
-					"@type": "Organization",
-					name: "CSI Super Toophan"
-				},
-				publisher: {
-					"@type": "Organization",
-					name: "CSI Super Toophan"
-				}
-			})
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter$1, "component")
-});
-//#endregion
-//#region src/routes/blog.bldc-vs-conventional-fans.tsx
-var $$splitComponentImporter = () => import("./blog.bldc-vs-conventional-fans-DlKZTR7r.js");
-var Route$4 = createFileRoute("/blog/bldc-vs-conventional-fans")({
-	head: () => ({
-		meta: [
-			{ title: "BLDC vs Conventional Ceiling Fans: Full Comparison | CSI Super Toophan" },
-			{
-				name: "description",
-				content: "Compare BLDC and conventional ceiling fans on power use, price, noise, and lifespan — and see when a BLDC fan actually pays for itself."
-			},
-			{
-				property: "og:title",
-				content: "BLDC vs Conventional Ceiling Fans"
-			},
-			{
-				property: "og:type",
-				content: "article"
-			},
-			{
-				property: "og:description",
-				content: "Power, price, noise, lifespan — a plain-English comparison for buyers."
-			},
-			{
-				property: "og:url",
-				content: `${SITE_URL}/blog/bldc-vs-conventional-fans`
-			}
-		],
-		links: [{
-			rel: "canonical",
-			href: `${SITE_URL}/blog/bldc-vs-conventional-fans`
-		}],
-		scripts: [{
-			type: "application/ld+json",
-			children: JSON.stringify({
-				"@context": "https://schema.org",
-				"@type": "Article",
-				headline: "BLDC vs Conventional Ceiling Fans: Which One Should You Buy?",
-				author: {
-					"@type": "Organization",
-					name: "CSI Super Toophan"
-				},
-				publisher: {
-					"@type": "Organization",
-					name: "CSI Super Toophan"
-				}
-			})
-		}]
-	}),
-	component: lazyRouteComponent($$splitComponentImporter, "component")
-});
+//#region src/routes/[.well-known]/oauth-protected-resource.ts
+var Route$11 = createFileRoute("/.well-known/oauth-protected-resource")({ server: { handlers: { ANY: createTanStackOAuthProtectedResourceMetadataHandler(mcp_default, {
+	resourcePath: "/mcp",
+	metadataPath: "/.well-known/oauth-protected-resource",
+	trustForwardedHost: true
+}) } } });
 //#endregion
 //#region src/lib/ai-gateway.server.ts
 var LOVABLE_AIG_RUN_ID_HEADER = "X-Lovable-AIG-Run-ID";
@@ -2748,11 +2389,11 @@ ${buildKnowledgeBase()}`;
 //#region src/routes/api/chat.ts
 /** Google's OpenAI-compatible endpoint for the Gemini API. */
 var GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai";
-var DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
+var DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
 function buildSystemPrompt(languageName) {
 	return languageName && languageName !== "English" ? `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected ${languageName}. Reply entirely in ${languageName}, regardless of the language of the question. Keep product names, model numbers, units and URLs unchanged.` : `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected English. Reply in English unless they explicitly ask for another language.`;
 }
-var Route$3 = createFileRoute("/api/chat")({ server: { handlers: { POST: async ({ request }) => {
+var Route$10 = createFileRoute("/api/chat")({ server: { handlers: { POST: async ({ request }) => {
 	const { messages, languageName } = await request.json();
 	if (!Array.isArray(messages)) return new Response("Messages are required", { status: 400 });
 	const geminiKey = process.env["GEMINI_API_KEY"] || process.env["GOOGLE_GENERATIVE_AI_API_KEY"];
@@ -2789,19 +2430,384 @@ var Route$3 = createFileRoute("/api/chat")({ server: { handlers: { POST: async (
 	}), gateway);
 } } } });
 //#endregion
-//#region src/routes/[.well-known]/oauth-protected-resource.ts
-var Route$2 = createFileRoute("/.well-known/oauth-protected-resource")({ server: { handlers: { ANY: createTanStackOAuthProtectedResourceMetadataHandler(mcp_default, {
-	resourcePath: "/mcp",
-	metadataPath: "/.well-known/oauth-protected-resource",
-	trustForwardedHost: true
-}) } } });
+//#region src/routes/blog.index.tsx
+var $$splitComponentImporter$8 = () => import("./blog.index-BZg7C07q.js");
+var Route$9 = createFileRoute("/blog/")({
+	head: () => ({
+		meta: [
+			{ title: "Blog & Guides | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "Practical guides on choosing, installing, and maintaining industrial and home fans — from the CSI Super Toophan team."
+			},
+			{
+				property: "og:title",
+				content: "Blog — CSI Super Toophan"
+			},
+			{
+				property: "og:description",
+				content: "Guides and answers to the most common questions about industrial and home fans."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/blog`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/blog`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$8, "component")
+});
 //#endregion
-//#region src/routes/[.mcp]/list-tools.ts
-var Route$1 = createFileRoute("/.mcp/list-tools")({ server: { handlers: { ANY: createTanStackListToolsHandler(mcp_default, {
-	resourcePath: "/mcp",
-	metadataPath: "/.well-known/oauth-protected-resource",
-	trustForwardedHost: true
-}) } } });
+//#region src/routes/blog.bldc-vs-conventional-fans.tsx
+var $$splitComponentImporter$7 = () => import("./blog.bldc-vs-conventional-fans-DlKZTR7r.js");
+var Route$8 = createFileRoute("/blog/bldc-vs-conventional-fans")({
+	head: () => ({
+		meta: [
+			{ title: "BLDC vs Conventional Ceiling Fans: Full Comparison | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "Compare BLDC and conventional ceiling fans on power use, price, noise, and lifespan — and see when a BLDC fan actually pays for itself."
+			},
+			{
+				property: "og:title",
+				content: "BLDC vs Conventional Ceiling Fans"
+			},
+			{
+				property: "og:type",
+				content: "article"
+			},
+			{
+				property: "og:description",
+				content: "Power, price, noise, lifespan — a plain-English comparison for buyers."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/blog/bldc-vs-conventional-fans`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/blog/bldc-vs-conventional-fans`
+		}],
+		scripts: [{
+			type: "application/ld+json",
+			children: JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Article",
+				headline: "BLDC vs Conventional Ceiling Fans: Which One Should You Buy?",
+				author: {
+					"@type": "Organization",
+					name: "CSI Super Toophan"
+				},
+				publisher: {
+					"@type": "Organization",
+					name: "CSI Super Toophan"
+				}
+			})
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$7, "component")
+});
+//#endregion
+//#region src/routes/blog.choose-industrial-fan-size.tsx
+var $$splitComponentImporter$6 = () => import("./blog.choose-industrial-fan-size-L7n2hwPL.js");
+var Route$7 = createFileRoute("/blog/choose-industrial-fan-size")({
+	head: () => ({
+		meta: [
+			{ title: "How to Choose the Right Industrial Fan Size | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "A practical guide to picking the right industrial fan size for your warehouse — covering ceiling height, square footage, and CFM airflow."
+			},
+			{
+				property: "og:title",
+				content: "How to Choose the Right Industrial Fan Size"
+			},
+			{
+				property: "og:type",
+				content: "article"
+			},
+			{
+				property: "og:description",
+				content: "Sizing framework for warehouse and factory fans — ceiling height, area, and airflow."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/blog/choose-industrial-fan-size`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/blog/choose-industrial-fan-size`
+		}],
+		scripts: [{
+			type: "application/ld+json",
+			children: JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Article",
+				headline: "How to Choose the Right Size Industrial Fan for Your Warehouse",
+				author: {
+					"@type": "Organization",
+					name: "CSI Super Toophan"
+				},
+				publisher: {
+					"@type": "Organization",
+					name: "CSI Super Toophan"
+				}
+			})
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$6, "component")
+});
+//#endregion
+//#region src/routes/blog.fan-maintenance-checklist.tsx
+var $$splitComponentImporter$5 = () => import("./blog.fan-maintenance-checklist-CsYHyOQS.js");
+var Route$6 = createFileRoute("/blog/fan-maintenance-checklist")({
+	head: () => ({
+		meta: [
+			{ title: "Yearly Fan Maintenance Checklist | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "A practical yearly maintenance checklist for home and industrial fans — cleaning, tightening, motor care, and safety checks."
+			},
+			{
+				property: "og:title",
+				content: "Yearly Fan Maintenance Checklist"
+			},
+			{
+				property: "og:type",
+				content: "article"
+			},
+			{
+				property: "og:description",
+				content: "Keep fans quiet, efficient, and long-lasting with this simple yearly checklist."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/blog/fan-maintenance-checklist`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/blog/fan-maintenance-checklist`
+		}],
+		scripts: [{
+			type: "application/ld+json",
+			children: JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "Article",
+				headline: "The Yearly Fan Maintenance Checklist",
+				author: {
+					"@type": "Organization",
+					name: "CSI Super Toophan"
+				},
+				publisher: {
+					"@type": "Organization",
+					name: "CSI Super Toophan"
+				}
+			})
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$5, "component")
+});
+//#endregion
+//#region src/routes/products.$category.tsx
+var $$splitComponentImporter$4 = () => import("./products._category-CWMdQZQP.js");
+var $$splitErrorComponentImporter = () => import("./products._category-DROMYZaz.js");
+var $$splitNotFoundComponentImporter = () => import("./products._category-Du1m0Dtj.js");
+var Route$5 = createFileRoute("/products/$category")({
+	loader: ({ params }) => {
+		const cat = findCategory(params.category);
+		if (!cat) throw notFound();
+		return cat;
+	},
+	head: ({ loaderData }) => ({
+		meta: [
+			{ title: `${loaderData?.name ?? "Products"} | CSI Fans` },
+			{
+				name: "description",
+				content: loaderData?.description ?? "CSI Fans product range."
+			},
+			{
+				property: "og:title",
+				content: `${loaderData?.name ?? "Products"} — CSI Fans`
+			},
+			{
+				property: "og:description",
+				content: loaderData?.tagline ?? "Premium fans."
+			},
+			{
+				property: "og:type",
+				content: "website"
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/products/${loaderData?.slug ?? ""}`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/products/${loaderData?.slug ?? ""}`
+		}],
+		scripts: loaderData ? [{
+			type: "application/ld+json",
+			children: JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "BreadcrumbList",
+				itemListElement: [
+					{
+						"@type": "ListItem",
+						position: 1,
+						name: "Home",
+						item: `${SITE_URL}/`
+					},
+					{
+						"@type": "ListItem",
+						position: 2,
+						name: "Products",
+						item: `${SITE_URL}/products`
+					},
+					{
+						"@type": "ListItem",
+						position: 3,
+						name: loaderData.name,
+						item: `${SITE_URL}/products/${loaderData.slug}`
+					}
+				]
+			})
+		}] : []
+	}),
+	notFoundComponent: lazyRouteComponent($$splitNotFoundComponentImporter, "notFoundComponent"),
+	errorComponent: lazyRouteComponent($$splitErrorComponentImporter, "errorComponent"),
+	component: lazyRouteComponent($$splitComponentImporter$4, "component")
+});
+//#endregion
+//#region src/routes/services.index.tsx
+var $$splitComponentImporter$3 = () => import("./services.index-ByTam-xV.js");
+var Route$4 = createFileRoute("/services/")({
+	head: () => ({
+		meta: [
+			{ title: "Services | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "Industrial fan manufacturing, professional installation, and after-sales maintenance services from CSI Super Toophan — Bihar."
+			},
+			{
+				property: "og:title",
+				content: "Services — CSI Super Toophan"
+			},
+			{
+				property: "og:description",
+				content: "Manufacturing, installation, and maintenance services for industrial and commercial fans."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/services`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/services`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$3, "component")
+});
+//#endregion
+//#region src/routes/services.installation.tsx
+var $$splitComponentImporter$2 = () => import("./services.installation-D1kbcfh2.js");
+var Route$3 = createFileRoute("/services/installation")({
+	head: () => ({
+		meta: [
+			{ title: "Fan Installation Services | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "Professional fan installation for warehouses, factories, offices, and homes. Safe mounting, wiring, and testing by CSI Super Toophan technicians."
+			},
+			{
+				property: "og:title",
+				content: "Fan Installation — CSI Super Toophan"
+			},
+			{
+				property: "og:description",
+				content: "Trained technicians, safe mounting, and full commissioning for every fan we install."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/services/installation`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/services/installation`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$2, "component")
+});
+//#endregion
+//#region src/routes/services.maintenance.tsx
+var $$splitComponentImporter$1 = () => import("./services.maintenance-CzHdJ5Mh.js");
+var Route$2 = createFileRoute("/services/maintenance")({
+	head: () => ({
+		meta: [
+			{ title: "Fan Maintenance & After-Sales | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "Preventive maintenance, servicing, and genuine spare parts for CSI Super Toophan fans. Extend fan life and keep performance high."
+			},
+			{
+				property: "og:title",
+				content: "Maintenance & After-Sales — CSI Super Toophan"
+			},
+			{
+				property: "og:description",
+				content: "Servicing, spare parts, and preventive maintenance for industrial and home fans."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/services/maintenance`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/services/maintenance`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter$1, "component")
+});
+//#endregion
+//#region src/routes/services.manufacturing.tsx
+var $$splitComponentImporter = () => import("./services.manufacturing-CSSr0Uzq.js");
+var Route$1 = createFileRoute("/services/manufacturing")({
+	head: () => ({
+		meta: [
+			{ title: "Industrial Fan Manufacturing | CSI Super Toophan" },
+			{
+				name: "description",
+				content: "ISO 9001:2015 certified industrial fan manufacturing in Bihar Sharif — ceiling, pedestal, wall and BLDC fans built for durability."
+			},
+			{
+				property: "og:title",
+				content: "Industrial Fan Manufacturing — CSI Super Toophan"
+			},
+			{
+				property: "og:description",
+				content: "Modern production lines, in-house testing, and rigorous quality control for every fan we make."
+			},
+			{
+				property: "og:url",
+				content: `${SITE_URL}/services/manufacturing`
+			}
+		],
+		links: [{
+			rel: "canonical",
+			href: `${SITE_URL}/services/manufacturing`
+		}]
+	}),
+	component: lazyRouteComponent($$splitComponentImporter, "component")
+});
 //#endregion
 //#region src/routes/[.mcp]/invoke-tool/$tool.ts
 var Route = createFileRoute("/.mcp/invoke-tool/$tool")({ server: { handlers: { ANY: createTanStackInvokeToolHandler(mcp_default, {
@@ -2811,29 +2817,34 @@ var Route = createFileRoute("/.mcp/invoke-tool/$tool")({ server: { handlers: { A
 }) } } });
 //#endregion
 //#region src/routeTree.gen.ts
-var SitemapDotxmlRoute = Route$23.update({
-	id: "/sitemap.xml",
-	path: "/sitemap.xml",
+var IndexRoute = Route$25.update({
+	id: "/",
+	path: "/",
 	getParentRoute: () => Route$24
 });
-var ServicesRoute = Route$22.update({
-	id: "/services",
-	path: "/services",
+var AboutRoute = Route$23.update({
+	id: "/about",
+	path: "/about",
 	getParentRoute: () => Route$24
 });
-var RobotsDottxtRoute = Route$21.update({
-	id: "/robots.txt",
-	path: "/robots.txt",
+var BlogRoute = Route$22.update({
+	id: "/blog",
+	path: "/blog",
 	getParentRoute: () => Route$24
 });
-var ProductsRoute = Route$20.update({
-	id: "/products",
-	path: "/products",
+var ContactRoute = Route$21.update({
+	id: "/contact",
+	path: "/contact",
 	getParentRoute: () => Route$24
 });
-var NewLaunchesRoute = Route$19.update({
-	id: "/new-launches",
-	path: "/new-launches",
+var DownloadsRoute = Route$20.update({
+	id: "/downloads",
+	path: "/downloads",
+	getParentRoute: () => Route$24
+});
+var GalleryRoute = Route$19.update({
+	id: "/gallery",
+	path: "/gallery",
 	getParentRoute: () => Route$24
 });
 var McpRoute = Route$18.update({
@@ -2841,99 +2852,99 @@ var McpRoute = Route$18.update({
 	path: "/mcp",
 	getParentRoute: () => Route$24
 });
-var GalleryRoute = Route$17.update({
-	id: "/gallery",
-	path: "/gallery",
+var NewLaunchesRoute = Route$17.update({
+	id: "/new-launches",
+	path: "/new-launches",
 	getParentRoute: () => Route$24
 });
-var DownloadsRoute = Route$16.update({
-	id: "/downloads",
-	path: "/downloads",
+var ProductsRoute = Route$16.update({
+	id: "/products",
+	path: "/products",
 	getParentRoute: () => Route$24
 });
-var ContactRoute = Route$15.update({
-	id: "/contact",
-	path: "/contact",
+var RobotsDottxtRoute = Route$15.update({
+	id: "/robots.txt",
+	path: "/robots.txt",
 	getParentRoute: () => Route$24
 });
-var BlogRoute = Route$14.update({
-	id: "/blog",
-	path: "/blog",
+var ServicesRoute = Route$14.update({
+	id: "/services",
+	path: "/services",
 	getParentRoute: () => Route$24
 });
-var AboutRoute = Route$13.update({
-	id: "/about",
-	path: "/about",
+var SitemapDotxmlRoute = Route$13.update({
+	id: "/sitemap.xml",
+	path: "/sitemap.xml",
 	getParentRoute: () => Route$24
 });
-var IndexRoute = Route$25.update({
-	id: "/",
-	path: "/",
+var Char91DotmcpChar93ListToolsRoute = Route$12.update({
+	id: "/.mcp/list-tools",
+	path: "/.mcp/list-tools",
 	getParentRoute: () => Route$24
 });
-var ServicesIndexRoute = Route$12.update({
-	id: "/",
-	path: "/",
-	getParentRoute: () => ServicesRoute
+var Char91DotwellKnownChar93OauthProtectedResourceRoute = Route$11.update({
+	id: "/.well-known/oauth-protected-resource",
+	path: "/.well-known/oauth-protected-resource",
+	getParentRoute: () => Route$24
 });
-var ProductsIndexRoute = Route$26.update({
-	id: "/",
-	path: "/",
-	getParentRoute: () => ProductsRoute
+var ApiChatRoute = Route$10.update({
+	id: "/api/chat",
+	path: "/api/chat",
+	getParentRoute: () => Route$24
 });
-var BlogIndexRoute = Route$11.update({
+var BlogIndexRoute = Route$9.update({
 	id: "/",
 	path: "/",
 	getParentRoute: () => BlogRoute
 });
-var ServicesManufacturingRoute = Route$10.update({
-	id: "/manufacturing",
-	path: "/manufacturing",
-	getParentRoute: () => ServicesRoute
+var BlogBldcVsConventionalFansRoute = Route$8.update({
+	id: "/bldc-vs-conventional-fans",
+	path: "/bldc-vs-conventional-fans",
+	getParentRoute: () => BlogRoute
 });
-var ServicesMaintenanceRoute = Route$9.update({
-	id: "/maintenance",
-	path: "/maintenance",
-	getParentRoute: () => ServicesRoute
-});
-var ServicesInstallationRoute = Route$8.update({
-	id: "/installation",
-	path: "/installation",
-	getParentRoute: () => ServicesRoute
-});
-var ProductsCategoryRoute = Route$7.update({
-	id: "/$category",
-	path: "/$category",
-	getParentRoute: () => ProductsRoute
+var BlogChooseIndustrialFanSizeRoute = Route$7.update({
+	id: "/choose-industrial-fan-size",
+	path: "/choose-industrial-fan-size",
+	getParentRoute: () => BlogRoute
 });
 var BlogFanMaintenanceChecklistRoute = Route$6.update({
 	id: "/fan-maintenance-checklist",
 	path: "/fan-maintenance-checklist",
 	getParentRoute: () => BlogRoute
 });
-var BlogChooseIndustrialFanSizeRoute = Route$5.update({
-	id: "/choose-industrial-fan-size",
-	path: "/choose-industrial-fan-size",
-	getParentRoute: () => BlogRoute
+var ProductsIndexRoute = Route$26.update({
+	id: "/",
+	path: "/",
+	getParentRoute: () => ProductsRoute
 });
-var BlogBldcVsConventionalFansRoute = Route$4.update({
-	id: "/bldc-vs-conventional-fans",
-	path: "/bldc-vs-conventional-fans",
-	getParentRoute: () => BlogRoute
+var ProductsCategoryRoute = Route$5.update({
+	id: "/$category",
+	path: "/$category",
+	getParentRoute: () => ProductsRoute
 });
-var ApiChatRoute = Route$3.update({
-	id: "/api/chat",
-	path: "/api/chat",
-	getParentRoute: () => Route$24
+var ServicesIndexRoute = Route$4.update({
+	id: "/",
+	path: "/",
+	getParentRoute: () => ServicesRoute
 });
-var Char91DotwellKnownChar93OauthProtectedResourceRoute = Route$2.update({
-	id: "/.well-known/oauth-protected-resource",
-	path: "/.well-known/oauth-protected-resource",
-	getParentRoute: () => Route$24
+var ServicesInstallationRoute = Route$3.update({
+	id: "/installation",
+	path: "/installation",
+	getParentRoute: () => ServicesRoute
 });
-var Char91DotmcpChar93ListToolsRoute = Route$1.update({
-	id: "/.mcp/list-tools",
-	path: "/.mcp/list-tools",
+var ServicesMaintenanceRoute = Route$2.update({
+	id: "/maintenance",
+	path: "/maintenance",
+	getParentRoute: () => ServicesRoute
+});
+var ServicesManufacturingRoute = Route$1.update({
+	id: "/manufacturing",
+	path: "/manufacturing",
+	getParentRoute: () => ServicesRoute
+});
+var Char91DotmcpChar93InvokeToolToolRoute = Route.update({
+	id: "/.mcp/invoke-tool/$tool",
+	path: "/.mcp/invoke-tool/$tool",
 	getParentRoute: () => Route$24
 });
 var ProductsCategoryIndexRoute = Route$27.update({
@@ -2945,11 +2956,6 @@ var ProductsCategoryModelRoute = Route$28.update({
 	id: "/$model",
 	path: "/$model",
 	getParentRoute: () => ProductsCategoryRoute
-});
-var Char91DotmcpChar93InvokeToolToolRoute = Route.update({
-	id: "/.mcp/invoke-tool/$tool",
-	path: "/.mcp/invoke-tool/$tool",
-	getParentRoute: () => Route$24
 });
 var BlogRouteChildren = {
 	BlogBldcVsConventionalFansRoute,
