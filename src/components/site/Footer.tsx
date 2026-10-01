@@ -17,6 +17,12 @@ export function Footer() {
             A product of an ISO 9001:2015 Certified Company delivering premium fans engineered for
             performance, silence and long life.
           </p>
+          <div className="mt-6">
+            <h4 className="font-[Poppins] font-semibold text-white mb-2">Contact Information</h4>
+            <a href="mailto:csifans.official@gmail.com" className="font-[Inter] text-sm text-white/75 hover:text-white focus-visible:underline break-all">
+              csifans.official@gmail.com
+            </a>
+          </div>
         </div>
 
         <div>

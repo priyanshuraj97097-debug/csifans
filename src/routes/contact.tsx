@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Linkedin, MapPin, ExternalLink } from "lucide-react";
+import { Linkedin, MapPin, ExternalLink, Mail } from "lucide-react";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { SITE_URL } from "@/lib/site";
 
@@ -10,15 +10,17 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with CSI Fans. Connect with us on LinkedIn and visit our registered address.",
+          "Contact CSI Fans at csifans.official@gmail.com, connect on LinkedIn, or find our registered address.",
       },
       { property: "og:title", content: "Contact CSI Fans" },
       {
         property: "og:description",
         content:
-          "Connect with CSI Fans on LinkedIn or reach out through our registered address.",
+          "Email csifans.official@gmail.com, connect with CSI Fans on LinkedIn, or find our registered address.",
       },
+      { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/contact` },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/contact` }],
   }),
@@ -32,10 +34,23 @@ function Contact() {
         <SectionHeader as="h1"
           eyebrow="Get in Touch"
           title="Contact CSI Fans"
-          subtitle="Connect with us professionally or visit our registered address."
+          subtitle="Email us, connect professionally, or visit our registered address."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="rounded-3xl bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-md p-6">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0d6b78]/10 text-[#0d4361]">
+                <Mail className="h-6 w-6" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-[Poppins] text-lg font-semibold text-[#0a2f44]">Business Email</h3>
+                <a href="mailto:csifans.official@gmail.com" className="mt-2 block break-all font-[Inter] text-sm text-[#0d6b78] hover:underline focus-visible:underline">
+                  csifans.official@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
           <a
             href="https://www.linkedin.com/in/csi-super-toophan-ab0791421?trk=contact-info"
             target="_blank"

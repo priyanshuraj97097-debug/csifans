@@ -78,7 +78,7 @@ export const Route = createFileRoute("/products/$category/$model")({
     return (
       <div className="py-24 text-center px-4">
         <h1 className="font-[Poppins] text-2xl font-bold text-[#0a2f44]">Something went wrong</h1>
-        <p className="mt-2 text-slate-600 text-sm">{error.message}</p>
+        <p className="mt-2 text-slate-600 text-sm">{error instanceof Error ? error.message : "Please try again."}</p>
         <button
           onClick={() => {
             router.invalidate();
