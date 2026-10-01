@@ -1,5 +1,5 @@
 import { t as renderErrorPage } from "../server.js";
-import { n as createMiddleware, t as createStart } from "./createStart-BWB9HM9w.js";
+import { n as createMiddleware, t as createStart } from "./createStart-Dt05N14y.js";
 //#region src/start.ts
 var errorMiddleware = createMiddleware().server(async ({ next }) => {
 	try {
