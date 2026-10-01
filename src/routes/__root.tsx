@@ -127,6 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               name: "CSI Fans",
               alternateName: "CSI Super Toophan",
               url: `${SITE_URL}/`,
+              email: "csifans.official@gmail.com",
               logo: `${SITE_URL}/favicon.ico`,
               description:
                 "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
