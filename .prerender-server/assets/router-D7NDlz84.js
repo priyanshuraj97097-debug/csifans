@@ -1611,7 +1611,11 @@ var Route$24 = createRootRouteWithContext()({
 			},
 			{
 				property: "og:site_name",
-				content: "CSI Super Toophan"
+				content: "CSI Fans"
+			},
+			{
+				name: "application-name",
+				content: "CSI Fans"
 			},
 			{
 				property: "og:image",
@@ -1629,8 +1633,8 @@ var Route$24 = createRootRouteWithContext()({
 			},
 			{
 				rel: "icon",
-				type: "image/png",
-				href: "/favicon.png"
+				type: "image/x-icon",
+				href: "/favicon.ico"
 			},
 			{
 				rel: "preconnect",
@@ -1653,9 +1657,10 @@ var Route$24 = createRootRouteWithContext()({
 				"@graph": [{
 					"@type": "Organization",
 					"@id": `${SITE_URL}/#organization`,
-					name: "CSI Super Toophan",
-					alternateName: "CSI Fans",
+					name: "CSI Fans",
+					alternateName: "CSI Super Toophan",
 					url: `${SITE_URL}/`,
+					logo: `${SITE_URL}/favicon.ico`,
 					description: "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
 					address: {
 						"@type": "PostalAddress",
@@ -1667,7 +1672,8 @@ var Route$24 = createRootRouteWithContext()({
 					"@type": "WebSite",
 					"@id": `${SITE_URL}/#website`,
 					url: `${SITE_URL}/`,
-					name: "CSI Super Toophan",
+					name: "CSI Fans",
+					alternateName: "CSI Super Toophan",
 					publisher: { "@id": `${SITE_URL}/#organization` }
 				}]
 			})
@@ -2748,7 +2754,7 @@ ${buildKnowledgeBase()}`;
 //#region src/routes/api/chat.ts
 /** Google's OpenAI-compatible endpoint for the Gemini API. */
 var GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai";
-var DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
+var DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
 function buildSystemPrompt(languageName) {
 	return languageName && languageName !== "English" ? `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected ${languageName}. Reply entirely in ${languageName}, regardless of the language of the question. Keep product names, model numbers, units and URLs unchanged.` : `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected English. Reply in English unless they explicitly ask for another language.`;
 }
