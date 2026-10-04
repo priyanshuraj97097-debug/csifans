@@ -5,27 +5,31 @@ import { findModel, categories, type Model, type Category, type Specification, t
 import { downloadProductCatalogue } from "@/lib/catalogue";
 import { Lightbox } from "@/components/site/Lightbox";
 import { SITE_URL } from "@/lib/site";
+import { useCatalog, findLiveCategory } from "@/lib/product-store";
 
 export const Route = createFileRoute("/products/$category/$model")({
   loader: ({ params }) => {
     const result = findModel(params.category, params.model);
-    if (!result) throw notFound();
-    return result;
+    if (result) return result;
+    // Products added from the admin panel are loaded live in the browser.
+    const category = categories.find((c) => c.slug === params.category);
+    if (!category) throw notFound();
+    return { category, model: undefined as unknown as Model, pending: true as const };
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData?.model.name ?? "Product"} | CSI Fans` },
-      { name: "description", content: loaderData?.model.description ?? "CSI Fans product details." },
-      { property: "og:title", content: `${loaderData?.model.name ?? "Product"} — CSI Fans` },
-      { property: "og:description", content: loaderData?.model.description ?? "Premium fans." },
+      { title: `${loaderData?.model?.name ?? "Product"} | CSI Fans` },
+      { name: "description", content: loaderData?.model?.description ?? "CSI Fans product details." },
+      { property: "og:title", content: `${loaderData?.model?.name ?? "Product"} — CSI Fans` },
+      { property: "og:description", content: loaderData?.model?.description ?? "Premium fans." },
       { property: "og:type", content: "product" },
       {
         property: "og:url",
-        content: `${SITE_URL}/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}`,
+        content: `${SITE_URL}/products/${loaderData?.category.slug ?? ""}/${loaderData?.model?.slug ?? ""}`,
       },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/products/${loaderData?.category.slug ?? ""}/${loaderData?.model.slug ?? ""}` }],
-    scripts: loaderData
+    links: [{ rel: "canonical", href: `${SITE_URL}/products/${loaderData?.category.slug ?? ""}/${loaderData?.model?.slug ?? ""}` }],
+    scripts: loaderData?.model
       ? [
           {
             type: "application/ld+json",
@@ -95,7 +99,33 @@ export const Route = createFileRoute("/products/$category/$model")({
 });
 
 function ProductDetailPage() {
-  const { category: cat, model } = Route.useLoaderData();
+  const loaded = Route.useLoaderData();
+  const params = Route.useParams();
+  const { categories: liveCategories, live } = useCatalog();
+  const liveCat = live ? findLiveCategory(liveCategories, params.category) : undefined;
+  const cat: Category = liveCat ?? loaded.category;
+  const model: Model | undefined = live
+    ? liveCat?.models.find((m) => m.slug === params.model)
+    : loaded.model;
+  if (!model) {
+    const waiting = !live && "pending" in loaded;
+    return (
+      <div className="py-24 text-center px-4">
+        {waiting ? (
+          <Loader2 className="mx-auto h-8 w-8 animate-spin text-[#0d6b78]" />
+        ) : (
+          <>
+            <h1 className="font-[Poppins] text-3xl font-bold text-[#0a2f44]">Product not found</h1>
+            <Link to="/products" search={{}} className="mt-6 inline-block text-[#0d6b78] underline">Back to products</Link>
+          </>
+        )}
+      </div>
+    );
+  }
+  return <ProductDetailView cat={cat} model={model} />;
+}
+
+function ProductDetailView({ cat, model }: { cat: Category; model: Model }) {
   const [downloading, setDownloading] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
