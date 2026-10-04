@@ -14,13 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      products: {
+        Row: {
+          category_slug: string
+          created_at: string
+          data: Json
+          id: string
+          is_published: boolean
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category_slug: string
+          created_at?: string
+          data?: Json
+          id?: string
+          is_published?: boolean
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category_slug?: string
+          created_at?: string
+          data?: Json
+          id?: string
+          is_published?: boolean
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_csi_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
