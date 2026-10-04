@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Sparkles, ArrowRight, Zap } from "lucide-react";
-import { categories } from "@/lib/products";
+import { useCatalog } from "@/lib/product-store";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { SITE_URL } from "@/lib/site";
 
@@ -27,6 +27,7 @@ const LAUNCH_MODEL_NOS = [
 ];
 
 function NewLaunches() {
+  const { categories } = useCatalog();
   // Curate launches from the explicit list above
   const launches = categories.flatMap((cat) =>
     cat.models

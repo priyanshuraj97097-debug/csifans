@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FileText, Download, BookOpen, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { SectionHeader } from "@/components/site/SectionHeader";
-import { categories } from "@/lib/products";
+import { useCatalog } from "@/lib/product-store";
 import { downloadCategoryCatalogue, downloadFullCatalogue } from "@/lib/catalogue";
 import { SITE_URL } from "@/lib/site";
 
