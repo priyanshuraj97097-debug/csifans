@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { allModels } from "@/lib/products";
+import { useCatalog } from "@/lib/product-store";
 import { Lightbox } from "@/components/site/Lightbox";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { SITE_URL } from "@/lib/site";
@@ -20,6 +20,8 @@ export const Route = createFileRoute("/gallery")({
 });
 
 function GalleryPage() {
+  const { categories } = useCatalog();
+  const allModels = useMemo(() => categories.flatMap((c) => c.models.map((m) => ({ ...m, categoryName: c.name }))), [categories]);
   // Build a deduped image list paired with the product name for alt text
   const items = useMemo(() => {
     const seen = new Set<string>();
@@ -33,7 +35,7 @@ function GalleryPage() {
       }
     }
     return out;
-  }, []);
+  }, [allModels]);
 
   const [open, setOpen] = useState<number | null>(null);
 

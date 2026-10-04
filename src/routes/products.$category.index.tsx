@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { Download, Check, ArrowLeft, ArrowRight, SlidersHorizontal, Tag, Loader2 } from "lucide-react";
 import { findCategory, categories, type Model, parseSweep, parsePower } from "@/lib/products";
 import { downloadCategoryCatalogue } from "@/lib/catalogue";
+import { useCatalog, findLiveCategory } from "@/lib/product-store";
 
 export const Route = createFileRoute("/products/$category/")({
   loader: ({ params }) => {
@@ -16,7 +17,9 @@ export const Route = createFileRoute("/products/$category/")({
 type SortKey = "latest" | "popular" | "price-asc" | "price-desc";
 
 function CategoryPage() {
-  const c = Route.useLoaderData();
+  const staticCategory = Route.useLoaderData();
+  const { categories: liveCategories } = useCatalog();
+  const c = findLiveCategory(liveCategories, staticCategory.slug) ?? staticCategory;
 
   const [sort, setSort] = useState<SortKey>("latest");
   const [maxPrice, setMaxPrice] = useState<number>(0);
