@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { Search, X } from "lucide-react";
-import { searchModels } from "@/lib/products";
+import { useCatalog, searchCatalog } from "@/lib/product-store";
 
 export function SearchCombobox({ id, autoFocus = false, onSubmitted }: { id?: string; autoFocus?: boolean; onSubmitted?: () => void }) {
   const [query, setQuery] = useState("");
@@ -9,7 +9,8 @@ export function SearchCombobox({ id, autoFocus = false, onSubmitted }: { id?: st
   const navigate = useNavigate();
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
-  const results = useMemo(() => searchModels(query).slice(0, 8), [query]);
+  const { categories } = useCatalog();
+  const results = useMemo(() => searchCatalog(categories, query).slice(0, 8), [query, categories]);
 
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {

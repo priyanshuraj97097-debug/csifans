@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Search as SearchIcon } from "lucide-react";
 import { z } from "zod";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
-import { categories, searchModels } from "@/lib/products";
+import { useCatalog, searchCatalog } from "@/lib/product-store";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { SITE_URL } from "@/lib/site";
 
@@ -35,7 +35,8 @@ export const Route = createFileRoute("/products/")({
 
 function Products() {
   const { q } = Route.useSearch();
-  const results = q ? searchModels(q) : [];
+  const { categories } = useCatalog();
+  const results = q ? searchCatalog(categories, q) : [];
 
   return (
     <div className="py-16 px-4 sm:px-6 lg:px-8">
