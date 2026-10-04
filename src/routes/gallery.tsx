@@ -21,7 +21,7 @@ export const Route = createFileRoute("/gallery")({
 
 function GalleryPage() {
   const { categories } = useCatalog();
-  const allModels = useMemo(() => categories.flatMap((c) => c.models), [categories]);
+  const allModels = useMemo(() => categories.flatMap((c) => c.models.map((m) => ({ ...m, categoryName: c.name }))), [categories]);
   // Build a deduped image list paired with the product name for alt text
   const items = useMemo(() => {
     const seen = new Set<string>();
