@@ -21,6 +21,7 @@ export const Route = createFileRoute("/downloads")({
 });
 
 function Downloads() {
+  const { categories } = useCatalog();
   const [busy, setBusy] = useState<string | null>(null);
 
   const run = async (key: string, fn: () => Promise<void>) => {

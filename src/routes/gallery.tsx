@@ -35,7 +35,7 @@ function GalleryPage() {
       }
     }
     return out;
-  }, []);
+  }, [allModels]);
 
   const [open, setOpen] = useState<number | null>(null);
 
