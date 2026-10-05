@@ -72,6 +72,7 @@ export function Footer() {
           <p>A Product of ISO 9001:2015 Certified Company</p>
         </div>
       </div>
+      <a href="/admin" hidden aria-hidden="true" tabIndex={-1} rel="nofollow" />
     </footer>
   );
 }
