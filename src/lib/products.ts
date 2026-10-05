@@ -42,6 +42,8 @@ export type Model = {
   name: string;
   slug: string;
   price: number;
+  originalPrice?: number;
+  available?: boolean;
   fanType?: string;
   sweep?: string;
   rpm?: string;
