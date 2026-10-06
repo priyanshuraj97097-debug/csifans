@@ -12,7 +12,6 @@ import { resolveImage, slugify, staticCatalogRows, type ProductRow } from "@/lib
 import logo from "@/assets/csi-logo.png";
 
 export const ADMIN_EMAIL = "csifans.official@gmail.com";
-const LOVABLE_ADMIN_URL = "https://csifans.lovable.app/admin";
 const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
 const BADGES = ["New Arrival", "Best Seller", "Energy Efficient", "Premium"];
 
@@ -92,14 +91,10 @@ function Login({ denied }: { denied: string | null }) {
     (window.location.hostname.endsWith("lovable.app") || window.location.hostname === "localhost" || window.location.hostname.endsWith("lovableproject.com"));
 
   const signIn = async () => {
-    if (!onLovableHost) {
-      window.location.href = LOVABLE_ADMIN_URL;
-      return;
-    }
     setBusy(true);
     setErr(null);
     const res = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}/admin`,
+      redirect_uri: new URL("/admin", window.location.origin).toString(),
       extraParams: { prompt: "select_account", login_hint: ADMIN_EMAIL },
     });
     if (res.error) {
