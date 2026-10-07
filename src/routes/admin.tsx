@@ -54,12 +54,40 @@ function AdminPage() {
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
+    // Session handoff: sign-in completed on the Lovable host returns here with
+    // tokens in the URL hash (never sent to any server).
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const at = hash.get("access_token");
+    const rt = hash.get("refresh_token");
+    if (at && rt) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+      supabase.auth.setSession({ access_token: at, refresh_token: rt }).finally(() => setReady(true));
+      return () => sub.subscription.unsubscribe();
+    }
+    // Remember the allowed production return URL across the Google round trip.
+    const returnTo = new URLSearchParams(window.location.search).get("return_to");
+    if (returnTo === PROD_ADMIN_URL) sessionStorage.setItem(RETURN_TO_KEY, returnTo);
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setReady(true);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
+
+  // After a verified admin sign-in on the Lovable host, send the session back
+  // to the production admin URL it came from.
+  useEffect(() => {
+    if (isAdmin !== true || !isLovableHost()) return;
+    const returnTo = sessionStorage.getItem(RETURN_TO_KEY);
+    if (returnTo !== PROD_ADMIN_URL) return;
+    sessionStorage.removeItem(RETURN_TO_KEY);
+    supabase.auth.getSession().then(({ data }) => {
+      const s = data.session;
+      if (s) {
+        window.location.replace(`${returnTo}#access_token=${s.access_token}&refresh_token=${s.refresh_token}`);
+      }
+    });
+  }, [isAdmin]);
 
   useEffect(() => {
     if (!session) {
