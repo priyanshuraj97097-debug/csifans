@@ -133,6 +133,12 @@ function Login({ denied }: { denied: string | null }) {
   const signIn = async () => {
     setBusy(true);
     setErr(null);
+    // The Google broker only exists on Lovable-hosted domains. From any other
+    // host, sign in on the Lovable admin URL and return here afterwards.
+    if (!onLovableHost) {
+      window.location.href = `${LOVABLE_ADMIN_URL}?return_to=${encodeURIComponent(window.location.origin + "/admin")}`;
+      return;
+    }
     const res = await lovable.auth.signInWithOAuth("google", {
       redirect_uri: new URL("/admin", window.location.origin).toString(),
       extraParams: { prompt: "select_account", login_hint: ADMIN_EMAIL },
