@@ -1,10 +1,11 @@
 import { t as csi_logo_default } from "./csi-logo-BiAyxoe9.js";
-import { n as categories, r as findCategory, s as searchModels } from "./products-CR_RBIhI.js";
+import { c as findCategory, o as useCatalog, r as searchCatalog, s as categories } from "./product-store-CuclNA7Y.js";
 import { t as SITE_URL } from "./site-BFylcJ2h.js";
-import { t as Route$25 } from "./routes-FoVptUX5.js";
-import { t as Route$26 } from "./products.index-D8QYsdxU.js";
-import { t as Route$27 } from "./products._category.index-CBl7A5b2.js";
-import { t as Route$28 } from "./products._category._model-Cr_yrH1c.js";
+import { t as Route$25 } from "./routes-BSa3wkrm.js";
+import { n as Route$26 } from "./admin-CFuC41v-.js";
+import { t as Route$27 } from "./products.index-EhePRHcs.js";
+import { t as Route$28 } from "./products._category.index-n4CnbmEk.js";
+import { t as Route$29 } from "./products._category._model-Bhra6ouk.js";
 import * as React from "react";
 import { createContext, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { HeadContent, Link, Outlet, Scripts, createFileRoute, createRootRouteWithContext, createRouter, lazyRouteComponent, notFound, useNavigate, useRouter } from "@tanstack/react-router";
@@ -30,7 +31,7 @@ import { createTanStackInvokeToolHandler, createTanStackListToolsHandler, create
 import { defineMcp, defineTool } from "@lovable.dev/mcp-js";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 //#region src/styles.css?url
-var styles_default = "/assets/styles-D5ZZQeFW.css";
+var styles_default = "/assets/styles-CIJI8MJg.css";
 //#endregion
 //#region src/lib/lovable-error-reporting.ts
 function reportLovableError(error, context = {}) {
@@ -52,7 +53,8 @@ function SearchCombobox({ id, autoFocus = false, onSubmitted }) {
 	const [open, setOpen] = useState(false);
 	const navigate = useNavigate();
 	const wrapRef = useRef(null);
-	const results = useMemo(() => searchModels(query).slice(0, 8), [query]);
+	const { categories } = useCatalog();
+	const results = useMemo(() => searchCatalog(categories, query).slice(0, 8), [query, categories]);
 	useEffect(() => {
 		const onDoc = (e) => {
 			if (!wrapRef.current?.contains(e.target)) setOpen(false);
@@ -589,78 +591,102 @@ function Header() {
 function Footer() {
 	return /* @__PURE__ */ jsxs("footer", {
 		className: "bg-gradient-to-br from-[#0a2f44] via-[#0d4361] to-[#0d6b78] text-white",
-		children: [/* @__PURE__ */ jsxs("div", {
-			className: "mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3",
-			children: [
-				/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsxs("div", {
-					className: "flex items-center gap-3",
-					children: [/* @__PURE__ */ jsx("img", {
-						src: csi_logo_default,
-						alt: "CSI Fans",
-						className: "h-12 w-12 rounded-full ring-2 ring-white/30"
-					}), /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("div", {
-						className: "font-[Poppins] text-xl font-extrabold",
-						children: "CSI Super Toophan"
-					}), /* @__PURE__ */ jsx("div", {
-						className: "font-[Inter] text-xs text-white/70",
-						children: "Innovation in Every Rotation"
-					})] })]
-				}), /* @__PURE__ */ jsx("p", {
-					className: "mt-4 font-[Inter] text-sm text-white/75 leading-relaxed",
-					children: "A product of an ISO 9001:2015 Certified Company delivering premium fans engineered for performance, silence and long life."
-				})] }),
-				/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("h4", {
-					className: "font-[Poppins] font-semibold text-white mb-4",
-					children: "Quick Links"
-				}), /* @__PURE__ */ jsx("ul", {
-					className: "space-y-2 font-[Inter] text-sm text-white/75",
-					children: [
-						["/about", "About Us"],
-						["/products", "Products"],
-						["/services", "Services"],
-						["/new-launches", "New Launches"],
-						["/gallery", "Gallery"],
-						["/blog", "Blog"],
-						["/downloads", "Downloads"],
-						["/contact", "Contact"]
-					].map(([to, label]) => /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(Link, {
-						to,
-						className: "hover:text-white transition-colors",
-						children: label
-					}) }, to))
-				})] }),
-				/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("h4", {
-					className: "font-[Poppins] font-semibold text-white mb-4",
-					children: "Products"
-				}), /* @__PURE__ */ jsx("ul", {
-					className: "space-y-2 font-[Inter] text-sm text-white/75",
-					children: [
-						["/products/ceiling-fans", "Ceiling Fans"],
-						["/products/pedestal-fans", "Pedestal Fans"],
-						["/products/table-fans", "Table Fans"],
-						["/products/wall-fans", "Wall Fans"],
-						["/products/special-fans", "Special Fans"],
-						["/products/premium-fans", "Premium Fans"],
-						["/products/home-appliances", "Home Appliances"],
-						["/products/room-heaters", "Room Heaters"]
-					].map(([to, label]) => /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(Link, {
-						to,
-						className: "hover:text-white transition-colors",
-						children: label
-					}) }, to))
-				})] })
-			]
-		}), /* @__PURE__ */ jsx("div", {
-			className: "border-t border-white/10",
-			children: /* @__PURE__ */ jsxs("div", {
-				className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 font-[Inter] text-xs text-white/60 flex flex-col sm:flex-row items-center justify-between gap-2",
-				children: [/* @__PURE__ */ jsxs("p", { children: [
-					"© ",
-					(/* @__PURE__ */ new Date()).getFullYear(),
-					" CSI Fans. All rights reserved."
-				] }), /* @__PURE__ */ jsx("p", { children: "A Product of ISO 9001:2015 Certified Company" })]
+		children: [
+			/* @__PURE__ */ jsxs("div", {
+				className: "mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3",
+				children: [
+					/* @__PURE__ */ jsxs("div", { children: [
+						/* @__PURE__ */ jsxs("div", {
+							className: "flex items-center gap-3",
+							children: [/* @__PURE__ */ jsx("img", {
+								src: csi_logo_default,
+								alt: "CSI Fans",
+								className: "h-12 w-12 rounded-full ring-2 ring-white/30"
+							}), /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("div", {
+								className: "font-[Poppins] text-xl font-extrabold",
+								children: "CSI Super Toophan"
+							}), /* @__PURE__ */ jsx("div", {
+								className: "font-[Inter] text-xs text-white/70",
+								children: "Innovation in Every Rotation"
+							})] })]
+						}),
+						/* @__PURE__ */ jsx("p", {
+							className: "mt-4 font-[Inter] text-sm text-white/75 leading-relaxed",
+							children: "A product of an ISO 9001:2015 Certified Company delivering premium fans engineered for performance, silence and long life."
+						}),
+						/* @__PURE__ */ jsxs("div", {
+							className: "mt-6",
+							children: [/* @__PURE__ */ jsx("h4", {
+								className: "font-[Poppins] font-semibold text-white mb-2",
+								children: "Contact Information"
+							}), /* @__PURE__ */ jsx("a", {
+								href: "mailto:csifans.official@gmail.com",
+								className: "font-[Inter] text-sm text-white/75 hover:text-white focus-visible:underline break-all",
+								children: "csifans.official@gmail.com"
+							})]
+						})
+					] }),
+					/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("h4", {
+						className: "font-[Poppins] font-semibold text-white mb-4",
+						children: "Quick Links"
+					}), /* @__PURE__ */ jsx("ul", {
+						className: "space-y-2 font-[Inter] text-sm text-white/75",
+						children: [
+							["/about", "About Us"],
+							["/products", "Products"],
+							["/services", "Services"],
+							["/new-launches", "New Launches"],
+							["/gallery", "Gallery"],
+							["/blog", "Blog"],
+							["/downloads", "Downloads"],
+							["/contact", "Contact"]
+						].map(([to, label]) => /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(Link, {
+							to,
+							className: "hover:text-white transition-colors",
+							children: label
+						}) }, to))
+					})] }),
+					/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("h4", {
+						className: "font-[Poppins] font-semibold text-white mb-4",
+						children: "Products"
+					}), /* @__PURE__ */ jsx("ul", {
+						className: "space-y-2 font-[Inter] text-sm text-white/75",
+						children: [
+							["/products/ceiling-fans", "Ceiling Fans"],
+							["/products/pedestal-fans", "Pedestal Fans"],
+							["/products/table-fans", "Table Fans"],
+							["/products/wall-fans", "Wall Fans"],
+							["/products/special-fans", "Special Fans"],
+							["/products/premium-fans", "Premium Fans"],
+							["/products/home-appliances", "Home Appliances"],
+							["/products/room-heaters", "Room Heaters"]
+						].map(([to, label]) => /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(Link, {
+							to,
+							className: "hover:text-white transition-colors",
+							children: label
+						}) }, to))
+					})] })
+				]
+			}),
+			/* @__PURE__ */ jsx("div", {
+				className: "border-t border-white/10",
+				children: /* @__PURE__ */ jsxs("div", {
+					className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 font-[Inter] text-xs text-white/60 flex flex-col sm:flex-row items-center justify-between gap-2",
+					children: [/* @__PURE__ */ jsxs("p", { children: [
+						"© ",
+						(/* @__PURE__ */ new Date()).getFullYear(),
+						" CSI Fans. All rights reserved."
+					] }), /* @__PURE__ */ jsx("p", { children: "A Product of ISO 9001:2015 Certified Company" })]
+				})
+			}),
+			/* @__PURE__ */ jsx("a", {
+				href: "/admin",
+				hidden: true,
+				"aria-hidden": "true",
+				tabIndex: -1,
+				rel: "nofollow"
 			})
-		})]
+		]
 	});
 }
 //#endregion
@@ -1526,7 +1552,7 @@ function ErrorComponent({ error, reset }) {
 	console.error(error);
 	const router = useRouter();
 	useEffect(() => {
-		reportLovableError(error, { boundary: "tanstack_root_error_component" });
+		reportLovableError(error instanceof Error ? error : new Error(String(error)), { boundary: "tanstack_root_error_component" });
 	}, [error]);
 	return /* @__PURE__ */ jsx("div", {
 		className: "flex min-h-screen items-center justify-center bg-background px-4",
@@ -1660,6 +1686,7 @@ var Route$24 = createRootRouteWithContext()({
 					name: "CSI Fans",
 					alternateName: "CSI Super Toophan",
 					url: `${SITE_URL}/`,
+					email: "csifans.official@gmail.com",
 					logo: `${SITE_URL}/favicon.ico`,
 					description: "ISO 9001:2015 certified manufacturer of ceiling, BLDC, table, pedestal, wall and premium fans in Bihar, India.",
 					address: {
@@ -1745,14 +1772,14 @@ var $$splitComponentImporter$15 = () => import("./blog-GHsbigBI.js");
 var Route$22 = createFileRoute("/blog")({ component: lazyRouteComponent($$splitComponentImporter$15, "component") });
 //#endregion
 //#region src/routes/contact.tsx
-var $$splitComponentImporter$14 = () => import("./contact-DH7OFkF4.js");
+var $$splitComponentImporter$14 = () => import("./contact-B-xT60z4.js");
 var Route$21 = createFileRoute("/contact")({
 	head: () => ({
 		meta: [
 			{ title: "Contact Us | CSI Fans" },
 			{
 				name: "description",
-				content: "Get in touch with CSI Fans. Connect with us on LinkedIn and visit our registered address."
+				content: "Contact CSI Fans at csifans.official@gmail.com, connect on LinkedIn, or find our registered address."
 			},
 			{
 				property: "og:title",
@@ -1760,11 +1787,19 @@ var Route$21 = createFileRoute("/contact")({
 			},
 			{
 				property: "og:description",
-				content: "Connect with CSI Fans on LinkedIn or reach out through our registered address."
+				content: "Email csifans.official@gmail.com, connect with CSI Fans on LinkedIn, or find our registered address."
+			},
+			{
+				property: "og:type",
+				content: "website"
 			},
 			{
 				property: "og:url",
 				content: `${SITE_URL}/contact`
+			},
+			{
+				name: "twitter:card",
+				content: "summary"
 			}
 		],
 		links: [{
@@ -1776,7 +1811,7 @@ var Route$21 = createFileRoute("/contact")({
 });
 //#endregion
 //#region src/routes/downloads.tsx
-var $$splitComponentImporter$13 = () => import("./downloads-B6Qwi0no.js");
+var $$splitComponentImporter$13 = () => import("./downloads-CZhQL-8q.js");
 var Route$20 = createFileRoute("/downloads")({
 	head: () => ({
 		meta: [
@@ -1807,7 +1842,7 @@ var Route$20 = createFileRoute("/downloads")({
 });
 //#endregion
 //#region src/routes/gallery.tsx
-var $$splitComponentImporter$12 = () => import("./gallery-AjHlde0m.js");
+var $$splitComponentImporter$12 = () => import("./gallery-Bj7zt0XY.js");
 var Route$19 = createFileRoute("/gallery")({
 	head: () => ({
 		meta: [
@@ -2003,7 +2038,7 @@ var Route$18 = createFileRoute("/mcp")({ server: { handlers: { ANY: createTanSta
 }) } } });
 //#endregion
 //#region src/routes/new-launches.tsx
-var $$splitComponentImporter$11 = () => import("./new-launches-Bytrp7WH.js");
+var $$splitComponentImporter$11 = () => import("./new-launches-BsLwzhpr.js");
 var Route$17 = createFileRoute("/new-launches")({
 	head: () => ({
 		meta: [
@@ -2042,6 +2077,7 @@ var Route$15 = createFileRoute("/robots.txt")({ server: { handlers: { GET: async
 	const body = [
 		"User-agent: *",
 		"Allow: /",
+		"Disallow: /admin",
 		"",
 		`Sitemap: ${SITE_URL}/sitemap.xml`,
 		""
@@ -2616,7 +2652,7 @@ var Route$6 = createFileRoute("/blog/fan-maintenance-checklist")({
 //#endregion
 //#region src/routes/products.$category.tsx
 var $$splitComponentImporter$4 = () => import("./products._category-CWMdQZQP.js");
-var $$splitErrorComponentImporter = () => import("./products._category-DROMYZaz.js");
+var $$splitErrorComponentImporter = () => import("./products._category-CFCfcDZJ.js");
 var $$splitNotFoundComponentImporter = () => import("./products._category-Du1m0Dtj.js");
 var Route$5 = createFileRoute("/products/$category")({
 	loader: ({ params }) => {
@@ -2827,6 +2863,11 @@ var AboutRoute = Route$23.update({
 	path: "/about",
 	getParentRoute: () => Route$24
 });
+var AdminRoute = Route$26.update({
+	id: "/admin",
+	path: "/admin",
+	getParentRoute: () => Route$24
+});
 var BlogRoute = Route$22.update({
 	id: "/blog",
 	path: "/blog",
@@ -2912,7 +2953,7 @@ var BlogFanMaintenanceChecklistRoute = Route$6.update({
 	path: "/fan-maintenance-checklist",
 	getParentRoute: () => BlogRoute
 });
-var ProductsIndexRoute = Route$26.update({
+var ProductsIndexRoute = Route$27.update({
 	id: "/",
 	path: "/",
 	getParentRoute: () => ProductsRoute
@@ -2947,12 +2988,12 @@ var Char91DotmcpChar93InvokeToolToolRoute = Route.update({
 	path: "/.mcp/invoke-tool/$tool",
 	getParentRoute: () => Route$24
 });
-var ProductsCategoryIndexRoute = Route$27.update({
+var ProductsCategoryIndexRoute = Route$28.update({
 	id: "/",
 	path: "/",
 	getParentRoute: () => ProductsCategoryRoute
 });
-var ProductsCategoryModelRoute = Route$28.update({
+var ProductsCategoryModelRoute = Route$29.update({
 	id: "/$model",
 	path: "/$model",
 	getParentRoute: () => ProductsCategoryRoute
@@ -2982,6 +3023,7 @@ var ServicesRouteChildren = {
 var rootRouteChildren = {
 	IndexRoute,
 	AboutRoute,
+	AdminRoute,
 	BlogRoute: BlogRouteWithChildren,
 	ContactRoute,
 	DownloadsRoute,

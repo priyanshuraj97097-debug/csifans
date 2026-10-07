@@ -1,4 +1,4 @@
-import { n as categories } from "./products-CR_RBIhI.js";
+import { o as useCatalog } from "./product-store-CuclNA7Y.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { n as downloadFullCatalogue, t as downloadCategoryCatalogue } from "./catalogue-KWkO4V1f.js";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { BookOpen, Download, FileText, Loader2 } from "lucide-react";
 //#region src/routes/downloads.tsx?tsr-split=component
 function Downloads() {
+	const { categories } = useCatalog();
 	const [busy, setBusy] = useState(null);
 	const run = async (key, fn) => {
 		if (busy) return;

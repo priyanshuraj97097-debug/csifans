@@ -1,10 +1,15 @@
-import { t as allModels } from "./products-CR_RBIhI.js";
+import { o as useCatalog } from "./product-store-CuclNA7Y.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { t as Lightbox } from "./Lightbox-B8utlvBm.js";
 import { useMemo, useState } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/gallery.tsx?tsr-split=component
 function GalleryPage() {
+	const { categories } = useCatalog();
+	const allModels = useMemo(() => categories.flatMap((c) => c.models.map((m) => ({
+		...m,
+		categoryName: c.name
+	}))), [categories]);
 	const items = useMemo(() => {
 		const seen = /* @__PURE__ */ new Set();
 		const out = [];
@@ -21,7 +26,7 @@ function GalleryPage() {
 			}
 		}
 		return out;
-	}, []);
+	}, [allModels]);
 	const [open, setOpen] = useState(null);
 	return /* @__PURE__ */ jsxs("div", {
 		className: "py-16 px-4 sm:px-6 lg:px-8",

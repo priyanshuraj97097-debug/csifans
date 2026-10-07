@@ -3,7 +3,7 @@ import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
 import { z } from "zod";
 import { fallback, zodValidator } from "@tanstack/zod-adapter";
 //#region src/routes/products.index.tsx
-var $$splitComponentImporter = () => import("./products.index-i9CO0x-q.js");
+var $$splitComponentImporter = () => import("./products2.index-CSS3bDZC.js");
 var productsSearchSchema = z.object({ q: fallback(z.string(), "").optional() });
 var Route = createFileRoute("/products/")({
 	validateSearch: zodValidator(productsSearchSchema),

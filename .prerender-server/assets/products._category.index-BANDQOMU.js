@@ -1,5 +1,5 @@
-import { a as parsePower, n as categories, o as parseSweep } from "./products-CR_RBIhI.js";
-import { t as Route } from "./products._category.index-CBl7A5b2.js";
+import { d as parseSweep, o as useCatalog, s as categories, t as findLiveCategory, u as parsePower } from "./product-store-CuclNA7Y.js";
+import { t as Route } from "./products._category.index-n4CnbmEk.js";
 import { t as downloadCategoryCatalogue } from "./catalogue-KWkO4V1f.js";
 import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -7,7 +7,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { ArrowLeft, ArrowRight, Check, Download, Loader2, SlidersHorizontal, Tag } from "lucide-react";
 //#region src/routes/products.$category.index.tsx?tsr-split=component
 function CategoryPage() {
-	const c = Route.useLoaderData();
+	const staticCategory = Route.useLoaderData();
+	const { categories: liveCategories } = useCatalog();
+	const c = findLiveCategory(liveCategories, staticCategory.slug) ?? staticCategory;
 	const [sort, setSort] = useState("latest");
 	const [maxPrice, setMaxPrice] = useState(0);
 	const [maxSweep, setMaxSweep] = useState(0);

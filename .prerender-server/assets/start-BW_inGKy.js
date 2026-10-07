@@ -1,5 +1,13 @@
 import { t as renderErrorPage } from "../server.js";
 import { n as createMiddleware, t as createStart } from "./createStart-Dt05N14y.js";
+import { t as supabase } from "./client-BCj1j12t.js";
+//#region src/integrations/supabase/auth-attacher.ts
+var attachSupabaseAuth = createMiddleware({ type: "function" }).client(async ({ next }) => {
+	const { data } = await supabase.auth.getSession();
+	const token = data.session?.access_token;
+	return next({ headers: token ? { Authorization: `Bearer ${token}` } : {} });
+});
+//#endregion
 //#region src/start.ts
 var errorMiddleware = createMiddleware().server(async ({ next }) => {
 	try {
@@ -13,6 +21,9 @@ var errorMiddleware = createMiddleware().server(async ({ next }) => {
 		});
 	}
 });
-var startInstance = createStart(() => ({ requestMiddleware: [errorMiddleware] }));
+var startInstance = createStart(() => ({
+	functionMiddleware: [attachSupabaseAuth],
+	requestMiddleware: [errorMiddleware]
+}));
 //#endregion
 export { startInstance };
