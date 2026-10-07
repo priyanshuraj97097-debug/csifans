@@ -1,4 +1,4 @@
-import { n as categories } from "./products-CR_RBIhI.js";
+import { o as useCatalog } from "./product-store-CuclNA7Y.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { Link } from "@tanstack/react-router";
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -11,6 +11,7 @@ var LAUNCH_MODEL_NOS = [
 	"CSI-ST-HEATER-QUARTZ"
 ];
 function NewLaunches() {
+	const { categories } = useCatalog();
 	const launches = categories.flatMap((cat) => cat.models.filter((m) => LAUNCH_MODEL_NOS.includes(m.modelNo)).map((m) => ({
 		m,
 		cat

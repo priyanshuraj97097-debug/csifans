@@ -12,7 +12,7 @@ var SplitErrorComponent = ({ error, reset }) => {
 			}),
 			/* @__PURE__ */ jsx("p", {
 				className: "mt-2 text-slate-600 text-sm",
-				children: error.message
+				children: error instanceof Error ? error.message : "Please try again."
 			}),
 			/* @__PURE__ */ jsx("button", {
 				onClick: () => {

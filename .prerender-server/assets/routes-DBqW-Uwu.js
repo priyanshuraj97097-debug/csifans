@@ -1,5 +1,5 @@
-import { n as categories, s as searchModels } from "./products-CR_RBIhI.js";
-import { t as Route } from "./routes-FoVptUX5.js";
+import { o as useCatalog, r as searchCatalog } from "./product-store-CuclNA7Y.js";
+import { t as Route } from "./routes-BSa3wkrm.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -81,7 +81,8 @@ function BrandVideo() {
 //#region src/routes/index.tsx?tsr-split=component
 function Products() {
 	const { q } = Route.useSearch();
-	const results = q ? searchModels(q) : [];
+	const { categories } = useCatalog();
+	const results = q ? searchCatalog(categories, q) : [];
 	return /* @__PURE__ */ jsx("div", {
 		className: "py-16 px-4 sm:px-6 lg:px-8",
 		children: /* @__PURE__ */ jsx("div", {

@@ -1,59 +1,61 @@
+import { t as supabase } from "./client-BCj1j12t.js";
+import { useEffect, useState } from "react";
 //#region src/assets/csi-super-toophan-table-fan-400mm.png
-var csi_super_toophan_table_fan_400mm_default = "/assets/csi-super-toophan-table-fan-400mm-DIa0A1Rq.png";
+var csi_super_toophan_table_fan_400mm_default$1 = "/assets/csi-super-toophan-table-fan-400mm-DIa0A1Rq.png";
 //#endregion
 //#region src/assets/csi-super-toophan-pedestal-fan-400mm.png
-var csi_super_toophan_pedestal_fan_400mm_default = "/assets/csi-super-toophan-pedestal-fan-400mm-BT-nExB8.png";
+var csi_super_toophan_pedestal_fan_400mm_default$1 = "/assets/csi-super-toophan-pedestal-fan-400mm-BT-nExB8.png";
 //#endregion
 //#region src/assets/csi-super-toophan-table-fan-300mm.png
-var csi_super_toophan_table_fan_300mm_default = "/assets/csi-super-toophan-table-fan-300mm-BAVs1xxu.png";
+var csi_super_toophan_table_fan_300mm_default$1 = "/assets/csi-super-toophan-table-fan-300mm-BAVs1xxu.png";
 //#endregion
 //#region src/assets/csi-super-toophan-ceiling-fan-classic.png
-var csi_super_toophan_ceiling_fan_classic_default = "/assets/csi-super-toophan-ceiling-fan-classic-BjzB8J1b.png";
+var csi_super_toophan_ceiling_fan_classic_default$1 = "/assets/csi-super-toophan-ceiling-fan-classic-BjzB8J1b.png";
 //#endregion
 //#region src/assets/csi-super-toophan-ceiling-fan-silver.png
-var csi_super_toophan_ceiling_fan_silver_default = "/assets/csi-super-toophan-ceiling-fan-silver-gPRVeQ0L.png";
+var csi_super_toophan_ceiling_fan_silver_default$1 = "/assets/csi-super-toophan-ceiling-fan-silver-gPRVeQ0L.png";
 //#endregion
 //#region src/assets/csi-super-toophan-bldc-ceiling-fan-brown.png
-var csi_super_toophan_bldc_ceiling_fan_brown_default = "/assets/csi-super-toophan-bldc-ceiling-fan-brown-Byko_7O1.png";
+var csi_super_toophan_bldc_ceiling_fan_brown_default$1 = "/assets/csi-super-toophan-bldc-ceiling-fan-brown-Byko_7O1.png";
 //#endregion
 //#region src/assets/csi-super-toophan-bldc-ceiling-fan-white.png
-var csi_super_toophan_bldc_ceiling_fan_white_default = "/assets/csi-super-toophan-bldc-ceiling-fan-white-D2jKiRsu.png";
+var csi_super_toophan_bldc_ceiling_fan_white_default$1 = "/assets/csi-super-toophan-bldc-ceiling-fan-white-D2jKiRsu.png";
 //#endregion
 //#region src/assets/csi-super-toophan-table-fan-red-400mm.png
-var csi_super_toophan_table_fan_red_400mm_default = "/assets/csi-super-toophan-table-fan-red-400mm-B1v9r5bf.png";
+var csi_super_toophan_table_fan_red_400mm_default$1 = "/assets/csi-super-toophan-table-fan-red-400mm-B1v9r5bf.png";
 //#endregion
 //#region src/assets/csi-super-toophan-wall-fan-teal-400mm.png
-var csi_super_toophan_wall_fan_teal_400mm_default = "/assets/csi-super-toophan-wall-fan-teal-400mm-CA7Ek-uO.png";
+var csi_super_toophan_wall_fan_teal_400mm_default$1 = "/assets/csi-super-toophan-wall-fan-teal-400mm-CA7Ek-uO.png";
 //#endregion
 //#region src/assets/csi-super-toophan-table-fan-teal-400mm.png
-var csi_super_toophan_table_fan_teal_400mm_default = "/assets/csi-super-toophan-table-fan-teal-400mm-CgLnDcoT.png";
+var csi_super_toophan_table_fan_teal_400mm_default$1 = "/assets/csi-super-toophan-table-fan-teal-400mm-CgLnDcoT.png";
 //#endregion
 //#region src/assets/csi-super-toophan-desk-fan-white-225mm.png
-var csi_super_toophan_desk_fan_white_225mm_default = "/assets/csi-super-toophan-desk-fan-white-225mm-BhyST5xa.png";
+var csi_super_toophan_desk_fan_white_225mm_default$1 = "/assets/csi-super-toophan-desk-fan-white-225mm-BhyST5xa.png";
 //#endregion
 //#region src/assets/csi-super-toophan-desk-fan-skyblue-225mm.png
-var csi_super_toophan_desk_fan_skyblue_225mm_default = "/assets/csi-super-toophan-desk-fan-skyblue-225mm-BAmr4zaA.png";
+var csi_super_toophan_desk_fan_skyblue_225mm_default$1 = "/assets/csi-super-toophan-desk-fan-skyblue-225mm-BAmr4zaA.png";
 //#endregion
 //#region src/assets/csi-super-toophan-induction-cooktop-2600w.png
-var csi_super_toophan_induction_cooktop_2600w_default = "/assets/csi-super-toophan-induction-cooktop-2600w-Bkd_psGr.png";
+var csi_super_toophan_induction_cooktop_2600w_default$1 = "/assets/csi-super-toophan-induction-cooktop-2600w-Bkd_psGr.png";
 //#endregion
 //#region src/assets/csi-super-toophan-room-heater-quartz.png
-var csi_super_toophan_room_heater_quartz_default = "/assets/csi-super-toophan-room-heater-quartz-BxF1kyFu.png";
+var csi_super_toophan_room_heater_quartz_default$1 = "/assets/csi-super-toophan-room-heater-quartz-BxF1kyFu.png";
 //#endregion
 //#region src/lib/products.ts
-var tableRed400 = csi_super_toophan_table_fan_red_400mm_default;
-var wallTeal400 = csi_super_toophan_wall_fan_teal_400mm_default;
-var tableTeal400 = csi_super_toophan_table_fan_teal_400mm_default;
-var deskWhite225 = csi_super_toophan_desk_fan_white_225mm_default;
-var deskSkyBlue225 = csi_super_toophan_desk_fan_skyblue_225mm_default;
-var inductionCooktop = csi_super_toophan_induction_cooktop_2600w_default;
-var roomHeater = csi_super_toophan_room_heater_quartz_default;
-var slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+var tableRed400 = csi_super_toophan_table_fan_red_400mm_default$1;
+var wallTeal400 = csi_super_toophan_wall_fan_teal_400mm_default$1;
+var tableTeal400 = csi_super_toophan_table_fan_teal_400mm_default$1;
+var deskWhite225 = csi_super_toophan_desk_fan_white_225mm_default$1;
+var deskSkyBlue225 = csi_super_toophan_desk_fan_skyblue_225mm_default$1;
+var inductionCooktop = csi_super_toophan_induction_cooktop_2600w_default$1;
+var roomHeater = csi_super_toophan_room_heater_quartz_default$1;
+var slugify$1 = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 var m = (model) => ({
 	voltage: "220–240 V AC",
 	frequency: "50 Hz",
 	...model,
-	slug: slugify(model.modelNo)
+	slug: slugify$1(model.modelNo)
 });
 var spec = (label, value) => ({
 	label,
@@ -65,7 +67,7 @@ var categories = [
 		name: "Ceiling Fans",
 		tagline: "Reliable everyday performance",
 		description: "CSI ceiling fans for homes and offices with copper-wound motors, strong air delivery, and dependable low-voltage operation.",
-		image: csi_super_toophan_ceiling_fan_silver_default,
+		image: csi_super_toophan_ceiling_fan_silver_default$1,
 		models: [m({
 			modelNo: "CSI-ST-CHOCOLATE-1200",
 			name: "Super Toophan Chocolate 1200mm",
@@ -82,8 +84,8 @@ var categories = [
 			bladeMaterial: "Metal blades · Chocolate finish",
 			motor: "Copper-wound induction motor",
 			colors: ["Chocolate"],
-			image: csi_super_toophan_ceiling_fan_classic_default,
-			images: [csi_super_toophan_ceiling_fan_classic_default],
+			image: csi_super_toophan_ceiling_fan_classic_default$1,
+			images: [csi_super_toophan_ceiling_fan_classic_default$1],
 			highlights: [
 				"Best performance in low voltage",
 				"Double ball bearing",
@@ -132,8 +134,8 @@ var categories = [
 			bladeMaterial: "Metal blades · Silver / White-Silver finish",
 			motor: "100% Copper Winding",
 			colors: ["Silver", "White-Silver"],
-			image: csi_super_toophan_ceiling_fan_silver_default,
-			images: [csi_super_toophan_ceiling_fan_silver_default],
+			image: csi_super_toophan_ceiling_fan_silver_default$1,
+			images: [csi_super_toophan_ceiling_fan_silver_default$1],
 			highlights: [
 				"Best performance in low voltage",
 				"100% copper winding",
@@ -174,7 +176,7 @@ var categories = [
 		name: "Pedestal Fans",
 		tagline: "Portable airflow with height adjustment",
 		description: "Pedestal fans with strong copper motors, metal safety grills, oscillation control, and sturdy round bases for home, office, shop, and classroom use.",
-		image: csi_super_toophan_pedestal_fan_400mm_default,
+		image: csi_super_toophan_pedestal_fan_400mm_default$1,
 		models: [m({
 			modelNo: "CSI-ST-PED-400",
 			name: "Super Toophan Pedestal Fan 400mm",
@@ -189,8 +191,8 @@ var categories = [
 			blades: "3",
 			bladeMaterial: "High-grade PP Plastic",
 			motor: "Copper-wound AC induction motor",
-			image: csi_super_toophan_pedestal_fan_400mm_default,
-			images: [csi_super_toophan_pedestal_fan_400mm_default],
+			image: csi_super_toophan_pedestal_fan_400mm_default$1,
+			images: [csi_super_toophan_pedestal_fan_400mm_default$1],
 			highlights: [
 				"Height adjustment",
 				"Tilt adjustment",
@@ -232,7 +234,7 @@ var categories = [
 		name: "Table Fans",
 		tagline: "Compact cooling for desks and counters",
 		description: "Table and mini pedestal fans for desks, bedside tables, shops, and workstations with lightweight placement and quick focused airflow.",
-		image: csi_super_toophan_table_fan_400mm_default,
+		image: csi_super_toophan_table_fan_400mm_default$1,
 		models: [
 			m({
 				modelNo: "CSI-ST-TABLE-400",
@@ -248,8 +250,8 @@ var categories = [
 				blades: "3",
 				bladeMaterial: "PP (Polypropylene) Plastic",
 				motor: "Copper-wound AC induction motor",
-				image: csi_super_toophan_table_fan_400mm_default,
-				images: [csi_super_toophan_table_fan_400mm_default],
+				image: csi_super_toophan_table_fan_400mm_default$1,
+				images: [csi_super_toophan_table_fan_400mm_default$1],
 				highlights: [
 					"Large 400 mm sweep",
 					"Powder-coated steel safety grill",
@@ -297,8 +299,8 @@ var categories = [
 				blades: "3",
 				bladeMaterial: "High-grade PP Plastic",
 				motor: "Copper-wound AC induction motor",
-				image: csi_super_toophan_table_fan_300mm_default,
-				images: [csi_super_toophan_table_fan_300mm_default],
+				image: csi_super_toophan_table_fan_300mm_default$1,
+				images: [csi_super_toophan_table_fan_300mm_default$1],
 				highlights: [
 					"Compact 12-inch size",
 					"High-speed performance",
@@ -597,7 +599,7 @@ var categories = [
 		name: "Special Fans",
 		tagline: "Application-specific cooling solutions",
 		description: "Special-purpose fan models will appear here as you add more CSI specialty products to the catalog.",
-		image: csi_super_toophan_ceiling_fan_silver_default,
+		image: csi_super_toophan_ceiling_fan_silver_default$1,
 		models: []
 	},
 	{
@@ -605,7 +607,7 @@ var categories = [
 		name: "Premium Fans",
 		tagline: "BLDC technology with remote convenience",
 		description: "Premium CSI BLDC fans with remote control, low power draw, high speed, and energy-efficient performance for modern homes.",
-		image: csi_super_toophan_bldc_ceiling_fan_brown_default,
+		image: csi_super_toophan_bldc_ceiling_fan_brown_default$1,
 		models: [m({
 			modelNo: "CSI-ST-BLDC-BROWN-1200",
 			name: "Super Toophan BLDC Brown 1200mm",
@@ -621,8 +623,8 @@ var categories = [
 			bladeMaterial: "Premium finish blades",
 			motor: "Brushless DC (BLDC) · 100% Copper",
 			colors: ["Chocolate Brown"],
-			image: csi_super_toophan_bldc_ceiling_fan_brown_default,
-			images: [csi_super_toophan_bldc_ceiling_fan_brown_default],
+			image: csi_super_toophan_bldc_ceiling_fan_brown_default$1,
+			images: [csi_super_toophan_bldc_ceiling_fan_brown_default$1],
 			highlights: [
 				"5-star energy efficient",
 				"Remote control",
@@ -673,8 +675,8 @@ var categories = [
 			bladeMaterial: "Aluminium",
 			motor: "Brushless DC (BLDC) · 100% Copper",
 			colors: ["White"],
-			image: csi_super_toophan_bldc_ceiling_fan_white_default,
-			images: [csi_super_toophan_bldc_ceiling_fan_white_default],
+			image: csi_super_toophan_bldc_ceiling_fan_white_default$1,
+			images: [csi_super_toophan_bldc_ceiling_fan_white_default$1],
 			highlights: [
 				"RF remote control",
 				"High air delivery",
@@ -836,33 +838,11 @@ var findModel = (categorySlug, modelSlug) => {
 		model
 	};
 };
-var allModels = categories.flatMap((c) => c.models.map((mm) => ({
+categories.flatMap((c) => c.models.map((mm) => ({
 	...mm,
 	categorySlug: c.slug,
 	categoryName: c.name
-})));
-allModels.flatMap((mm) => mm.images && mm.images.length ? mm.images : [mm.image]);
-var searchModels = (query) => {
-	const q = query.trim().toLowerCase();
-	if (!q) return [];
-	return allModels.filter((mm) => [
-		mm.name,
-		mm.modelNo,
-		mm.categoryName,
-		mm.fanType ?? "",
-		mm.description ?? "",
-		mm.sweep ?? "",
-		mm.power ?? "",
-		mm.voltage ?? "",
-		mm.rpm ?? "",
-		mm.motor ?? "",
-		mm.bladeMaterial ?? "",
-		...mm.tags ?? [],
-		...mm.highlights ?? [],
-		...mm.features ?? [],
-		...(mm.specifications ?? []).map((item) => `${item.label} ${item.value ?? ""}`)
-	].join(" ").toLowerCase().includes(q));
-};
+}))).flatMap((mm) => mm.images && mm.images.length ? mm.images : [mm.image]);
 var parseSweep = (s) => {
 	if (!s) return 0;
 	const match = s.match(/(\d+)/);
@@ -874,4 +854,135 @@ var parsePower = (s) => {
 	return match ? parseInt(match[1], 10) : 0;
 };
 //#endregion
-export { parsePower as a, findModel as i, categories as n, parseSweep as o, findCategory as r, searchModels as s, allModels as t };
+//#region src/lib/product-store.ts
+var assetUrls = /* #__PURE__ */ Object.assign({
+	"../assets/csi-logo.png": "/assets/csi-logo-C6Fzs_Aw.png",
+	"../assets/csi-super-toophan-bldc-ceiling-fan-brown.png": "/assets/csi-super-toophan-bldc-ceiling-fan-brown-Byko_7O1.png",
+	"../assets/csi-super-toophan-bldc-ceiling-fan-white.png": "/assets/csi-super-toophan-bldc-ceiling-fan-white-D2jKiRsu.png",
+	"../assets/csi-super-toophan-ceiling-fan-classic.png": "/assets/csi-super-toophan-ceiling-fan-classic-BjzB8J1b.png",
+	"../assets/csi-super-toophan-ceiling-fan-silver.png": "/assets/csi-super-toophan-ceiling-fan-silver-gPRVeQ0L.png",
+	"../assets/csi-super-toophan-desk-fan-skyblue-225mm.png": "/assets/csi-super-toophan-desk-fan-skyblue-225mm-BAmr4zaA.png",
+	"../assets/csi-super-toophan-desk-fan-white-225mm.png": "/assets/csi-super-toophan-desk-fan-white-225mm-BhyST5xa.png",
+	"../assets/csi-super-toophan-induction-cooktop-2600w.png": "/assets/csi-super-toophan-induction-cooktop-2600w-Bkd_psGr.png",
+	"../assets/csi-super-toophan-pedestal-fan-400mm.png": "/assets/csi-super-toophan-pedestal-fan-400mm-BT-nExB8.png",
+	"../assets/csi-super-toophan-room-heater-quartz.png": "/assets/csi-super-toophan-room-heater-quartz-BxF1kyFu.png",
+	"../assets/csi-super-toophan-table-fan-300mm.png": "/assets/csi-super-toophan-table-fan-300mm-BAVs1xxu.png",
+	"../assets/csi-super-toophan-table-fan-400mm.png": "/assets/csi-super-toophan-table-fan-400mm-DIa0A1Rq.png",
+	"../assets/csi-super-toophan-table-fan-red-400mm.png": "/assets/csi-super-toophan-table-fan-red-400mm-B1v9r5bf.png",
+	"../assets/csi-super-toophan-table-fan-teal-400mm.png": "/assets/csi-super-toophan-table-fan-teal-400mm-CgLnDcoT.png",
+	"../assets/csi-super-toophan-wall-fan-teal-400mm.png": "/assets/csi-super-toophan-wall-fan-teal-400mm-CA7Ek-uO.png"
+});
+var assetByName = {};
+var nameByUrl = {};
+for (const [path, url] of Object.entries(assetUrls)) {
+	const name = path.split("/").pop();
+	assetByName[name] = url;
+	nameByUrl[url] = name;
+}
+var resolveImage = (ref) => {
+	if (!ref) return "";
+	if (ref.startsWith("asset:")) return assetByName[ref.slice(6)] ?? "";
+	return ref;
+};
+var toImageRef = (url) => nameByUrl[url] ? `asset:${nameByUrl[url]}` : url;
+var slugify = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+var rowToModel = (row) => {
+	const d = row.data ?? {};
+	const image = resolveImage(d.image);
+	const images = (d.images ?? []).map(resolveImage).filter(Boolean);
+	return {
+		...d,
+		modelNo: d.modelNo || row.slug.toUpperCase(),
+		name: d.name || row.slug,
+		price: Number(d.price ?? 0),
+		slug: row.slug,
+		image,
+		images: images.length ? images : image ? [image] : [],
+		highlights: d.highlights ?? []
+	};
+};
+/** Static catalogue converted to database rows (used once to import existing products). */
+var staticCatalogRows = () => {
+	let order = 0;
+	return categories.flatMap((c) => c.models.map((m) => {
+		const { slug, ...rest } = m;
+		return {
+			category_slug: c.slug,
+			slug,
+			is_published: true,
+			sort_order: order++,
+			data: {
+				...rest,
+				image: toImageRef(m.image),
+				images: (m.images ?? [m.image]).map(toImageRef)
+			}
+		};
+	}));
+};
+var buildCatalog = (rows) => categories.map((c) => ({
+	...c,
+	models: rows.filter((r) => r.category_slug === c.slug).sort((a, b) => a.sort_order - b.sort_order).map(rowToModel)
+}));
+var cache = null;
+var inflight = null;
+var listeners = /* @__PURE__ */ new Set();
+var fetchLiveCatalog = () => {
+	if (inflight) return inflight;
+	inflight = (async () => {
+		try {
+			const { data, error } = await supabase.from("products").select("*").eq("is_published", true).order("sort_order");
+			if (error || !data || data.length === 0) return null;
+			cache = buildCatalog(data);
+			listeners.forEach((l) => l(cache));
+			return cache;
+		} catch {
+			return null;
+		} finally {
+			setTimeout(() => inflight = null, 3e4);
+		}
+	})();
+	return inflight;
+};
+/** Live product catalogue: renders the built-in list first, then swaps in published database products. */
+function useCatalog() {
+	const [cats, setCats] = useState(null);
+	useEffect(() => {
+		if (cache) setCats(cache);
+		const l = (c) => setCats(c);
+		listeners.add(l);
+		fetchLiveCatalog();
+		return () => {
+			listeners.delete(l);
+		};
+	}, []);
+	return {
+		categories: cats ?? categories,
+		live: !!cats
+	};
+}
+var findLiveCategory = (cats, slug) => cats.find((c) => c.slug === slug);
+var searchCatalog = (cats, query) => {
+	const q = query.trim().toLowerCase();
+	if (!q) return [];
+	return cats.flatMap((c) => c.models.map((mm) => ({
+		...mm,
+		categorySlug: c.slug,
+		categoryName: c.name
+	}))).filter((mm) => [
+		mm.name,
+		mm.modelNo,
+		mm.categoryName,
+		mm.fanType ?? "",
+		mm.description ?? "",
+		mm.sweep ?? "",
+		mm.power ?? "",
+		mm.rpm ?? "",
+		mm.motor ?? "",
+		...mm.tags ?? [],
+		...mm.highlights ?? [],
+		...mm.features ?? [],
+		...(mm.specifications ?? []).map((s) => `${s.label} ${s.value ?? ""}`)
+	].join(" ").toLowerCase().includes(q));
+};
+//#endregion
+export { staticCatalogRows as a, findCategory as c, parseSweep as d, slugify as i, findModel as l, resolveImage as n, useCatalog as o, searchCatalog as r, categories as s, findLiveCategory as t, parsePower as u };

@@ -1,5 +1,5 @@
-import { n as categories, s as searchModels } from "./products-CR_RBIhI.js";
-import { t as Route } from "./products.index-D8QYsdxU.js";
+import { o as useCatalog, r as searchCatalog } from "./product-store-CuclNA7Y.js";
+import { t as Route } from "./products.index-EhePRHcs.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { Link } from "@tanstack/react-router";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
@@ -7,7 +7,8 @@ import { ArrowRight, Search } from "lucide-react";
 //#region src/routes/products.index.tsx?tsr-split=component
 function Products() {
 	const { q } = Route.useSearch();
-	const results = q ? searchModels(q) : [];
+	const { categories } = useCatalog();
+	const results = q ? searchCatalog(categories, q) : [];
 	return /* @__PURE__ */ jsx("div", {
 		className: "py-16 px-4 sm:px-6 lg:px-8",
 		children: /* @__PURE__ */ jsx("div", {

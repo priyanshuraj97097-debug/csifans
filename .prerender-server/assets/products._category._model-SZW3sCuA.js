@@ -1,13 +1,37 @@
-import { t as Route } from "./products._category._model-Cr_yrH1c.js";
+import { o as useCatalog, t as findLiveCategory } from "./product-store-CuclNA7Y.js";
+import { t as Route } from "./products._category._model-Bhra6ouk.js";
 import { r as downloadProductCatalogue } from "./catalogue-KWkO4V1f.js";
 import { t as Lightbox } from "./Lightbox-B8utlvBm.js";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { jsx, jsxs } from "react/jsx-runtime";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { ArrowLeft, ArrowRight, Check, Download, Loader2, Tag } from "lucide-react";
 //#region src/routes/products.$category.$model.tsx?tsr-split=component
 function ProductDetailPage() {
-	const { category: cat, model } = Route.useLoaderData();
+	const loaded = Route.useLoaderData();
+	const params = Route.useParams();
+	const { categories: liveCategories, live } = useCatalog();
+	const liveCat = live ? findLiveCategory(liveCategories, params.category) : void 0;
+	const cat = liveCat ?? loaded.category;
+	const model = live ? liveCat?.models.find((m) => m.slug === params.model) : loaded.model;
+	if (!model) return /* @__PURE__ */ jsx("div", {
+		className: "py-24 text-center px-4",
+		children: !live && "pending" in loaded ? /* @__PURE__ */ jsx(Loader2, { className: "mx-auto h-8 w-8 animate-spin text-[#0d6b78]" }) : /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx("h1", {
+			className: "font-[Poppins] text-3xl font-bold text-[#0a2f44]",
+			children: "Product not found"
+		}), /* @__PURE__ */ jsx(Link, {
+			to: "/products",
+			search: {},
+			className: "mt-6 inline-block text-[#0d6b78] underline",
+			children: "Back to products"
+		})] })
+	});
+	return /* @__PURE__ */ jsx(ProductDetailView, {
+		cat,
+		model
+	});
+}
+function ProductDetailView({ cat, model }) {
 	const [downloading, setDownloading] = useState(false);
 	const [lightboxOpen, setLightboxOpen] = useState(false);
 	const [lightboxIndex, setLightboxIndex] = useState(0);
