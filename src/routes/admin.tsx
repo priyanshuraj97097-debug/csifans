@@ -15,6 +15,18 @@ export const ADMIN_EMAIL = "csifans.official@gmail.com";
 const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
 const BADGES = ["New Arrival", "Best Seller", "Energy Efficient", "Premium"];
 
+// The managed Google sign-in broker only runs on Lovable-hosted domains, so on
+// the production domain we sign in on the Lovable admin URL and hand the
+// session back to the production URL. Only this exact URL may receive tokens.
+const PROD_ADMIN_URL = "https://csifans.pages.dev/admin";
+const LOVABLE_ADMIN_URL = "https://csifans.lovable.app/admin";
+const RETURN_TO_KEY = "csi-admin-return-to";
+const isLovableHost = () =>
+  typeof window !== "undefined" &&
+  (window.location.hostname.endsWith("lovable.app") ||
+    window.location.hostname === "localhost" ||
+    window.location.hostname.endsWith("lovableproject.com"));
+
 export const Route = createFileRoute("/admin")({
   ssr: false,
   head: () => ({
