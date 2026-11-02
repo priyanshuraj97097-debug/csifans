@@ -15,17 +15,11 @@ export const ADMIN_EMAIL = "csifans.official@gmail.com";
 const TEN_YEARS = 60 * 60 * 24 * 365 * 10;
 const BADGES = ["New Arrival", "Best Seller", "Energy Efficient", "Premium"];
 
-// The managed Google sign-in broker only runs on Lovable-hosted domains, so on
-// the production domain we sign in on the Lovable admin URL and hand the
-// session back to the production URL. Only this exact URL may receive tokens.
-const PROD_ADMIN_URL = "https://csifans.pages.dev/admin";
-const LOVABLE_ADMIN_URL = "https://csifans.lovable.app/admin";
-const RETURN_TO_KEY = "csi-admin-return-to";
-const isLovableHost = () =>
-  typeof window !== "undefined" &&
-  (window.location.hostname.endsWith("lovable.app") ||
-    window.location.hostname === "localhost" ||
-    window.location.hostname.endsWith("lovableproject.com"));
+const isLovableHost = () => {
+  if (typeof window === "undefined") return false;
+  const hostname = window.location.hostname;
+  return import.meta.env.DEV || hostname.endsWith(".lovable.app") || hostname.endsWith(".lovableproject.com");
+};
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -54,40 +48,12 @@ function AdminPage() {
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-    // Session handoff: sign-in completed on the Lovable host returns here with
-    // tokens in the URL hash (never sent to any server).
-    const hash = new URLSearchParams(window.location.hash.slice(1));
-    const at = hash.get("access_token");
-    const rt = hash.get("refresh_token");
-    if (at && rt) {
-      window.history.replaceState(null, "", window.location.pathname + window.location.search);
-      supabase.auth.setSession({ access_token: at, refresh_token: rt }).finally(() => setReady(true));
-      return () => sub.subscription.unsubscribe();
-    }
-    // Remember the allowed production return URL across the Google round trip.
-    const returnTo = new URLSearchParams(window.location.search).get("return_to");
-    if (returnTo === PROD_ADMIN_URL) sessionStorage.setItem(RETURN_TO_KEY, returnTo);
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setReady(true);
     });
     return () => sub.subscription.unsubscribe();
   }, []);
-
-  // After a verified admin sign-in on the Lovable host, send the session back
-  // to the production admin URL it came from.
-  useEffect(() => {
-    if (isAdmin !== true || !isLovableHost()) return;
-    const returnTo = sessionStorage.getItem(RETURN_TO_KEY);
-    if (returnTo !== PROD_ADMIN_URL) return;
-    sessionStorage.removeItem(RETURN_TO_KEY);
-    supabase.auth.getSession().then(({ data }) => {
-      const s = data.session;
-      if (s) {
-        window.location.replace(`${returnTo}#access_token=${s.access_token}&refresh_token=${s.refresh_token}`);
-      }
-    });
-  }, [isAdmin]);
 
   useEffect(() => {
     if (!session) {
@@ -127,16 +93,23 @@ function Centered({ children }: { children: React.ReactNode }) {
 function Login({ denied }: { denied: string | null }) {
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const onLovableHost = typeof window !== "undefined" &&
-    (window.location.hostname.endsWith("lovable.app") || window.location.hostname === "localhost" || window.location.hostname.endsWith("lovableproject.com"));
+  const onLovableHost = isLovableHost();
 
   const signIn = async () => {
     setBusy(true);
     setErr(null);
-    // The Google broker only exists on Lovable-hosted domains. From any other
-    // host, sign in on the Lovable admin URL and return here afterwards.
     if (!onLovableHost) {
-      window.location.href = `${LOVABLE_ADMIN_URL}?return_to=${encodeURIComponent(window.location.origin + "/admin")}`;
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/admin`,
+          queryParams: { prompt: "select_account", login_hint: ADMIN_EMAIL },
+        },
+      });
+      if (error) {
+        setErr("Google sign-in failed. Please try again.");
+        setBusy(false);
+      }
       return;
     }
     const res = await lovable.auth.signInWithOAuth("google", {
