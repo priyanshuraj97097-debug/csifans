@@ -60,6 +60,8 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("Messages are required", { status: 400 });
         }
 
+        const languageName = typeof (await Promise.resolve(undefined)) === "string" ? undefined : undefined;
+
         // Server-only secrets. Never referenced from client code.
         const geminiKey =
           process.env["GEMINI_API_KEY"] || process.env["GOOGLE_GENERATIVE_AI_API_KEY"];
