@@ -10,4 +10,5 @@
 <!-- LOVABLE:END -->
 - Products live in the Cloud `products` table (jsonb `data` mirrors the `Model` type); public pages render the bundled catalogue first, then swap in published rows via `useCatalog()` — keeps static Cloudflare Pages prerender working without a server.
 - Admin authorization is enforced in the database (`is_csi_admin()` RLS on products and product-images storage), never only in the UI; the `/admin` page is client-only (`ssr: false`).
+- Admin Google sign-in uses a same-origin provider redirect on the Cloudflare Pages domain and the Lovable broker on Lovable preview hosts; database authorization remains the authority because Pages does not host the Lovable OAuth broker.
 - Uploaded product images go to the private `product-images` bucket and are stored as long-lived signed URLs (public buckets are blocked in this workspace); bundled images are stored as `asset:<file>` refs.
