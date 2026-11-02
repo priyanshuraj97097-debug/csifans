@@ -245,7 +245,7 @@ export function SupportChat() {
 
               {error && (
                 <p className="px-1 font-[Inter] text-sm text-red-600">
-                  {t("chat.error")}
+                  {error.message || t("chat.error")}
                 </p>
               )}
             </ConversationContent>

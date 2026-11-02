@@ -17,6 +17,36 @@ type Env = {
 const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai";
 const DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
 
+function safeChatError(error: unknown) {
+  const details = error && typeof error === "object" ? (error as Record<string, unknown>) : {};
+  const statusValue = details.statusCode ?? details.status;
+  const status = typeof statusValue === "number" ? statusValue : undefined;
+
+  let providerMessage: string | undefined;
+  const body = details.responseBody;
+  if (typeof body === "string") {
+    try {
+      const parsed = JSON.parse(body) as { error?: { message?: unknown }; message?: unknown };
+      const nested = parsed.error?.message;
+      if (typeof nested === "string") providerMessage = nested;
+      else if (typeof parsed.message === "string") providerMessage = parsed.message;
+    } catch {
+      // Keep the SDK message below when the response body is not structured.
+    }
+  }
+
+  const raw = providerMessage ?? (error instanceof Error ? error.message : String(error));
+  const message = raw
+    .replace(/\bAIza[0-9A-Za-z_-]{20,}\b/g, "[redacted key]")
+    .replace(/(Bearer\s+)[A-Za-z0-9._~+/-]+/gi, "$1[redacted]")
+    .replace(/((?:api[-_ ]?key|authorization)\s*[:=]\s*)[^\s,;]+/gi, "$1[redacted]")
+    .replace(/\s+/g, " ")
+    .slice(0, 400);
+
+  console.error("Gemini assistant request failed", { status, message });
+  return `${status ? `Gemini returned HTTP ${status}: ` : "Gemini request failed: "}${message || "No provider message was returned."}`;
+}
+
 function buildSystemPrompt(languageName?: string) {
   return languageName && languageName !== "English"
     ? `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected ${languageName}. Reply entirely in ${languageName}, regardless of the language of the question. Keep product names, model numbers, units and URLs unchanged.`
@@ -40,13 +70,12 @@ export const onRequestPost = async (context: {
     );
   }
 
-  const google = createOpenAICompatible({
-    name: "google-gemini",
-    baseURL: GEMINI_BASE_URL,
-    apiKey,
-  });
-
   try {
+    const google = createOpenAICompatible({
+      name: "google-gemini",
+      baseURL: GEMINI_BASE_URL,
+      apiKey,
+    });
     const result = streamText({
       model: google(context.env.GEMINI_MODEL || DEFAULT_GEMINI_MODEL),
       system: buildSystemPrompt(languageName),
@@ -55,12 +84,12 @@ export const onRequestPost = async (context: {
 
     return result.toUIMessageStreamResponse({
       originalMessages: messages as UIMessage[],
+      onError: safeChatError,
     });
   } catch (error) {
-    console.error("Gemini chat request failed", error);
-    return new Response(
-      "The support assistant is temporarily unavailable. Please try again.",
-      { status: 502 },
-    );
+    return new Response(safeChatError(error), {
+      status: 502,
+      headers: { "Cache-Control": "no-store", "Content-Type": "text/plain; charset=utf-8" },
+    });
   }
 };
