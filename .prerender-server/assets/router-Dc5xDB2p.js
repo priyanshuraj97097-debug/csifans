@@ -2,7 +2,7 @@ import { t as csi_logo_default } from "./csi-logo-BiAyxoe9.js";
 import { c as findCategory, o as useCatalog, r as searchCatalog, s as categories } from "./product-store-DsR1t-6o.js";
 import { t as SITE_URL } from "./site-BFylcJ2h.js";
 import { t as Route$25 } from "./routes-Dx3BnZM1.js";
-import { n as Route$26 } from "./admin-hdVSL4DQ.js";
+import { n as Route$26 } from "./admin-C-SBV-nn.js";
 import { t as Route$27 } from "./products.index-D6gWm8y-.js";
 import { t as Route$28 } from "./products._category.index-BOFO1CKH.js";
 import { t as Route$29 } from "./products._category._model-BnJdZYkq.js";

@@ -1,7 +1,7 @@
 import { t as csi_logo_default } from "./csi-logo-BiAyxoe9.js";
 import { a as staticCatalogRows, i as slugify, n as resolveImage, s as categories } from "./product-store-DsR1t-6o.js";
 import { t as supabase } from "./client-qU6B5IM3.js";
-import { t as ADMIN_EMAIL } from "./admin-hdVSL4DQ.js";
+import { t as ADMIN_EMAIL } from "./admin-C-SBV-nn.js";
 import { Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, CheckCircle2, Download, ExternalLink, Eye, EyeOff, LayoutGrid, Loader2, LogOut, Package, Pencil, Plus, Search, ShieldCheck, Trash2, Upload, X } from "lucide-react";
@@ -37,6 +37,7 @@ var isLovableHost = () => {
 	const hostname = window.location.hostname;
 	return hostname.endsWith(".lovable.app") || hostname.endsWith(".lovableproject.com");
 };
+var isAuthorizedAdminEmail = (email) => email?.trim().toLowerCase() === ADMIN_EMAIL;
 var db = supabase;
 function AdminPage() {
 	const [session, setSession] = useState(null);
@@ -61,7 +62,7 @@ function AdminPage() {
 			const { data: u } = await supabase.auth.getUser();
 			const { data: ok } = await db.rpc("is_csi_admin");
 			if (cancelled) return;
-			if (u.user && ok === true) setIsAdmin(true);
+			if (u.user && isAuthorizedAdminEmail(u.user.email) && ok === true) setIsAdmin(true);
 			else {
 				setDenied(u.user?.email ?? "this account");
 				setIsAdmin(false);
