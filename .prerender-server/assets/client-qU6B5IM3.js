@@ -1,5 +1,19 @@
 import { createClient } from "@supabase/supabase-js";
 //#region src/integrations/supabase/previewAuthStorage.ts
+var RESULT = "lovable-preview-auth:result";
+function readBrokerReply(data, requestId) {
+	if (typeof data !== "object" || data === null) return null;
+	if (!("type" in data) || data.type !== RESULT) return null;
+	if (!("requestId" in data) || data.requestId !== requestId) return null;
+	return {
+		ok: "ok" in data && Boolean(data.ok),
+		value: "value" in data && typeof data.value === "string" ? data.value : null
+	};
+}
+/**
+* On a Lovable preview surface, broker the auth session to the editor over
+* postMessage so the project's preview surfaces share one login; else localStorage.
+*/
 function brokeredPreviewStorage() {
 	if (typeof window === "undefined") return void 0;
 	const host = location.hostname;
@@ -9,58 +23,69 @@ function brokeredPreviewStorage() {
 		"lovable.app",
 		"gpt-eng.com",
 		"gptengineer.run"
-	].some((z) => host === z || host.endsWith("." + z)) ? host.match(/* @__PURE__ */ new RegExp("^(?:id-preview(?:-[a-z0-9]+)?|project)--([0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})(?:-dev)?(?=\\.|$)", "i"))?.[1] ?? host.match(/* @__PURE__ */ new RegExp("^([0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})(?=[.-])", "i"))?.[1] : void 0;
-	const framed = window.parent && window.parent !== window;
-	if (!projectId || !framed) return localStorage;
+	].some((z) => host === z || host.endsWith("." + z)) ? (/* @__PURE__ */ new RegExp("^(?:id-preview(?:-[a-z0-9]+)?|project)--([0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})(?:-dev)?(?=\\.|$)", "i")).exec(host)?.[1] ?? (/* @__PURE__ */ new RegExp("^([0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})(?=[.-])", "i")).exec(host)?.[1] : void 0;
+	const parentWindow = window.parent;
+	if (!projectId || !(parentWindow !== null && parentWindow !== window)) return localStorage;
 	const dev = host.endsWith(".lovableproject-dev.com") || host.endsWith(".gpt-eng.com");
 	const EDITOR = dev ? /^https:\/\/([a-z0-9-]+\.)*(lovable\.dev|gptengineer\.app)$|^http:\/\/localhost:3000$/ : /^https:\/\/([a-z0-9-]+\.)*(lovable\.dev|gptengineer\.app)$/;
-	const ancestor = location.ancestorOrigins && location.ancestorOrigins[0] || (document.referrer ? new URL(document.referrer).origin : "");
+	const ancestor = location.ancestorOrigins?.[0] ?? (document.referrer ? new URL(document.referrer).origin : "");
 	const editorOrigins = ancestor && EDITOR.test(ancestor) ? [ancestor] : dev ? ["https://lovable.dev", "http://localhost:3000"] : ["https://lovable.dev"];
-	const RESULT = "lovable-preview-auth:result";
 	const TIMEOUT = 2e3;
 	const newId = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 	const request = (type, key, value) => new Promise((resolve) => {
 		const requestId = newId();
 		let done = false;
-		let timer;
-		const finish = (r) => {
+		const finish = (reply) => {
 			if (done) return;
 			done = true;
 			clearTimeout(timer);
 			window.removeEventListener("message", onMessage);
-			resolve(r);
+			resolve(reply);
 		};
 		const onMessage = (e) => {
-			if (editorOrigins.indexOf(e.origin) < 0) return;
-			const d = e.data;
-			if (d && d.type === RESULT && d.requestId === requestId) finish(d);
+			if (!editorOrigins.includes(e.origin)) return;
+			const reply = readBrokerReply(e.data, requestId);
+			if (reply) finish(reply);
 		};
 		window.addEventListener("message", onMessage);
+		const timer = setTimeout(() => {
+			finish(null);
+		}, TIMEOUT);
 		const msg = {
 			type,
 			requestId,
 			projectId,
 			key
 		};
-		if (value !== void 0) msg["value"] = value;
+		if (value !== void 0) msg.value = value;
 		for (const origin of editorOrigins) window.parent.postMessage(msg, origin);
-		timer = setTimeout(() => finish(null), TIMEOUT);
 	});
 	let firstGet = true;
 	const RETRY_DELAY = 250;
+	const readLocal = (key) => {
+		try {
+			return localStorage.getItem(key);
+		} catch {
+			return;
+		}
+	};
 	return {
 		getItem: async (key) => {
-			let res = await request("lovable-preview-auth:get", key);
+			const local = readLocal(key);
+			let res = await request("lovable-preview-auth:get", key, local ?? void 0);
 			if (!res && firstGet) {
-				await new Promise((r) => setTimeout(r, RETRY_DELAY));
-				res = await request("lovable-preview-auth:get", key);
+				await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+				res = await request("lovable-preview-auth:get", key, local ?? void 0);
 			}
 			firstGet = false;
-			if (res && res.ok && typeof res.value === "string") {
+			if (res?.ok && res.value !== null) {
 				if (res.value === "") {
-					localStorage.removeItem(key);
+					if (local !== void 0 && readLocal(key) === local) localStorage.removeItem(key);
 					return null;
 				}
+				if (local === null && readLocal(key) === null) try {
+					localStorage.setItem(key, res.value);
+				} catch {}
 				return res.value;
 			}
 			return localStorage.getItem(key);
@@ -68,13 +93,14 @@ function brokeredPreviewStorage() {
 		setItem: (key, value) => {
 			localStorage.setItem(key, value);
 			return request("lovable-preview-auth:set", key, value).then((res) => {
-				if (res && res.ok && typeof res.value === "string" && localStorage.getItem(key) === value) if (res.value === "") localStorage.removeItem(key);
+				if (res?.ok && res.value !== null && localStorage.getItem(key) === value) if (res.value === "") localStorage.removeItem(key);
 				else localStorage.setItem(key, res.value);
 			});
 		},
 		removeItem: (key) => {
+			const local = readLocal(key);
 			localStorage.removeItem(key);
-			return request("lovable-preview-auth:remove", key).then(() => void 0);
+			return request("lovable-preview-auth:remove", key, local ?? void 0).then(() => {});
 		}
 	};
 }

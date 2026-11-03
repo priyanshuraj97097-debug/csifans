@@ -1,10 +1,10 @@
-import { o as useCatalog, r as searchCatalog } from "./product-store-CuclNA7Y.js";
-import { t as Route } from "./routes-BSa3wkrm.js";
+import { o as useCatalog, r as searchCatalog } from "./product-store-DsR1t-6o.js";
+import { t as Route } from "./routes-Dx3BnZM1.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
-import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import { useRef, useState } from "react";
 import { ArrowRight, Pause, Play, Search } from "lucide-react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 //#region src/components/site/BrandVideo.tsx
 var VIDEO_SRC = "/videos/csi-super-toophan-brand-video.mp4";
 var POSTER_SRC = "/videos/csi-super-toophan-brand-video-poster.jpg";

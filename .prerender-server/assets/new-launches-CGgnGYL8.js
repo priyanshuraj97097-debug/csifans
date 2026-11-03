@@ -1,8 +1,8 @@
-import { o as useCatalog } from "./product-store-CuclNA7Y.js";
+import { o as useCatalog } from "./product-store-DsR1t-6o.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { Link } from "@tanstack/react-router";
-import { jsx, jsxs } from "react/jsx-runtime";
 import { ArrowRight, Sparkles, Zap } from "lucide-react";
+import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/new-launches.tsx?tsr-split=component
 var LAUNCH_MODEL_NOS = [
 	"CSI-ST-BLDC-BROWN-1200",

@@ -1,10 +1,10 @@
-import { d as parseSweep, o as useCatalog, s as categories, t as findLiveCategory, u as parsePower } from "./product-store-CuclNA7Y.js";
-import { t as Route } from "./products._category.index-n4CnbmEk.js";
+import { d as parseSweep, o as useCatalog, s as categories, t as findLiveCategory, u as parsePower } from "./product-store-DsR1t-6o.js";
+import { t as Route } from "./products._category.index-BOFO1CKH.js";
 import { t as downloadCategoryCatalogue } from "./catalogue-KWkO4V1f.js";
-import { useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { jsx, jsxs } from "react/jsx-runtime";
+import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Download, Loader2, SlidersHorizontal, Tag } from "lucide-react";
+import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/products.$category.index.tsx?tsr-split=component
 function CategoryPage() {
 	const staticCategory = Route.useLoaderData();

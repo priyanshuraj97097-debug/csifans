@@ -1,8 +1,8 @@
-import { l as findModel, s as categories } from "./product-store-CuclNA7Y.js";
+import { l as findModel, s as categories } from "./product-store-DsR1t-6o.js";
 import { t as SITE_URL } from "./site-BFylcJ2h.js";
 import { createFileRoute, lazyRouteComponent, notFound } from "@tanstack/react-router";
 //#region src/routes/products.$category.$model.tsx
-var $$splitComponentImporter = () => import("./products._category._model-SZW3sCuA.js");
+var $$splitComponentImporter = () => import("./products._category._model-BbJ5fHU5.js");
 var $$splitErrorComponentImporter = () => import("./products._category._model-CZJKV-9T.js");
 var $$splitNotFoundComponentImporter = () => import("./products._category._model-DrawftfA.js");
 var Route = createFileRoute("/products/$category/$model")({

@@ -1,6 +1,6 @@
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
-import { jsx, jsxs } from "react/jsx-runtime";
 import { ExternalLink, Linkedin, Mail, MapPin } from "lucide-react";
+import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/contact.tsx?tsr-split=component
 function Contact() {
 	return /* @__PURE__ */ jsx("div", {

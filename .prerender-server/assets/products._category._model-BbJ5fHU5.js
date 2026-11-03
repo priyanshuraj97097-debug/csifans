@@ -1,11 +1,11 @@
-import { o as useCatalog, t as findLiveCategory } from "./product-store-CuclNA7Y.js";
-import { t as Route } from "./products._category._model-Bhra6ouk.js";
+import { o as useCatalog, t as findLiveCategory } from "./product-store-DsR1t-6o.js";
+import { t as Route } from "./products._category._model-BnJdZYkq.js";
 import { r as downloadProductCatalogue } from "./catalogue-KWkO4V1f.js";
-import { t as Lightbox } from "./Lightbox-B8utlvBm.js";
-import { useState } from "react";
+import { t as Lightbox } from "./Lightbox-RoImrvMB.js";
 import { Link } from "@tanstack/react-router";
-import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import { useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Download, Loader2, Tag } from "lucide-react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/products.$category.$model.tsx?tsr-split=component
 function ProductDetailPage() {
 	const loaded = Route.useLoaderData();
