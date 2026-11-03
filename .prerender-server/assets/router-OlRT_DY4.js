@@ -2438,7 +2438,7 @@ function safeChatError(error, provider) {
 		if (typeof nested === "string") providerMessage = nested;
 		else if (typeof parsed.message === "string") providerMessage = parsed.message;
 	} catch {}
-	const message = (providerMessage ?? (error instanceof Error ? error.message : String(error))).replace(/\bAIza[0-9A-Za-z_-]{20,}\b/g, "[redacted key]").replace(/(Bearer\s+)[A-Za-z0-9._~+/-]+/gi, "$1[redacted]").replace(/((?:api[-_ ]?key|authorization)\s*[:=]\s*)[^\s,;]+/gi, "$1[redacted]").replace(/\s+/g, " ").slice(0, 400);
+	const message = (providerMessage ?? (error instanceof Error ? error.message : String(error))).replace(/\bAIza[0-9A-Za-z_-]{20,}\b/g, "[redacted key]").replace(/(Bearer\s+)[A-Za-z0-9._~+/-]+/gi, "$1[redacted]").replace(/([?&\s](?:key|api_key|api-key)=)[^&\s]+/gi, "$1[redacted]").replace(/((?:api[-_ ]?key|authorization)\s*[:=]\s*)[^\s,;]+/gi, "$1[redacted]").replace(/\s+/g, " ").slice(0, 400);
 	console.error("Support assistant request failed", {
 		provider,
 		status,
