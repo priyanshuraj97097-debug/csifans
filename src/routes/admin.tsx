@@ -21,6 +21,9 @@ const isLovableHost = () => {
   return import.meta.env.DEV || hostname.endsWith(".lovable.app") || hostname.endsWith(".lovableproject.com");
 };
 
+const isAuthorizedAdminEmail = (email: string | null | undefined) =>
+  email?.trim().toLowerCase() === ADMIN_EMAIL;
+
 export const Route = createFileRoute("/admin")({
   ssr: false,
   head: () => ({
@@ -66,7 +69,7 @@ function AdminPage() {
       const { data: u } = await supabase.auth.getUser();
       const { data: ok } = await db.rpc("is_csi_admin");
       if (cancelled) return;
-      if (u.user && ok === true) {
+      if (u.user && isAuthorizedAdminEmail(u.user.email) && ok === true) {
         setIsAdmin(true);
       } else {
         setDenied(u.user?.email ?? "this account");
