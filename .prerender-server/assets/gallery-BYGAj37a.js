@@ -1,6 +1,6 @@
-import { o as useCatalog } from "./product-store-CuclNA7Y.js";
+import { o as useCatalog } from "./product-store-DsR1t-6o.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
-import { t as Lightbox } from "./Lightbox-B8utlvBm.js";
+import { t as Lightbox } from "./Lightbox-RoImrvMB.js";
 import { useMemo, useState } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/gallery.tsx?tsr-split=component

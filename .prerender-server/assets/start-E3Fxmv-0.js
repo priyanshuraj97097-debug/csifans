@@ -1,6 +1,6 @@
 import { t as renderErrorPage } from "../server.js";
-import { n as createMiddleware, t as createStart } from "./createStart-Dt05N14y.js";
-import { t as supabase } from "./client-BCj1j12t.js";
+import { t as supabase } from "./client-qU6B5IM3.js";
+import { n as createMiddleware, t as createStart } from "./createStart-CPUe9Bt4.js";
 //#region src/integrations/supabase/auth-attacher.ts
 var attachSupabaseAuth = createMiddleware({ type: "function" }).client(async ({ next }) => {
 	const { data } = await supabase.auth.getSession();

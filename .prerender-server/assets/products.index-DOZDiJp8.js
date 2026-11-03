@@ -1,9 +1,9 @@
-import { o as useCatalog, r as searchCatalog } from "./product-store-CuclNA7Y.js";
-import { t as Route } from "./products.index-EhePRHcs.js";
+import { o as useCatalog, r as searchCatalog } from "./product-store-DsR1t-6o.js";
+import { t as Route } from "./products.index-D6gWm8y-.js";
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
 import { Link } from "@tanstack/react-router";
-import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { ArrowRight, Search } from "lucide-react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/products.index.tsx?tsr-split=component
 function Products() {
 	const { q } = Route.useSearch();

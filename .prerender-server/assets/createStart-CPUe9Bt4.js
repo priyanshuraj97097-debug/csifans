@@ -1,4 +1,4 @@
-//#region node_modules/@tanstack/start-client-core/dist/esm/createMiddleware.js
+//#region ../persist/node_modules/@tanstack/start-client-core/dist/esm/createMiddleware.js
 var createMiddleware = (options, __opts) => {
 	const resolvedOptions = {
 		type: "request",
@@ -26,7 +26,7 @@ var createMiddleware = (options, __opts) => {
 	};
 };
 //#endregion
-//#region node_modules/@tanstack/start-client-core/dist/esm/createStart.js
+//#region ../persist/node_modules/@tanstack/start-client-core/dist/esm/createStart.js
 function dedupeSerializationAdapters(deduped, serializationAdapters) {
 	for (let i = 0, len = serializationAdapters.length; i < len; i++) {
 		const current = serializationAdapters[i];

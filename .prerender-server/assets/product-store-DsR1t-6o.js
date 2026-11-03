@@ -1,4 +1,4 @@
-import { t as supabase } from "./client-BCj1j12t.js";
+import { t as supabase } from "./client-qU6B5IM3.js";
 import { useEffect, useState } from "react";
 //#region src/assets/csi-super-toophan-table-fan-400mm.png
 var csi_super_toophan_table_fan_400mm_default$1 = "/assets/csi-super-toophan-table-fan-400mm-DIa0A1Rq.png";

@@ -1,17 +1,17 @@
 import { t as csi_logo_default } from "./csi-logo-BiAyxoe9.js";
-import { c as findCategory, o as useCatalog, r as searchCatalog, s as categories } from "./product-store-CuclNA7Y.js";
+import { c as findCategory, o as useCatalog, r as searchCatalog, s as categories } from "./product-store-DsR1t-6o.js";
 import { t as SITE_URL } from "./site-BFylcJ2h.js";
-import { t as Route$25 } from "./routes-BSa3wkrm.js";
-import { n as Route$26 } from "./admin-DfDoVzKY.js";
-import { t as Route$27 } from "./products.index-EhePRHcs.js";
-import { t as Route$28 } from "./products._category.index-n4CnbmEk.js";
-import { t as Route$29 } from "./products._category._model-Bhra6ouk.js";
+import { t as Route$25 } from "./routes-Dx3BnZM1.js";
+import { n as Route$26 } from "./admin-C-SBV-nn.js";
+import { t as Route$27 } from "./products.index-D6gWm8y-.js";
+import { t as Route$28 } from "./products._category.index-BOFO1CKH.js";
+import { t as Route$29 } from "./products._category._model-BnJdZYkq.js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HeadContent, Link, Outlet, Scripts, createFileRoute, createRootRouteWithContext, createRouter, lazyRouteComponent, notFound, useNavigate, useRouter } from "@tanstack/react-router";
 import * as React from "react";
 import { createContext, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { HeadContent, Link, Outlet, Scripts, createFileRoute, createRootRouteWithContext, createRouter, lazyRouteComponent, notFound, useNavigate, useRouter } from "@tanstack/react-router";
-import { Fragment, jsx, jsxs } from "react/jsx-runtime";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ArrowDownIcon, Check, ChevronDown, CornerDownLeftIcon, Globe, Loader2Icon, Menu, Mic, MicOff, RotateCcw, Search, SquareIcon, X, XIcon } from "lucide-react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, convertToModelMessages, streamText } from "ai";
 import { Slot } from "@radix-ui/react-slot";
@@ -1471,7 +1471,7 @@ function SupportChat() {
 						}),
 						error && /* @__PURE__ */ jsx("p", {
 							className: "px-1 font-[Inter] text-sm text-red-600",
-							children: t("chat.error")
+							children: error.message || t("chat.error")
 						})
 					]
 				}), /* @__PURE__ */ jsx(ConversationScrollButton, {})]
@@ -1737,7 +1737,7 @@ function RootComponent() {
 }
 //#endregion
 //#region src/routes/about.tsx
-var $$splitComponentImporter$16 = () => import("./about-BtLyYdYH.js");
+var $$splitComponentImporter$16 = () => import("./about-CGtWOrWF.js");
 var Route$23 = createFileRoute("/about")({
 	head: () => ({
 		meta: [
@@ -1772,7 +1772,7 @@ var $$splitComponentImporter$15 = () => import("./blog-GHsbigBI.js");
 var Route$22 = createFileRoute("/blog")({ component: lazyRouteComponent($$splitComponentImporter$15, "component") });
 //#endregion
 //#region src/routes/contact.tsx
-var $$splitComponentImporter$14 = () => import("./contact-B-xT60z4.js");
+var $$splitComponentImporter$14 = () => import("./contact-BtHgs96s.js");
 var Route$21 = createFileRoute("/contact")({
 	head: () => ({
 		meta: [
@@ -1811,7 +1811,7 @@ var Route$21 = createFileRoute("/contact")({
 });
 //#endregion
 //#region src/routes/downloads.tsx
-var $$splitComponentImporter$13 = () => import("./downloads-CZhQL-8q.js");
+var $$splitComponentImporter$13 = () => import("./downloads-CxVqrE5-.js");
 var Route$20 = createFileRoute("/downloads")({
 	head: () => ({
 		meta: [
@@ -1842,7 +1842,7 @@ var Route$20 = createFileRoute("/downloads")({
 });
 //#endregion
 //#region src/routes/gallery.tsx
-var $$splitComponentImporter$12 = () => import("./gallery-Bj7zt0XY.js");
+var $$splitComponentImporter$12 = () => import("./gallery-BYGAj37a.js");
 var Route$19 = createFileRoute("/gallery")({
 	head: () => ({
 		meta: [
@@ -2038,7 +2038,7 @@ var Route$18 = createFileRoute("/mcp")({ server: { handlers: { ANY: createTanSta
 }) } } });
 //#endregion
 //#region src/routes/new-launches.tsx
-var $$splitComponentImporter$11 = () => import("./new-launches-BsLwzhpr.js");
+var $$splitComponentImporter$11 = () => import("./new-launches-CGgnGYL8.js");
 var Route$17 = createFileRoute("/new-launches")({
 	head: () => ({
 		meta: [
@@ -2426,6 +2426,26 @@ ${buildKnowledgeBase()}`;
 /** Google's OpenAI-compatible endpoint for the Gemini API. */
 var GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai";
 var DEFAULT_GEMINI_MODEL = "gemini-3.6-flash";
+function safeChatError(error, provider) {
+	const details = error && typeof error === "object" ? error : {};
+	const statusValue = details.statusCode ?? details.status;
+	const status = typeof statusValue === "number" ? statusValue : void 0;
+	let providerMessage;
+	const body = details.responseBody;
+	if (typeof body === "string") try {
+		const parsed = JSON.parse(body);
+		const nested = parsed.error?.message;
+		if (typeof nested === "string") providerMessage = nested;
+		else if (typeof parsed.message === "string") providerMessage = parsed.message;
+	} catch {}
+	const message = (providerMessage ?? (error instanceof Error ? error.message : String(error))).replace(/\bAIza[0-9A-Za-z_-]{20,}\b/g, "[redacted key]").replace(/(Bearer\s+)[A-Za-z0-9._~+/-]+/gi, "$1[redacted]").replace(/([?&\s](?:key|api_key|api-key)=)[^&\s]+/gi, "$1[redacted]").replace(/((?:api[-_ ]?key|authorization)\s*[:=]\s*)[^\s,;]+/gi, "$1[redacted]").replace(/\s+/g, " ").slice(0, 400);
+	console.error("Support assistant request failed", {
+		provider,
+		status,
+		message
+	});
+	return `${provider}${status ? ` returned HTTP ${status}` : " request failed"}: ${message || "No provider message was returned."}`;
+}
 function buildSystemPrompt(languageName) {
 	return languageName && languageName !== "English" ? `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected ${languageName}. Reply entirely in ${languageName}, regardless of the language of the question. Keep product names, model numbers, units and URLs unchanged.` : `${SUPPORT_SYSTEM_PROMPT}\n\nLANGUAGE: The customer has selected English. Reply in English unless they explicitly ask for another language.`;
 }
@@ -2435,23 +2455,27 @@ var Route$10 = createFileRoute("/api/chat")({ server: { handlers: { POST: async 
 	const geminiKey = process.env["GEMINI_API_KEY"] || process.env["GOOGLE_GENERATIVE_AI_API_KEY"];
 	const lovableKey = process.env["LOVABLE_API_KEY"];
 	const system = buildSystemPrompt(languageName);
-	const modelMessages = await convertToModelMessages(messages);
-	if (geminiKey) {
-		const google = createOpenAICompatible({
-			name: "google-gemini",
-			baseURL: GEMINI_BASE_URL,
-			apiKey: geminiKey
+	if (geminiKey) try {
+		return streamText({
+			model: createOpenAICompatible({
+				name: "google-gemini",
+				baseURL: GEMINI_BASE_URL,
+				apiKey: geminiKey
+			})(process.env["GEMINI_MODEL"] || DEFAULT_GEMINI_MODEL),
+			system,
+			messages: await convertToModelMessages(messages)
+		}).toUIMessageStreamResponse({
+			originalMessages: messages,
+			onError: (error) => safeChatError(error, "Gemini")
 		});
-		try {
-			return streamText({
-				model: google(process.env["GEMINI_MODEL"] || DEFAULT_GEMINI_MODEL),
-				system,
-				messages: modelMessages
-			}).toUIMessageStreamResponse({ originalMessages: messages });
-		} catch (error) {
-			console.error("Gemini chat request failed", error);
-			return new Response("The support assistant is temporarily unavailable. Please try again.", { status: 502 });
-		}
+	} catch (error) {
+		return new Response(safeChatError(error, "Gemini"), {
+			status: 502,
+			headers: {
+				"Cache-Control": "no-store",
+				"Content-Type": "text/plain; charset=utf-8"
+			}
+		});
 	}
 	if (!lovableKey) return new Response("AI support is not configured. Set the GEMINI_API_KEY environment variable.", { status: 500 });
 	const initialRunId = getLovableAiGatewayRunId(request);
@@ -2459,15 +2483,16 @@ var Route$10 = createFileRoute("/api/chat")({ server: { handlers: { POST: async 
 	return withLovableAiGatewayRunIdHeader(streamText({
 		model: gateway("google/gemini-3.6-flash"),
 		system,
-		messages: modelMessages
+		messages: await convertToModelMessages(messages)
 	}).toUIMessageStreamResponse({
 		originalMessages: messages,
+		onError: (error) => safeChatError(error, "AI provider"),
 		headers: getLovableAiGatewayResponseHeaders(void 0, { ...initialRunId ? { "X-Lovable-AIG-Run-ID": initialRunId } : {} })
 	}), gateway);
 } } } });
 //#endregion
 //#region src/routes/blog.index.tsx
-var $$splitComponentImporter$8 = () => import("./blog.index-BZg7C07q.js");
+var $$splitComponentImporter$8 = () => import("./blog.index-AiRFaDiL.js");
 var Route$9 = createFileRoute("/blog/")({
 	head: () => ({
 		meta: [
@@ -2722,7 +2747,7 @@ var Route$5 = createFileRoute("/products/$category")({
 });
 //#endregion
 //#region src/routes/services.index.tsx
-var $$splitComponentImporter$3 = () => import("./services.index-ByTam-xV.js");
+var $$splitComponentImporter$3 = () => import("./services.index-hl36uiTl.js");
 var Route$4 = createFileRoute("/services/")({
 	head: () => ({
 		meta: [

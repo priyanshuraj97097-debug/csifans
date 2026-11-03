@@ -1,11 +1,11 @@
 import { t as csi_logo_default } from "./csi-logo-BiAyxoe9.js";
-import { a as staticCatalogRows, i as slugify, n as resolveImage, s as categories } from "./product-store-CuclNA7Y.js";
-import { t as supabase } from "./client-BCj1j12t.js";
-import "./admin-DfDoVzKY.js";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { a as staticCatalogRows, i as slugify, n as resolveImage, s as categories } from "./product-store-DsR1t-6o.js";
+import { t as supabase } from "./client-qU6B5IM3.js";
+import { t as ADMIN_EMAIL } from "./admin-C-SBV-nn.js";
 import { Link } from "@tanstack/react-router";
-import { jsx, jsxs } from "react/jsx-runtime";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AlertCircle, CheckCircle2, Download, ExternalLink, Eye, EyeOff, LayoutGrid, Loader2, LogOut, Package, Pencil, Plus, Search, ShieldCheck, Trash2, Upload, X } from "lucide-react";
+import { jsx, jsxs } from "react/jsx-runtime";
 import { createLovableAuth } from "@lovable.dev/cloud-auth-js";
 //#region src/integrations/lovable/index.ts
 var lovableAuth = createLovableAuth();
@@ -32,10 +32,12 @@ var BADGES = [
 	"Energy Efficient",
 	"Premium"
 ];
-var PROD_ADMIN_URL = "https://csifans.pages.dev/admin";
-var LOVABLE_ADMIN_URL = "https://csifans.lovable.app/admin";
-var RETURN_TO_KEY = "csi-admin-return-to";
-var isLovableHost = () => typeof window !== "undefined" && (window.location.hostname.endsWith("lovable.app") || window.location.hostname === "localhost" || window.location.hostname.endsWith("lovableproject.com"));
+var isLovableHost = () => {
+	if (typeof window === "undefined") return false;
+	const hostname = window.location.hostname;
+	return hostname.endsWith(".lovable.app") || hostname.endsWith(".lovableproject.com");
+};
+var isAuthorizedAdminEmail = (email) => email?.trim().toLowerCase() === ADMIN_EMAIL;
 var db = supabase;
 function AdminPage() {
 	const [session, setSession] = useState(null);
@@ -44,35 +46,12 @@ function AdminPage() {
 	const [denied, setDenied] = useState(null);
 	useEffect(() => {
 		const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
-		const hash = new URLSearchParams(window.location.hash.slice(1));
-		const at = hash.get("access_token");
-		const rt = hash.get("refresh_token");
-		if (at && rt) {
-			window.history.replaceState(null, "", window.location.pathname + window.location.search);
-			supabase.auth.setSession({
-				access_token: at,
-				refresh_token: rt
-			}).finally(() => setReady(true));
-			return () => sub.subscription.unsubscribe();
-		}
-		const returnTo = new URLSearchParams(window.location.search).get("return_to");
-		if (returnTo === PROD_ADMIN_URL) sessionStorage.setItem(RETURN_TO_KEY, returnTo);
 		supabase.auth.getSession().then(({ data }) => {
 			setSession(data.session);
 			setReady(true);
 		});
 		return () => sub.subscription.unsubscribe();
 	}, []);
-	useEffect(() => {
-		if (isAdmin !== true || !isLovableHost()) return;
-		const returnTo = sessionStorage.getItem(RETURN_TO_KEY);
-		if (returnTo !== PROD_ADMIN_URL) return;
-		sessionStorage.removeItem(RETURN_TO_KEY);
-		supabase.auth.getSession().then(({ data }) => {
-			const s = data.session;
-			if (s) window.location.replace(`${returnTo}#access_token=${s.access_token}&refresh_token=${s.refresh_token}`);
-		});
-	}, [isAdmin]);
 	useEffect(() => {
 		if (!session) {
 			setIsAdmin(null);
@@ -83,7 +62,7 @@ function AdminPage() {
 			const { data: u } = await supabase.auth.getUser();
 			const { data: ok } = await db.rpc("is_csi_admin");
 			if (cancelled) return;
-			if (u.user && ok === true) setIsAdmin(true);
+			if (u.user && isAuthorizedAdminEmail(u.user.email) && ok === true) setIsAdmin(true);
 			else {
 				setDenied(u.user?.email ?? "this account");
 				setIsAdmin(false);
@@ -107,12 +86,25 @@ function Centered({ children }) {
 function Login({ denied }) {
 	const [busy, setBusy] = useState(false);
 	const [err, setErr] = useState(null);
-	const onLovableHost = typeof window !== "undefined" && (window.location.hostname.endsWith("lovable.app") || window.location.hostname === "localhost" || window.location.hostname.endsWith("lovableproject.com"));
+	const onLovableHost = isLovableHost();
 	const signIn = async () => {
 		setBusy(true);
 		setErr(null);
 		if (!onLovableHost) {
-			window.location.href = `${LOVABLE_ADMIN_URL}?return_to=${encodeURIComponent(window.location.origin + "/admin")}`;
+			const { error } = await supabase.auth.signInWithOAuth({
+				provider: "google",
+				options: {
+					redirectTo: `${window.location.origin}/admin`,
+					queryParams: {
+						prompt: "select_account",
+						login_hint: ADMIN_EMAIL
+					}
+				}
+			});
+			if (error) {
+				setErr("Google sign-in failed. Please try again.");
+				setBusy(false);
+			}
 			return;
 		}
 		if ((await lovable.auth.signInWithOAuth("google", {

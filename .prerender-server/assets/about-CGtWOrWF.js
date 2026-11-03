@@ -1,6 +1,6 @@
 import { t as SectionHeader } from "./SectionHeader-DnE8YoMs.js";
-import { jsx, jsxs } from "react/jsx-runtime";
 import { Eye, Factory, ShieldCheck, Target } from "lucide-react";
+import { jsx, jsxs } from "react/jsx-runtime";
 //#region src/routes/about.tsx?tsr-split=component
 function About() {
 	return /* @__PURE__ */ jsx("div", {

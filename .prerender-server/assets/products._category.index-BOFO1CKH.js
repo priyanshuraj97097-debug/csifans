@@ -1,7 +1,7 @@
-import { c as findCategory } from "./product-store-CuclNA7Y.js";
+import { c as findCategory } from "./product-store-DsR1t-6o.js";
 import { createFileRoute, lazyRouteComponent, notFound } from "@tanstack/react-router";
 //#region src/routes/products.$category.index.tsx
-var $$splitComponentImporter = () => import("./products._category.index-BANDQOMU.js");
+var $$splitComponentImporter = () => import("./products._category.index-gu6kPgoC.js");
 var Route = createFileRoute("/products/$category/")({
 	loader: ({ params }) => {
 		const cat = findCategory(params.category);

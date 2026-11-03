@@ -1,6 +1,6 @@
 import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
 //#region src/routes/admin.tsx
-var $$splitComponentImporter = () => import("./admin-DC1oADcG.js");
+var $$splitComponentImporter = () => import("./admin-BLT0UmWW.js");
 var ADMIN_EMAIL = "csifans.official@gmail.com";
 var Route = createFileRoute("/admin")({
 	ssr: false,
