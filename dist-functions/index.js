@@ -57,7 +57,7 @@ function getErrorMessage(error51) {
 var marker, symbol, _a, _b, AISDKError, name, marker2, symbol2, _a2, _b2, APICallError, name2, marker3, symbol3, _a3, _b3, EmptyResponseBodyError, name3, marker4, symbol4, _a4, _b4, InvalidArgumentError, name4, marker5, symbol5, _a5, _b5, InvalidPromptError, name5, marker6, symbol6, _a6, _b6, InvalidResponseDataError, name6, marker7, symbol7, _a7, _b7, JSONParseError, name7, marker8, symbol8, _a8, _b8, LoadAPIKeyError, name8, marker9, symbol9, _a9, _b9, LoadSettingError, name9, marker10, symbol10, _a10, _b10, NoContentGeneratedError, name10, marker11, symbol11, _a11, _b11, NoSuchModelError, name11, marker12, symbol12, _a12, _b12, NoSuchProviderReferenceError, name12, marker13, symbol13, _a13, _b13, TooManyEmbeddingValuesForCallError, name13, marker14, symbol14, _a14, _b14, TypeValidationError, name14, marker15, symbol15, _a15, _b15, UnsupportedFunctionalityError;
 var init_dist = __esm({
   "../../persist/node_modules/@ai-sdk/provider/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     marker = "vercel.ai.error";
     symbol = Symbol.for(marker);
     AISDKError = class _AISDKError extends (_b = Error, _a = symbol, _b) {
@@ -495,7 +495,7 @@ function config(newConfig) {
 var _a16, NEVER, $brand, $ZodAsyncError, $ZodEncodeError, globalConfig;
 var init_core = __esm({
   "../../persist/node_modules/zod/v4/core/core.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     NEVER = /* @__PURE__ */ Object.freeze({
       status: "aborted"
     });
@@ -1136,7 +1136,7 @@ function uint8ArrayToHex(bytes) {
 var EVALUATING, captureStackTrace, allowsEval, getParsedType, propertyKeyTypes, primitiveTypes, NUMBER_FORMAT_RANGES, BIGINT_FORMAT_RANGES, Class;
 var init_util = __esm({
   "../../persist/node_modules/zod/v4/core/util.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core();
     __name(assertEqual, "assertEqual");
     __name(assertNotEqual, "assertNotEqual");
@@ -1408,7 +1408,7 @@ function prettifyError(error51) {
 var initializer, $ZodError, $ZodRealError;
 var init_errors = __esm({
   "../../persist/node_modules/zod/v4/core/errors.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core();
     init_util();
     initializer = /* @__PURE__ */ __name((inst, def) => {
@@ -1441,7 +1441,7 @@ var init_errors = __esm({
 var _parse, parse, _parseAsync, parseAsync, _safeParse, safeParse, _safeParseAsync, safeParseAsync, _encode, encode, _decode, decode, _encodeAsync, encodeAsync, _decodeAsync, decodeAsync, _safeEncode, safeEncode, _safeDecode, safeDecode, _safeEncodeAsync, safeEncodeAsync, _safeDecodeAsync, safeDecodeAsync;
 var init_parse = __esm({
   "../../persist/node_modules/zod/v4/core/parse.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core();
     init_errors();
     init_util();
@@ -1627,7 +1627,7 @@ function fixedBase64url(length) {
 var cuid, cuid2, ulid, xid, ksuid, nanoid, duration, extendedDuration, guid, uuid, uuid4, uuid6, uuid7, email, html5Email, rfc5322Email, unicodeEmail, idnEmail, browserEmail, _emoji, ipv4, ipv6, mac, cidrv4, cidrv6, base64, base64url, hostname, domain, httpProtocol, e164, dateSource, date, string, bigint, integer, number, boolean, _null, _undefined, lowercase, uppercase, hex, md5_hex, md5_base64, md5_base64url, sha1_hex, sha1_base64, sha1_base64url, sha256_hex, sha256_base64, sha256_base64url, sha384_hex, sha384_base64, sha384_base64url, sha512_hex, sha512_base64, sha512_base64url;
 var init_regexes = __esm({
   "../../persist/node_modules/zod/v4/core/regexes.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     cuid = /^[cC][0-9a-z]{6,}$/;
     cuid2 = /^[0-9a-z]+$/;
@@ -1715,7 +1715,7 @@ function handleCheckPropertyResult(result, payload, property) {
 var $ZodCheck, numericOriginMap, $ZodCheckLessThan, $ZodCheckGreaterThan, $ZodCheckMultipleOf, $ZodCheckNumberFormat, $ZodCheckBigIntFormat, $ZodCheckMaxSize, $ZodCheckMinSize, $ZodCheckSizeEquals, $ZodCheckMaxLength, $ZodCheckMinLength, $ZodCheckLengthEquals, $ZodCheckStringFormat, $ZodCheckRegex, $ZodCheckLowerCase, $ZodCheckUpperCase, $ZodCheckIncludes, $ZodCheckStartsWith, $ZodCheckEndsWith, $ZodCheckProperty, $ZodCheckMimeType, $ZodCheckOverwrite;
 var init_checks = __esm({
   "../../persist/node_modules/zod/v4/core/checks.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core();
     init_regexes();
     init_util();
@@ -2268,7 +2268,7 @@ var init_checks = __esm({
 var Doc;
 var init_doc = __esm({
   "../../persist/node_modules/zod/v4/core/doc.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     Doc = class {
       static {
         __name(this, "Doc");
@@ -2313,7 +2313,7 @@ var init_doc = __esm({
 var version;
 var init_versions = __esm({
   "../../persist/node_modules/zod/v4/core/versions.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     version = {
       major: 4,
       minor: 4,
@@ -2729,7 +2729,7 @@ function handleRefineResult(result, payload, input, inst) {
 var $ZodType, $ZodString, $ZodStringFormat, $ZodGUID, $ZodUUID, $ZodEmail, $ZodURL, $ZodEmoji, $ZodNanoID, $ZodCUID, $ZodCUID2, $ZodULID, $ZodXID, $ZodKSUID, $ZodISODateTime, $ZodISODate, $ZodISOTime, $ZodISODuration, $ZodIPv4, $ZodIPv6, $ZodMAC, $ZodCIDRv4, $ZodCIDRv6, $ZodBase64, $ZodBase64URL, $ZodE164, $ZodJWT, $ZodCustomStringFormat, $ZodNumber, $ZodNumberFormat, $ZodBoolean, $ZodBigInt, $ZodBigIntFormat, $ZodSymbol, $ZodUndefined, $ZodNull, $ZodAny, $ZodUnknown, $ZodNever, $ZodVoid, $ZodDate, $ZodArray, $ZodObject, $ZodObjectJIT, $ZodUnion, $ZodXor, $ZodDiscriminatedUnion, $ZodIntersection, $ZodTuple, $ZodRecord, $ZodMap, $ZodSet, $ZodEnum, $ZodLiteral, $ZodFile, $ZodTransform, $ZodOptional, $ZodExactOptional, $ZodNullable, $ZodDefault, $ZodPrefault, $ZodNonOptional, $ZodSuccess, $ZodCatch, $ZodNaN, $ZodPipe, $ZodCodec, $ZodPreprocess, $ZodReadonly, $ZodTemplateLiteral, $ZodFunction, $ZodPromise, $ZodLazy, $ZodCustom;
 var init_schemas = __esm({
   "../../persist/node_modules/zod/v4/core/schemas.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_checks();
     init_core();
     init_doc();
@@ -4462,7 +4462,7 @@ function ar_default() {
 var error;
 var init_ar = __esm({
   "../../persist/node_modules/zod/v4/locales/ar.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -4578,7 +4578,7 @@ function az_default() {
 var error2;
 var init_az = __esm({
   "../../persist/node_modules/zod/v4/locales/az.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error2 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -4708,7 +4708,7 @@ function be_default() {
 var error3;
 var init_be = __esm({
   "../../persist/node_modules/zod/v4/locales/be.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     __name(getBelarusianPlural, "getBelarusianPlural");
     error3 = /* @__PURE__ */ __name(() => {
@@ -4860,7 +4860,7 @@ function bg_default() {
 var error4;
 var init_bg = __esm({
   "../../persist/node_modules/zod/v4/locales/bg.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error4 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -4990,7 +4990,7 @@ function ca_default() {
 var error5;
 var init_ca = __esm({
   "../../persist/node_modules/zod/v4/locales/ca.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error5 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5108,7 +5108,7 @@ function cs_default() {
 var error6;
 var init_cs = __esm({
   "../../persist/node_modules/zod/v4/locales/cs.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error6 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5229,7 +5229,7 @@ function da_default() {
 var error7;
 var init_da = __esm({
   "../../persist/node_modules/zod/v4/locales/da.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error7 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5354,7 +5354,7 @@ function de_default() {
 var error8;
 var init_de = __esm({
   "../../persist/node_modules/zod/v4/locales/de.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error8 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5472,7 +5472,7 @@ function el_default() {
 var error9;
 var init_el = __esm({
   "../../persist/node_modules/zod/v4/locales/el.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error9 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5591,7 +5591,7 @@ function en_default() {
 var error10;
 var init_en = __esm({
   "../../persist/node_modules/zod/v4/locales/en.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error10 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5713,7 +5713,7 @@ function eo_default() {
 var error11;
 var init_eo = __esm({
   "../../persist/node_modules/zod/v4/locales/eo.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error11 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5832,7 +5832,7 @@ function es_default() {
 var error12;
 var init_es = __esm({
   "../../persist/node_modules/zod/v4/locales/es.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error12 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -5974,7 +5974,7 @@ function fa_default() {
 var error13;
 var init_fa = __esm({
   "../../persist/node_modules/zod/v4/locales/fa.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error13 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -6098,7 +6098,7 @@ function fi_default() {
 var error14;
 var init_fi = __esm({
   "../../persist/node_modules/zod/v4/locales/fi.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error14 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -6220,7 +6220,7 @@ function fr_default() {
 var error15;
 var init_fr = __esm({
   "../../persist/node_modules/zod/v4/locales/fr.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error15 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -6355,7 +6355,7 @@ function fr_CA_default() {
 var error16;
 var init_fr_CA = __esm({
   "../../persist/node_modules/zod/v4/locales/fr-CA.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error16 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -6472,7 +6472,7 @@ function he_default() {
 var error17;
 var init_he = __esm({
   "../../persist/node_modules/zod/v4/locales/he.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error17 = /* @__PURE__ */ __name(() => {
       const TypeNames = {
@@ -6675,7 +6675,7 @@ function hr_default() {
 var error18;
 var init_hr = __esm({
   "../../persist/node_modules/zod/v4/locales/hr.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error18 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -6807,7 +6807,7 @@ function hu_default() {
 var error19;
 var init_hu = __esm({
   "../../persist/node_modules/zod/v4/locales/hu.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error19 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -6935,7 +6935,7 @@ function hy_default() {
 var error20;
 var init_hy = __esm({
   "../../persist/node_modules/zod/v4/locales/hy.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     __name(getArmenianPlural, "getArmenianPlural");
     __name(withDefiniteArticle, "withDefiniteArticle");
@@ -7084,7 +7084,7 @@ function id_default() {
 var error21;
 var init_id = __esm({
   "../../persist/node_modules/zod/v4/locales/id.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error21 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7200,7 +7200,7 @@ function is_default() {
 var error22;
 var init_is = __esm({
   "../../persist/node_modules/zod/v4/locales/is.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error22 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7319,7 +7319,7 @@ function it_default() {
 var error23;
 var init_it = __esm({
   "../../persist/node_modules/zod/v4/locales/it.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error23 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7437,7 +7437,7 @@ function ja_default() {
 var error24;
 var init_ja = __esm({
   "../../persist/node_modules/zod/v4/locales/ja.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error24 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7554,7 +7554,7 @@ function ka_default() {
 var error25;
 var init_ka = __esm({
   "../../persist/node_modules/zod/v4/locales/ka.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error25 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7676,7 +7676,7 @@ function km_default() {
 var error26;
 var init_km = __esm({
   "../../persist/node_modules/zod/v4/locales/km.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error26 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7793,7 +7793,7 @@ function kh_default() {
 }
 var init_kh = __esm({
   "../../persist/node_modules/zod/v4/locales/kh.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_km();
     __name(kh_default, "default");
   }
@@ -7808,7 +7808,7 @@ function ko_default() {
 var error27;
 var init_ko = __esm({
   "../../persist/node_modules/zod/v4/locales/ko.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error27 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -7939,7 +7939,7 @@ function lt_default() {
 var capitalizeFirstCharacter, error28;
 var init_lt = __esm({
   "../../persist/node_modules/zod/v4/locales/lt.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     capitalizeFirstCharacter = /* @__PURE__ */ __name((text2) => {
       return text2.charAt(0).toUpperCase() + text2.slice(1);
@@ -8143,7 +8143,7 @@ function mk_default() {
 var error29;
 var init_mk = __esm({
   "../../persist/node_modules/zod/v4/locales/mk.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error29 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8262,7 +8262,7 @@ function ms_default() {
 var error30;
 var init_ms = __esm({
   "../../persist/node_modules/zod/v4/locales/ms.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error30 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8379,7 +8379,7 @@ function nl_default() {
 var error31;
 var init_nl = __esm({
   "../../persist/node_modules/zod/v4/locales/nl.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error31 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8499,7 +8499,7 @@ function no_default() {
 var error32;
 var init_no = __esm({
   "../../persist/node_modules/zod/v4/locales/no.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error32 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8617,7 +8617,7 @@ function ota_default() {
 var error33;
 var init_ota = __esm({
   "../../persist/node_modules/zod/v4/locales/ota.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error33 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8736,7 +8736,7 @@ function ps_default() {
 var error34;
 var init_ps = __esm({
   "../../persist/node_modules/zod/v4/locales/ps.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error34 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8860,7 +8860,7 @@ function pl_default() {
 var error35;
 var init_pl = __esm({
   "../../persist/node_modules/zod/v4/locales/pl.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error35 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -8979,7 +8979,7 @@ function pt_default() {
 var error36;
 var init_pt = __esm({
   "../../persist/node_modules/zod/v4/locales/pt.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error36 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9097,7 +9097,7 @@ function ro_default() {
 var error37;
 var init_ro = __esm({
   "../../persist/node_modules/zod/v4/locales/ro.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error37 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9241,7 +9241,7 @@ function ru_default() {
 var error38;
 var init_ru = __esm({
   "../../persist/node_modules/zod/v4/locales/ru.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     __name(getRussianPlural, "getRussianPlural");
     error38 = /* @__PURE__ */ __name(() => {
@@ -9393,7 +9393,7 @@ function sl_default() {
 var error39;
 var init_sl = __esm({
   "../../persist/node_modules/zod/v4/locales/sl.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error39 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9512,7 +9512,7 @@ function sv_default() {
 var error40;
 var init_sv = __esm({
   "../../persist/node_modules/zod/v4/locales/sv.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error40 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9632,7 +9632,7 @@ function ta_default() {
 var error41;
 var init_ta = __esm({
   "../../persist/node_modules/zod/v4/locales/ta.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error41 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9752,7 +9752,7 @@ function th_default() {
 var error42;
 var init_th = __esm({
   "../../persist/node_modules/zod/v4/locales/th.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error42 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9872,7 +9872,7 @@ function tr_default() {
 var error43;
 var init_tr = __esm({
   "../../persist/node_modules/zod/v4/locales/tr.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error43 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -9987,7 +9987,7 @@ function uk_default() {
 var error44;
 var init_uk = __esm({
   "../../persist/node_modules/zod/v4/locales/uk.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error44 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10102,7 +10102,7 @@ function ua_default() {
 }
 var init_ua = __esm({
   "../../persist/node_modules/zod/v4/locales/ua.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_uk();
     __name(ua_default, "default");
   }
@@ -10117,7 +10117,7 @@ function ur_default() {
 var error45;
 var init_ur = __esm({
   "../../persist/node_modules/zod/v4/locales/ur.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error45 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10237,7 +10237,7 @@ function uz_default() {
 var error46;
 var init_uz = __esm({
   "../../persist/node_modules/zod/v4/locales/uz.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error46 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10357,7 +10357,7 @@ function vi_default() {
 var error47;
 var init_vi = __esm({
   "../../persist/node_modules/zod/v4/locales/vi.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error47 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10475,7 +10475,7 @@ function zh_CN_default() {
 var error48;
 var init_zh_CN = __esm({
   "../../persist/node_modules/zod/v4/locales/zh-CN.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error48 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10594,7 +10594,7 @@ function zh_TW_default() {
 var error49;
 var init_zh_TW = __esm({
   "../../persist/node_modules/zod/v4/locales/zh-TW.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error49 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10711,7 +10711,7 @@ function yo_default() {
 var error50;
 var init_yo = __esm({
   "../../persist/node_modules/zod/v4/locales/yo.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_util();
     error50 = /* @__PURE__ */ __name(() => {
       const Sizable = {
@@ -10877,7 +10877,7 @@ __export(locales_exports, {
 });
 var init_locales = __esm({
   "../../persist/node_modules/zod/v4/locales/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_ar();
     init_az();
     init_be();
@@ -10940,7 +10940,7 @@ function registry() {
 var _a17, $output, $input, $ZodRegistry, globalRegistry;
 var init_registries = __esm({
   "../../persist/node_modules/zod/v4/core/registries.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     $output = /* @__PURE__ */ Symbol("ZodOutput");
     $input = /* @__PURE__ */ Symbol("ZodInput");
     $ZodRegistry = class {
@@ -12026,7 +12026,7 @@ function _stringFormat(Class2, format, fnOrRegex, _params = {}) {
 var TimePrecision;
 var init_api = __esm({
   "../../persist/node_modules/zod/v4/core/api.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_checks();
     init_registries();
     init_schemas();
@@ -12503,7 +12503,7 @@ function isTransforming(_schema, _ctx) {
 var createToJSONSchemaMethod, createStandardJSONSchemaMethod;
 var init_to_json_schema = __esm({
   "../../persist/node_modules/zod/v4/core/to-json-schema.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_registries();
     __name(initializeContext, "initializeContext");
     __name(process2, "process");
@@ -12564,7 +12564,7 @@ function toJSONSchema(input, params) {
 var formatMap, stringProcessor, numberProcessor, booleanProcessor, bigintProcessor, symbolProcessor, nullProcessor, undefinedProcessor, voidProcessor, neverProcessor, anyProcessor, unknownProcessor, dateProcessor, enumProcessor, literalProcessor, nanProcessor, templateLiteralProcessor, fileProcessor, successProcessor, customProcessor, functionProcessor, transformProcessor, mapProcessor, setProcessor, arrayProcessor, objectProcessor, unionProcessor, intersectionProcessor, tupleProcessor, recordProcessor, nullableProcessor, nonoptionalProcessor, defaultProcessor, prefaultProcessor, catchProcessor, pipeProcessor, readonlyProcessor, promiseProcessor, optionalProcessor, lazyProcessor, allProcessors;
 var init_json_schema_processors = __esm({
   "../../persist/node_modules/zod/v4/core/json-schema-processors.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_to_json_schema();
     init_util();
     formatMap = {
@@ -13083,7 +13083,7 @@ var init_json_schema_processors = __esm({
 var JSONSchemaGenerator;
 var init_json_schema_generator = __esm({
   "../../persist/node_modules/zod/v4/core/json-schema-generator.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_json_schema_processors();
     init_to_json_schema();
     JSONSchemaGenerator = class {
@@ -13169,7 +13169,7 @@ var init_json_schema_generator = __esm({
 var json_schema_exports = {};
 var init_json_schema = __esm({
   "../../persist/node_modules/zod/v4/core/json-schema.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
   }
 });
 
@@ -13453,7 +13453,7 @@ __export(core_exports2, {
 });
 var init_core2 = __esm({
   "../../persist/node_modules/zod/v4/core/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core();
     init_parse();
     init_errors();
@@ -13508,7 +13508,7 @@ __export(checks_exports2, {
 });
 var init_checks2 = __esm({
   "../../persist/node_modules/zod/v4/classic/checks.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
   }
 });
@@ -13540,7 +13540,7 @@ function duration2(params) {
 var ZodISODateTime, ZodISODate, ZodISOTime, ZodISODuration;
 var init_iso = __esm({
   "../../persist/node_modules/zod/v4/classic/iso.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     init_schemas2();
     ZodISODateTime = /* @__PURE__ */ $constructor("ZodISODateTime", (inst, def) => {
@@ -13570,7 +13570,7 @@ var init_iso = __esm({
 var initializer2, ZodError, ZodRealError;
 var init_errors2 = __esm({
   "../../persist/node_modules/zod/v4/classic/errors.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     init_core2();
     init_util();
@@ -13619,7 +13619,7 @@ var init_errors2 = __esm({
 var parse2, parseAsync2, safeParse2, safeParseAsync2, encode2, decode2, encodeAsync2, decodeAsync2, safeEncode2, safeDecode2, safeEncodeAsync2, safeDecodeAsync2;
 var init_parse2 = __esm({
   "../../persist/node_modules/zod/v4/classic/parse.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     init_errors2();
     parse2 = /* @__PURE__ */ _parse(ZodRealError);
@@ -14322,7 +14322,7 @@ function preprocess(fn, schema) {
 var _installedGroups, ZodType, _ZodString, ZodString, ZodStringFormat, ZodEmail, ZodGUID, ZodUUID, ZodURL, ZodEmoji, ZodNanoID, ZodCUID, ZodCUID2, ZodULID, ZodXID, ZodKSUID, ZodIPv4, ZodMAC, ZodIPv6, ZodCIDRv4, ZodCIDRv6, ZodBase64, ZodBase64URL, ZodE164, ZodJWT, ZodCustomStringFormat, ZodNumber, ZodNumberFormat, ZodBoolean, ZodBigInt, ZodBigIntFormat, ZodSymbol, ZodUndefined, ZodNull, ZodAny, ZodUnknown, ZodNever, ZodVoid, ZodDate, ZodArray, ZodObject, ZodUnion, ZodXor, ZodDiscriminatedUnion, ZodIntersection, ZodTuple, ZodRecord, ZodMap, ZodSet, ZodEnum, ZodLiteral, ZodFile, ZodTransform, ZodOptional, ZodExactOptional, ZodNullable, ZodDefault, ZodPrefault, ZodNonOptional, ZodSuccess, ZodCatch, ZodNaN, ZodPipe, ZodCodec, ZodPreprocess, ZodReadonly, ZodTemplateLiteral, ZodLazy, ZodPromise, ZodFunction, ZodCustom, describe2, meta2, stringbool;
 var init_schemas2 = __esm({
   "../../persist/node_modules/zod/v4/classic/schemas.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     init_core2();
     init_json_schema_processors();
@@ -15214,7 +15214,7 @@ function getErrorMap() {
 var ZodIssueCode, ZodFirstPartyTypeKind;
 var init_compat = __esm({
   "../../persist/node_modules/zod/v4/classic/compat.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     ZodIssueCode = {
       invalid_type: "invalid_type",
@@ -15642,7 +15642,7 @@ function fromJSONSchema(schema, params) {
 var z, RECOGNIZED_KEYS;
 var init_from_json_schema = __esm({
   "../../persist/node_modules/zod/v4/classic/from-json-schema.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_registries();
     init_checks2();
     init_iso();
@@ -15757,7 +15757,7 @@ function date4(params) {
 }
 var init_coerce = __esm({
   "../../persist/node_modules/zod/v4/classic/coerce.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     init_schemas2();
     __name(string3, "string");
@@ -16012,7 +16012,7 @@ __export(external_exports, {
 });
 var init_external = __esm({
   "../../persist/node_modules/zod/v4/classic/external.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_core2();
     init_schemas2();
     init_checks2();
@@ -16035,7 +16035,7 @@ var init_external = __esm({
 // ../../persist/node_modules/zod/v4/classic/index.js
 var init_classic = __esm({
   "../../persist/node_modules/zod/v4/classic/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_external();
     init_external();
   }
@@ -16044,7 +16044,7 @@ var init_classic = __esm({
 // ../../persist/node_modules/zod/v4/index.js
 var init_v4 = __esm({
   "../../persist/node_modules/zod/v4/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_classic();
   }
 });
@@ -16226,7 +16226,7 @@ function isEventPrefix(chunk, i, firstCharCode) {
 var ParseError, LF, CR, SPACE;
 var init_dist2 = __esm({
   "../../persist/node_modules/eventsource-parser/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     ParseError = class extends Error {
       static {
         __name(this, "ParseError");
@@ -16249,7 +16249,7 @@ var init_dist2 = __esm({
 var EventSourceParserStream;
 var init_stream = __esm({
   "../../persist/node_modules/eventsource-parser/dist/stream.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist2();
     EventSourceParserStream = class extends TransformStream {
       static {
@@ -16284,7 +16284,7 @@ var init_stream = __esm({
 var WORKFLOW_SERIALIZE, WORKFLOW_DESERIALIZE;
 var init_dist3 = __esm({
   "../../persist/node_modules/@workflow/serde/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     WORKFLOW_SERIALIZE = /* @__PURE__ */ Symbol.for("workflow-serialize");
     WORKFLOW_DESERIALIZE = /* @__PURE__ */ Symbol.for("workflow-deserialize");
   }
@@ -18069,7 +18069,7 @@ function withoutTrailingSlash(url2) {
 var textDecoder, btoa2, atob2, imageMediaTypeSignatures, documentMediaTypeSignatures, audioMediaTypeSignaturesWithoutMp4, audioMediaTypeSignatures, videoMediaTypeSignatures, DEFAULT_SNIFF_BYTES, MAX_SIGNATURE_BYTES, MAX_ID3_TAG_BYTES, ID3_SCAN_BYTES, stripID3, topLevelSignatureTables, name15, marker16, symbol17, _a18, _b16, DownloadError, safeNodeFetchPromise, initialGlobalFetch, initialGlobalFetchIsNodeDefault, BLOCKED_REQUEST_HEADERS, MAX_DOWNLOAD_REDIRECTS, REDIRECT_STATUS_CODES, DEFAULT_MAX_DOWNLOAD_SIZE, createIdGenerator, generateId, FETCH_FAILED_ERROR_MESSAGES, BUN_ERROR_CODES, VERSION, suspectProtoRx, suspectConstructorRx, ignoreOverride, defaultOptions, getDefaultOptions, parseCatchDef, integerDateParser, isJsonSchema7AllOfType, emojiRegex, zodPatterns, ALPHA_NUMERIC, primitiveMappings, asAnyOf, parseOptionalDef, parsePipelineDef, parseReadonlyDef, selectParser, getRelativePath, get$ref, addMeta, getRefs, zod3ToJsonSchema, schemaSymbol, getOriginalFetch2, postJsonToApi, postFormDataToApi, postToApi, textDecoder2, createJsonErrorResponseHandler, createEventSourceResponseHandler, createJsonResponseHandler, name22, marker22, symbol22, _a22, _b22, SerializationError, StreamingToolCallTracker;
 var init_dist4 = __esm({
   "../../persist/node_modules/@ai-sdk/provider-utils/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist();
     init_dist();
     init_dist();
@@ -19718,7 +19718,7 @@ function createOpenAICompatible(options) {
 var openaiCompatibleErrorDataSchema, defaultOpenAICompatibleErrorStructure, openaiCompatibleLanguageModelChatOptions, OpenAICompatibleChatLanguageModel, openaiCompatibleTokenUsageSchema, OpenAICompatibleChatResponseSchema, chunkBaseSchema, createOpenAICompatibleChatChunkSchema, openaiCompatibleLanguageModelCompletionOptions, OpenAICompatibleCompletionLanguageModel, usageSchema, openaiCompatibleCompletionResponseSchema, createOpenAICompatibleCompletionChunkSchema, openaiCompatibleEmbeddingModelOptions, OpenAICompatibleEmbeddingModel, openaiTextEmbeddingResponseSchema, OpenAICompatibleImageModel, openaiCompatibleImageResponseSchema, VERSION2;
 var init_dist5 = __esm({
   "../../persist/node_modules/@ai-sdk/openai-compatible/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist4();
     init_v4();
     init_v4();
@@ -20949,7 +20949,7 @@ function getErrorMessage2(error51) {
 var marker17, symbol18, _a19, _b17, AISDKError2, name16, marker23, symbol23, _a23, _b23, APICallError2, name23, marker32, symbol32, _a32, _b32, EmptyResponseBodyError2, name32, marker42, symbol42, _a42, _b42, InvalidArgumentError2, name42, marker52, symbol52, _a52, _b52, InvalidPromptError2, name52, marker62, symbol62, _a62, _b62, InvalidResponseDataError2, name62, marker72, symbol72, _a72, _b72, JSONParseError2, name72, marker82, symbol82, _a82, _b82, LoadAPIKeyError2, name82, marker92, symbol92, _a92, _b92, LoadSettingError2, name92, marker102, symbol102, _a102, _b102, NoContentGeneratedError2, name102, marker112, symbol112, _a112, _b112, NoSuchModelError2, name112, marker122, symbol122, _a122, _b122, NoSuchProviderReferenceError2, name122, marker132, symbol132, _a132, _b132, TooManyEmbeddingValuesForCallError2, name132, marker142, symbol142, _a142, _b142, TypeValidationError2, name142, marker152, symbol152, _a152, _b152, UnsupportedFunctionalityError2;
 var init_dist6 = __esm({
   "../../persist/node_modules/@ai-sdk/gateway/node_modules/@ai-sdk/provider/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     marker17 = "vercel.ai.error";
     symbol18 = Symbol.for(marker17);
     AISDKError2 = class _AISDKError2 extends (_b17 = Error, _a19 = symbol18, _b17) {
@@ -23159,7 +23159,7 @@ function withoutTrailingSlash2(url2) {
 var textDecoder3, WEBSOCKET_OPEN_STATE, btoa3, atob3, audioMediaTypeSignaturesWithoutMp42, audioMediaTypeSignatures2, MAX_SIGNATURE_BYTES2, MAX_ID3_TAG_BYTES2, ID3_SCAN_BYTES2, name17, marker18, symbol19, _a20, _b18, DownloadError2, safeNodeFetchPromise2, initialGlobalFetch2, initialGlobalFetchIsNodeDefault2, BLOCKED_REQUEST_HEADERS2, MAX_DOWNLOAD_REDIRECTS2, REDIRECT_STATUS_CODES2, DEFAULT_MAX_DOWNLOAD_SIZE2, createIdGenerator2, generateId2, FETCH_FAILED_ERROR_MESSAGES2, BUN_ERROR_CODES2, VERSION3, getOriginalFetch, getFromApi, suspectProtoRx2, suspectConstructorRx2, ignoreOverride2, defaultOptions2, getDefaultOptions2, parseCatchDef2, integerDateParser2, isJsonSchema7AllOfType2, emojiRegex2, zodPatterns2, ALPHA_NUMERIC2, primitiveMappings2, asAnyOf2, parseOptionalDef2, parsePipelineDef2, parseReadonlyDef2, selectParser2, getRelativePath2, get$ref2, addMeta2, getRefs2, zod3ToJsonSchema2, schemaSymbol2, getOriginalFetch22, postJsonToApi2, postToApi2, textDecoder22, createJsonErrorResponseHandler2, createEventSourceResponseHandler2, createJsonResponseHandler2, name24, marker24, symbol24, _a24, _b24, SerializationError2, TRANSCRIPTION_STREAM_START_FRAME_TYPE, TRANSCRIPTION_STREAM_AUDIO_DONE_FRAME_TYPE;
 var init_dist7 = __esm({
   "../../persist/node_modules/@ai-sdk/gateway/node_modules/@ai-sdk/provider-utils/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist6();
     init_dist6();
     init_dist6();
@@ -24096,7 +24096,7 @@ var init_dist7 = __esm({
 var require_get_context = __commonJS({
   "../../persist/node_modules/@vercel/oidc/dist/get-context.js"(exports, module) {
     "use strict";
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     var __defProp3 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -24133,7 +24133,7 @@ var require_get_context = __commonJS({
 var require_auth_errors = __commonJS({
   "../../persist/node_modules/@vercel/oidc/dist/auth-errors.js"(exports, module) {
     "use strict";
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     var __defProp3 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -24184,7 +24184,7 @@ var require_auth_errors = __commonJS({
 var require_index_browser = __commonJS({
   "../../persist/node_modules/@vercel/oidc/dist/index-browser.js"(exports, module) {
     "use strict";
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     var __defProp3 = Object.defineProperty;
     var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
     var __getOwnPropNames2 = Object.getOwnPropertyNames;
@@ -24957,7 +24957,7 @@ function assertGatewayClientSecretServerEnvironment() {
 var import_oidc, import_oidc2, GATEWAY_REALTIME_SUBPROTOCOL, GATEWAY_TRANSCRIPTION_SUBPROTOCOL, GATEWAY_AUTH_SUBPROTOCOL_PREFIX, GATEWAY_TEAM_SUBPROTOCOL_PREFIX, marker19, symbol20, _a21, _b19, GatewayError, name18, marker25, symbol25, _a25, _b25, GatewayAuthenticationError, name25, marker33, symbol33, _a33, _b33, GatewayInvalidRequestError, name33, marker43, symbol43, _a43, _b43, GatewayRateLimitError, name43, marker53, symbol53, modelNotFoundParamSchema, _a53, _b53, GatewayModelNotFoundError, name53, marker63, symbol63, _a63, _b63, GatewayInternalServerError, name63, marker73, symbol73, _a73, _b73, GatewayFailedDependencyError, name73, marker83, symbol83, forbiddenParamSchema, _a83, _b83, GatewayForbiddenError, name83, marker93, symbol93, _a93, _b93, GatewayResponseError, gatewayErrorResponseSchema, name93, marker103, symbol103, _a103, _b103, GatewayTimeoutError, GATEWAY_AUTH_METHOD_HEADER, VERCEL_AI_GATEWAY_TEAM_HEADER, gatewayAuthMethodSchema, KNOWN_MODEL_TYPES, GatewayFetchMetadata, gatewayAvailableModelsResponseSchema, gatewayCreditsResponseSchema, GatewaySpendReport, gatewaySpendReportResponseSchema, GatewayGenerationInfoFetcher, gatewayGenerationInfoResponseSchema, GatewayLanguageModel, GatewayEmbeddingModel, gatewayEmbeddingWarningSchema, gatewayEmbeddingResponseSchema, GatewayImageModel, providerMetadataEntrySchema, gatewayImageWarningSchema, gatewayImageUsageSchema, gatewayImageResponseSchema, GatewayVideoModel, providerMetadataEntrySchema2, gatewayVideoDataSchema, gatewayVideoWarningSchema, gatewayVideoEventSchema, GatewayRerankingModel, gatewayRerankingWarningSchema, gatewayRerankingResponseSchema, GatewaySpeechModel, providerMetadataEntrySchema3, gatewaySpeechWarningSchema, gatewaySpeechResponseSchema, GatewayTranscriptionModel, MAX_AUDIO_FRAME_BYTES, providerMetadataEntrySchema4, gatewayTranscriptionWarningSchema, gatewayTranscriptionResponseSchema, SERVER_ERROR_STATUS_CODES, GatewayRealtimeModel, exaSearchInputSchema, exaSearchOutputSchema, exaSearchToolFactory, exaSearch, parallelSearchInputSchema, parallelSearchOutputSchema, parallelSearchToolFactory, parallelSearch, perplexitySearchInputSchema, perplexitySearchOutputSchema, perplexitySearchToolFactory, perplexitySearch, gatewayTools, VERSION4, AI_GATEWAY_PROTOCOL_VERSION, gatewayClientSecretResponseSchema, gateway;
 var init_dist8 = __esm({
   "../../persist/node_modules/@ai-sdk/gateway/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist7();
     init_v4();
     init_dist6();
@@ -27052,7 +27052,7 @@ function getErrorMessage3(error51) {
 var marker20, symbol21, _a26, _b20, AISDKError3, name19, marker26, symbol26, _a27, _b26, APICallError3, name26, marker34, symbol34, _a34, _b34, EmptyResponseBodyError3, name34, marker44, symbol44, _a44, _b44, InvalidArgumentError3, name44, marker54, symbol54, _a54, _b54, InvalidPromptError3, name54, marker64, symbol64, _a64, _b64, InvalidResponseDataError3, name64, marker74, symbol74, _a74, _b74, JSONParseError3, name74, marker84, symbol84, _a84, _b84, LoadAPIKeyError3, name84, marker94, symbol94, _a94, _b94, LoadSettingError3, name94, marker104, symbol104, _a104, _b104, NoContentGeneratedError3, name103, marker113, symbol113, _a113, _b113, NoSuchModelError3, name113, marker123, symbol123, _a123, _b123, NoSuchProviderReferenceError3, name123, marker133, symbol133, _a133, _b133, TooManyEmbeddingValuesForCallError3, name133, marker143, symbol143, _a143, _b143, TypeValidationError3, name143, marker153, symbol153, _a153, _b153, UnsupportedFunctionalityError3;
 var init_dist9 = __esm({
   "../../persist/node_modules/ai/node_modules/@ai-sdk/provider/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     marker20 = "vercel.ai.error";
     symbol21 = Symbol.for(marker20);
     AISDKError3 = class _AISDKError3 extends (_b20 = Error, _a26 = symbol21, _b20) {
@@ -29096,7 +29096,7 @@ function getToolCaller(tool2) {
 var textDecoder4, btoa4, atob4, DelayedPromise, imageMediaTypeSignatures2, documentMediaTypeSignatures2, audioMediaTypeSignaturesWithoutMp43, audioMediaTypeSignatures3, videoMediaTypeSignatures2, DEFAULT_SNIFF_BYTES2, MAX_SIGNATURE_BYTES3, MAX_ID3_TAG_BYTES3, ID3_SCAN_BYTES3, stripID32, topLevelSignatureTables2, name20, marker21, symbol27, _a28, _b21, DownloadError3, safeNodeFetchPromise3, initialGlobalFetch3, initialGlobalFetchIsNodeDefault3, BLOCKED_REQUEST_HEADERS3, MAX_DOWNLOAD_REDIRECTS3, REDIRECT_STATUS_CODES3, DEFAULT_MAX_DOWNLOAD_SIZE3, createIdGenerator3, generateId3, suspectProtoRx3, suspectConstructorRx3, ignoreOverride3, defaultOptions3, getDefaultOptions3, parseCatchDef3, integerDateParser3, isJsonSchema7AllOfType3, emojiRegex3, zodPatterns3, ALPHA_NUMERIC3, primitiveMappings3, asAnyOf3, parseOptionalDef3, parsePipelineDef3, parseReadonlyDef3, selectParser3, getRelativePath3, get$ref3, addMeta3, getRefs3, zod3ToJsonSchema3, schemaSymbol3, retryWithExponentialBackoff, textDecoder23, name27, marker27, symbol28, _a29, _b27, SerializationError3;
 var init_dist10 = __esm({
   "../../persist/node_modules/ai/node_modules/@ai-sdk/provider-utils/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist9();
     init_dist9();
     init_dist9();
@@ -35962,7 +35962,7 @@ function createDownload(options) {
 var __defProp2, __export2, name21, marker28, symbol29, _a30, InvalidArgumentError4, name28, marker29, symbol210, _a210, name35, marker35, symbol35, _a35, InvalidToolApprovalError, name45, marker45, symbol45, _a45, InvalidToolApprovalSignatureError, name55, marker55, symbol55, _a55, InvalidToolInputError, name65, marker65, symbol65, _a65, ToolCallNotFoundForApprovalError, name75, marker75, symbol75, _a75, MissingToolResultsError, name85, marker85, symbol85, _a85, name95, marker95, symbol95, _a95, NoObjectGeneratedError, name104, marker105, symbol105, _a105, NoOutputGeneratedError, name114, marker114, symbol114, _a114, name124, marker124, symbol124, _a124, name134, marker134, symbol134, _a134, name144, marker144, symbol144, _a144, name152, marker154, symbol154, _a154, NoSuchToolError, name162, marker162, symbol162, _a162, ToolCallRepairError, UnsupportedModelVersionError, name172, marker172, symbol172, _a172, UIMessageStreamError, name182, marker182, symbol182, _a182, InvalidDataContentError, name192, marker192, symbol192, _a192, InvalidMessageRoleError, name202, marker202, symbol202, _a202, MessageConversionError, name212, marker212, symbol212, _a212, RetryError, FIRST_WARNING_INFO_MESSAGE, hasLoggedBefore, logWarnings, VERSION5, download, createDefaultDownloadFunction, URL_EXTENSION_TO_MEDIA_TYPE, jsonValueSchema, providerMetadataSchema, fileInlineDataSchema, providerReferenceSchema, textPartSchema, imagePartSchema, taggedFileDataSchema, taggedReasoningFileDataSchema, filePartSchema, reasoningPartSchema, customPartSchema, reasoningFilePartSchema, toolCallPartSchema, outputSchema, toolResultPartSchema, toolApprovalRequestSchema, toolApprovalResponseSchema, systemModelMessageSchema, userModelMessageSchema, assistantModelMessageSchema, toolModelMessageSchema, modelMessageSchema, retryWithExponentialBackoffRespectingRetryHeaders, DefaultGeneratedFile, DefaultGeneratedFileWithType, output_exports, text, object2, array2, choice, json2, AI_SDK_TELEMETRY_TRACING_CHANNEL, diagnosticsChannelPromise, DefaultStepResult, DIRECT_TOOL_CALL, encoder, encoder2, originalGenerateId, originalGenerateCallId, JsonToSseTransformStream, UI_MESSAGE_STREAM_HEADERS, toolMetadataSchema, uiMessageChunkSchema, originalGenerateId2, originalGenerateCallId2, originalGenerateId3, originalGenerateCallId3, isOutputChunkType, DefaultStreamTextResult, toolMetadataSchema2, providerReferenceSchema2, uiMessagesSchema, originalGenerateCallId4, originalGenerateCallId5, originalGenerateId4, originalGenerateId5, defaultDownload, name222, marker222, symbol222, _a222, originalGenerateCallId6, defaultDownload2;
 var init_dist11 = __esm({
   "../../persist/node_modules/ai/dist/index.js"() {
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist10();
     init_dist9();
     init_dist9();
@@ -39407,7 +39407,7 @@ var SUPPORT_SYSTEM_PROMPT;
 var init_knowledge_generated = __esm({
   "api/knowledge.generated.ts"() {
     "use strict";
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     SUPPORT_SYSTEM_PROMPT = `You are the CSI Fans (CSI Super Toophan) customer support assistant on the company's official website.
 
 RULES \u2014 follow strictly:
@@ -39725,7 +39725,7 @@ var GEMINI_BASE_URL, DEFAULT_GEMINI_MODEL, onRequestPost;
 var init_chat = __esm({
   "api/chat.ts"() {
     "use strict";
-    init_functionsRoutes_0_20415142894848093();
+    init_functionsRoutes_0_6444199947244564();
     init_dist5();
     init_dist11();
     init_knowledge_generated();
@@ -39770,10 +39770,10 @@ var init_chat = __esm({
   }
 });
 
-// ../.wrangler/tmp/pages-Q4bLtg/functionsRoutes-0.20415142894848093.mjs
+// ../.wrangler/tmp/pages-RCqOYe/functionsRoutes-0.6444199947244564.mjs
 var routes;
-var init_functionsRoutes_0_20415142894848093 = __esm({
-  "../.wrangler/tmp/pages-Q4bLtg/functionsRoutes-0.20415142894848093.mjs"() {
+var init_functionsRoutes_0_6444199947244564 = __esm({
+  "../.wrangler/tmp/pages-RCqOYe/functionsRoutes-0.6444199947244564.mjs"() {
     "use strict";
     init_chat();
     routes = [
@@ -39789,10 +39789,10 @@ var init_functionsRoutes_0_20415142894848093 = __esm({
 });
 
 // ../../root/.npm/_npx/32026684e21afda6/node_modules/wrangler/templates/pages-template-worker.ts
-init_functionsRoutes_0_20415142894848093();
+init_functionsRoutes_0_6444199947244564();
 
 // ../../root/.npm/_npx/32026684e21afda6/node_modules/path-to-regexp/dist.es2015/index.js
-init_functionsRoutes_0_20415142894848093();
+init_functionsRoutes_0_6444199947244564();
 function lexer(str) {
   var tokens = [];
   var i = 0;
