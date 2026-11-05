@@ -117,6 +117,7 @@ async function startStream(
   model: string,
   system: string,
   messages: Awaited<ReturnType<typeof convertToModelMessages>>,
+  originalMessages: UIMessage[],
 ): Promise<StreamAttempt> {
   let capturedError: unknown;
   const result = streamText({
@@ -127,7 +128,7 @@ async function startStream(
   });
 
   const response = result.toUIMessageStreamResponse({
-    originalMessages: [] as UIMessage[],
+    originalMessages,
     onError: (error) => {
       capturedError = error;
       return safeChatError(error);
@@ -219,7 +220,7 @@ export const onRequestPost = async (context: {
   let lastError: unknown;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const model = models[attempt % models.length];
-    const started = await startStream(google, model, system, modelMessages);
+    const started = await startStream(google, model, system, modelMessages, messages as UIMessage[]);
 
     if (started.ok) {
       const stream = new ReadableStream<Uint8Array>({
