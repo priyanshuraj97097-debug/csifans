@@ -43,10 +43,21 @@ function extractError(error: unknown): ErrorInfo {
   const body = details.responseBody;
   if (typeof body === "string") {
     try {
-      const parsed = JSON.parse(body) as { error?: { message?: unknown }; message?: unknown };
-      const nested = parsed.error?.message;
-      if (typeof nested === "string") providerMessage = nested;
-      else if (typeof parsed.message === "string") providerMessage = parsed.message;
+      const parsed = JSON.parse(body) as unknown;
+      // Google sometimes wraps the error object in a JSON array.
+      const candidates = Array.isArray(parsed) ? parsed : [parsed];
+      for (const candidate of candidates) {
+        const shaped = candidate as { error?: { message?: unknown }; message?: unknown };
+        const nested = shaped.error?.message;
+        if (typeof nested === "string") {
+          providerMessage = nested;
+          break;
+        }
+        if (typeof shaped.message === "string") {
+          providerMessage = shaped.message;
+          break;
+        }
+      }
     } catch {
       // Keep the SDK message below when the response body is not structured.
     }
